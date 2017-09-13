@@ -1,3 +1,8 @@
+#
+# Cookbook:: nexus-iq
+#
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+
 name 'nexus-iq'
 maintainer 'Copyright (c) 2017-present Sonatype, Inc.'
 license 'All Rights Reserved.'
