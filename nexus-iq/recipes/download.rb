@@ -8,7 +8,7 @@ user 'nexus' do
   comment 'Nexus IQ user'
   system true
   shell '/bin/false'
-  home '/opt/nxiq'
+  home node['nexus-iq']['install_dir']
   action :create
 end
 
@@ -17,7 +17,7 @@ group 'nexus' do
   action :create
 end
 
-directory '/opt/nxiq' do
+directory node['nexus-iq']['install_dir'] do
   owner 'nexus'
   group 'nexus'
   mode '755'
@@ -25,8 +25,9 @@ directory '/opt/nxiq' do
 end
 
 tar_extract "https://download.sonatype.com/clm/server/nexus-iq-server-#{node['nexus-iq']['version']}-bundle.tar.gz" do
-  target_dir '/opt/nxiq'
+  target_dir node['nexus-iq']['install_dir']
   user 'nexus'
   group 'nexus'
-  creates '/opt/nxiq/config.yml'
+  checksum node['nexus-iq']['checksum']
+  creates node['nexus-iq']['install_dir'] + '/config.yml'
 end
