@@ -9,4 +9,4 @@ Because this cookbook isn't public it is accessed by the nexus cloudformation st
 and then upload the resulting archive to the int-public bucket like this:
 
 
-`aws s3 cp /Users/mac/IdeaProjects/nexus-chef-cookbook/nexus-iq/cookbooks-nnnnnnn.tar.gz s3://int-public/nxiq-cookbook.tar.gz`
+`aws s3 cp /Users/mac/IdeaProjects/nexus-chef-cookbook/nexus-iq/cookbooks-nnnnnnn.tar.gz s3://int-public/nxiq-cookbook.tar.gz --acl public-read`
