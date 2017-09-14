@@ -1,6 +1,6 @@
 #
 # Cookbook:: nexus-iq
-#
+
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
 
 default['java']['jdk_version'] = '8'
@@ -11,6 +11,7 @@ default['nexus-iq']['version'] = '1.35.0-02'
 default['nexus-iq']['checksum'] = '05eb24f885238c77dfa678bf199becf725e40c2ed08fc9235f6ce067e982ae5e'
 default['nexus-iq']['install_dir'] = '/opt/nxiq'
 default['nexus-iq']['logs_dir'] = '/var/log/nxiq'
+default['nexus-iq']['conf_dir'] = '/etc/nxiq'
 
 #
 # default['nexus-iq']['config'] is used to generate config.yml. Parameter names and hierarchy must be the same as they

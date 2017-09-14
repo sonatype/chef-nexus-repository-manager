@@ -7,3 +7,4 @@
 include_recipe 'java'
 include_recipe 'nexus-iq::download'
 include_recipe 'nexus-iq::configure'
+include_recipe 'nexus-iq::systemd'
