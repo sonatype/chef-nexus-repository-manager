@@ -1,7 +1,7 @@
 #
 # Cookbook:: nexus-iq
 
-# Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
 default['java']['jdk_version'] = '8'
 default['java']['install_flavor'] = 'oracle'
