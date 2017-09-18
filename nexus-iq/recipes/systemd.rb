@@ -2,7 +2,7 @@
 # Cookbook:: nexus-iq
 # Recipe:: systemd
 #
-# Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
 systemd_unit 'nxiq.service' do
   content <<-EOU.gsub(/^\s+/, '')

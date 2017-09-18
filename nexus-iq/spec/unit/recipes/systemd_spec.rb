@@ -2,7 +2,7 @@
 # Cookbook:: nexus-iq
 # Spec:: default
 #
-# Copyright:: 2017, The Authors, All Rights Reserved.
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
 require 'spec_helper'
 

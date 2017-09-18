@@ -2,7 +2,7 @@
 # Cookbook:: nexus-iq
 # Recipe:: configure
 #
-# Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
 config_path = node['nexus-iq']['conf_dir'] + '/config.yml'
 start_script = node['nexus-iq']['install_dir'] + '/start-nexus-iq.sh'
