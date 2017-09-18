@@ -28,9 +28,9 @@ suites:
         - test/smoke/default
     attributes:
 # Cache JDK locally for faster kitchen:
-#      java:
-#        jdk:
-#          '8':
-#            x86_64:
-#              url: 'http://10.0.2.2:8080/jdk-8u131-linux-x64.tar.gz'
-#              checksum: '62b215bdfb48bace523723cdbb2157c665e6a25429c73828a32f00e587301236'
+      java:
+        jdk:
+          '8':
+            x86_64:
+              url: 'http://10.0.2.2:8080/jdk-8u131-linux-x64.tar.gz'
+              checksum: '62b215bdfb48bace523723cdbb2157c665e6a25429c73828a32f00e587301236'
