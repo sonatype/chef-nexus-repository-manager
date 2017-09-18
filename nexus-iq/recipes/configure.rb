@@ -12,6 +12,7 @@ directory node['nexus-iq']['conf_dir'] do
   group 'root'
   mode '0755'
   action :create
+  recursive true
 end
 
 directory node['nexus-iq']['logs_dir'] do
@@ -19,6 +20,15 @@ directory node['nexus-iq']['logs_dir'] do
   group 'nexus'
   mode '0755'
   action :create
+  recursive true
+end
+
+directory node['nexus-iq']['config']['sonatypeWork'] do
+  owner 'nexus'
+  group 'nexus'
+  mode '0755'
+  action :create
+  recursive true
 end
 
 template config_path do
