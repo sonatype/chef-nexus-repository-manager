@@ -1,0 +1,36 @@
+---
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
+driver:
+  name: vagrant
+  network:
+    - ["private_network", {ip: "192.168.35.35"}]
+
+provisioner:
+  name: chef_zero
+  # You may wish to disable always updating cookbooks in CI or other testing environments.
+  # For example:
+  #   always_update_cookbooks: <%= !ENV['CI'] %>
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-16.04
+  - name: centos-7.3
+
+suites:
+  - name: default
+    run_list:
+      - recipe[nexus-iq-server::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+# Cache JDK locally for faster kitchen:
+#      java:
+#        jdk:
+#          '8':
+#           x86_64:
+#              url: 'http://10.0.2.2:8080/jdk-8u131-linux-x64.tar.gz'
+#              checksum: '62b215bdfb48bace523723cdbb2157c665e6a25429c73828a32f00e587301236'

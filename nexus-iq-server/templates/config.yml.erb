@@ -1,0 +1,7 @@
+#
+# Cookbook:: nexus-iq-server
+#
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
+
+<% require 'yaml' %>
+<%= node['nexus-iq-server']['config'].to_hash.to_yaml %>
