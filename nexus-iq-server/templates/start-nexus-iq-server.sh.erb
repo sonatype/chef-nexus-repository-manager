@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
+#
+
+<%
+    nexus_iq_jar = node['nexus-iq-server']['install_dir'] + "/nexus-iq-server-#{node['nexus-iq-server']['version']}.jar"
+    nexus_iq_config = node['nexus-iq-server']['conf_dir'] + '/config.yml'
+%>
+
+cd <%= node['nexus-iq-server']['install_dir'] %>
+exec /usr/bin/java -jar <%= nexus_iq_jar  %> server <%= nexus_iq_config  %>

@@ -1,5 +1,5 @@
 DEPENDENCIES
-  nexus-iq
+  nexus-iq-server
     path: .
     metadata: true
 
@@ -10,7 +10,7 @@ GRAPH
     apt (>= 0.0.0)
     homebrew (>= 0.0.0)
     windows (>= 0.0.0)
-  nexus-iq (0.1.0)
+  nexus-iq-server (0.1.0)
     java (~> 1.50)
     tar (~> 2.1)
   ohai (5.2.0)

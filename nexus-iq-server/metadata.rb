@@ -1,9 +1,9 @@
 #
-# Cookbook:: nexus-iq
+# Cookbook:: nexus-iq-server
 #
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
-name 'nexus-iq'
+name 'nexus-iq-server'
 maintainer 'Copyright (c) 2017-present Sonatype, Inc.'
 maintainer_email 'cloud-ops@sonatype.com'
 license 'Apache-2.0'
@@ -16,8 +16,8 @@ source_url 'https://github.com/sonatype/nexus-chef-cookbook'
 supports 'ubuntu', '>= 16.04'
 supports 'centos', '>= 7.3'
 
-recipe 'nexus-iq::default', 'Installs Nexus IQ Server and starts it as systemd service.'
-recipe 'nexus-iq::docker', 'Installs Nexus IQ Server. Instead of a systemd service start-nexus-iq.sh is provided in install_dir.'
+recipe 'nexus-iq-server::default', 'Installs Nexus IQ Server and starts it as systemd service.'
+recipe 'nexus-iq-server::docker', 'Installs Nexus IQ Server. Instead of a systemd service start-nexus-iq-server.sh is provided in install_dir.'
 
 depends 'java', '~> 1.50'
 depends 'tar', '~> 2.1'
