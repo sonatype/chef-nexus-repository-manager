@@ -9,15 +9,15 @@ default['java']['oracle']['accept_oracle_download_terms'] = true
 
 default['nexus-iq']['version'] = '1.36.0-01'
 default['nexus-iq']['checksum'] = 'a1a5d127e2deaf2b26ed4e605802986b99ea317c8a821059c918783517728d6c'
-default['nexus-iq']['install_dir'] = '/opt/nxiq'
-default['nexus-iq']['logs_dir'] = '/var/log/nxiq'
-default['nexus-iq']['conf_dir'] = '/etc/nxiq'
+default['nexus-iq']['install_dir'] = '/opt/sonatype/nexus-iq-server'
+default['nexus-iq']['logs_dir'] = '/var/log/nexus-iq-server'
+default['nexus-iq']['conf_dir'] = '/etc/nexus-iq-server'
 
 #
 # default['nexus-iq']['config'] is used to generate config.yml. Parameter names and hierarchy must be the same as they
 # are in config.yml.
 #
-default['nexus-iq']['config']['sonatypeWork'] = default['nexus-iq']['install_dir'] + '/sonatype-work/clm-server'
+default['nexus-iq']['config']['sonatypeWork'] = default['nexus-iq']['install_dir'] + '/sonatype-work/'
 default['nexus-iq']['config']['http']['port'] = 8070
 default['nexus-iq']['config']['http']['adminPort'] = 8071
 default['nexus-iq']['config']['http']['requestLog']['console']['enabled'] = false

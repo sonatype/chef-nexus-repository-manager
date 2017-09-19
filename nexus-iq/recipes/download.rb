@@ -22,6 +22,7 @@ directory node['nexus-iq']['install_dir'] do
   group 'nexus'
   mode '755'
   action :create
+  recursive true
 end
 
 tar_extract "https://download.sonatype.com/clm/server/nexus-iq-server-#{node['nexus-iq']['version']}-bundle.tar.gz" do

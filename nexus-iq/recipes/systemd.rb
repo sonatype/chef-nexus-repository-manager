@@ -4,7 +4,7 @@
 #
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
-systemd_unit 'nxiq.service' do
+systemd_unit 'nexus-iq-server.service' do
   content <<-EOU.gsub(/^\s+/, '')
   [Unit]
   Description=nexus-iq service

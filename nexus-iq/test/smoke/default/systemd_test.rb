@@ -6,7 +6,7 @@
 
 # Inspec test for recipe nexus-iq::systemd
 
-describe service 'nxiq' do
+describe service 'nexus-iq-server' do
   it { should be_enabled }
   it { should be_running }
 end
