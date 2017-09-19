@@ -1,0 +1,326 @@
+I, [2017-09-18T21:43:08.349370 #11456]  INFO -- default-ubuntu-1604: -----> Cleaning up any prior instances of <default-ubuntu-1604>
+I, [2017-09-18T21:43:08.350076 #11456]  INFO -- default-ubuntu-1604: -----> Destroying <default-ubuntu-1604>...
+I, [2017-09-18T21:43:12.808758 #11456]  INFO -- default-ubuntu-1604: ==> default: Destroying VM and associated drives...
+I, [2017-09-18T21:43:13.466402 #11456]  INFO -- default-ubuntu-1604: Vagrant instance <default-ubuntu-1604> destroyed.
+I, [2017-09-18T21:43:13.471358 #11456]  INFO -- default-ubuntu-1604: Finished destroying <default-ubuntu-1604> (0m5.12s).
+I, [2017-09-18T21:43:13.471677 #11456]  INFO -- default-ubuntu-1604: -----> Testing <default-ubuntu-1604>
+I, [2017-09-18T21:43:13.471850 #11456]  INFO -- default-ubuntu-1604: -----> Creating <default-ubuntu-1604>...
+I, [2017-09-18T21:43:14.943326 #11456]  INFO -- default-ubuntu-1604: Bringing machine 'default' up with 'virtualbox' provider...
+I, [2017-09-18T21:43:15.084504 #11456]  INFO -- default-ubuntu-1604: ==> default: Importing base box 'bento/ubuntu-16.04'...
+I, [2017-09-18T21:43:24.235764 #11456]  INFO -- default-ubuntu-1604: [KProgress: 20%[KProgress: 30%[KProgress: 40%[KProgress: 50%[KProgress: 60%[KProgress: 70%[KProgress: 80%[KProgress: 90%[K==> default: Matching MAC address for NAT networking...
+I, [2017-09-18T21:43:24.374750 #11456]  INFO -- default-ubuntu-1604: ==> default: Checking if box 'bento/ubuntu-16.04' is up to date...
+I, [2017-09-18T21:43:26.452314 #11456]  INFO -- default-ubuntu-1604: ==> default: Setting the name of the VM: default-ubuntu-1604_default_1505792606407_87655
+I, [2017-09-18T21:43:27.724878 #11456]  INFO -- default-ubuntu-1604: ==> default: Clearing any previously set network interfaces...
+I, [2017-09-18T21:43:27.927817 #11456]  INFO -- default-ubuntu-1604: ==> default: Preparing network interfaces based on configuration...
+I, [2017-09-18T21:43:27.928186 #11456]  INFO -- default-ubuntu-1604:     default: Adapter 1: nat
+I, [2017-09-18T21:43:27.928602 #11456]  INFO -- default-ubuntu-1604:     default: Adapter 2: hostonly
+I, [2017-09-18T21:43:27.990715 #11456]  INFO -- default-ubuntu-1604: ==> default: Forwarding ports...
+I, [2017-09-18T21:43:28.068126 #11456]  INFO -- default-ubuntu-1604:     default: 22 (guest) => 2222 (host) (adapter 1)
+I, [2017-09-18T21:43:28.230400 #11456]  INFO -- default-ubuntu-1604: ==> default: Booting VM...
+I, [2017-09-18T21:43:28.638426 #11456]  INFO -- default-ubuntu-1604: ==> default: Waiting for machine to boot. This may take a few minutes...
+I, [2017-09-18T21:43:28.941129 #11456]  INFO -- default-ubuntu-1604:     default: SSH address: 127.0.0.1:2222
+I, [2017-09-18T21:43:28.941283 #11456]  INFO -- default-ubuntu-1604:     default: SSH username: vagrant
+I, [2017-09-18T21:43:28.941521 #11456]  INFO -- default-ubuntu-1604:     default: SSH auth method: private key
+I, [2017-09-18T21:43:44.865648 #11456]  INFO -- default-ubuntu-1604:     default: 
+I, [2017-09-18T21:43:44.865696 #11456]  INFO -- default-ubuntu-1604:     default: Vagrant insecure key detected. Vagrant will automatically replace
+I, [2017-09-18T21:43:44.865764 #11456]  INFO -- default-ubuntu-1604:     default: this with a newly generated keypair for better security.
+I, [2017-09-18T21:43:45.548657 #11456]  INFO -- default-ubuntu-1604:     default: 
+I, [2017-09-18T21:43:45.548742 #11456]  INFO -- default-ubuntu-1604:     default: Inserting generated public key within guest...
+I, [2017-09-18T21:43:45.652753 #11456]  INFO -- default-ubuntu-1604:     default: Removing insecure key from the guest if it's present...
+I, [2017-09-18T21:43:45.744621 #11456]  INFO -- default-ubuntu-1604:     default: Key inserted! Disconnecting and reconnecting using new SSH key...
+I, [2017-09-18T21:43:46.682942 #11456]  INFO -- default-ubuntu-1604: ==> default: Machine booted and ready!
+I, [2017-09-18T21:43:46.683357 #11456]  INFO -- default-ubuntu-1604: ==> default: Checking for guest additions in VM...
+I, [2017-09-18T21:43:46.731823 #11456]  INFO -- default-ubuntu-1604: ==> default: Setting hostname...
+I, [2017-09-18T21:43:47.035648 #11456]  INFO -- default-ubuntu-1604: ==> default: Configuring and enabling network interfaces...
+I, [2017-09-18T21:43:47.405269 #11456]  INFO -- default-ubuntu-1604: ==> default: Mounting shared folders...
+I, [2017-09-18T21:43:47.409347 #11456]  INFO -- default-ubuntu-1604:     default: /tmp/omnibus/cache => /Users/jcava/.kitchen/cache
+I, [2017-09-18T21:43:47.878366 #11456]  INFO -- default-ubuntu-1604: ==> default: Machine not provisioned because `--no-provision` is specified.
+I, [2017-09-18T21:43:50.242528 #11456]  INFO -- default-ubuntu-1604: [SSH] Established
+I, [2017-09-18T21:43:50.243013 #11456]  INFO -- default-ubuntu-1604: Vagrant instance <default-ubuntu-1604> created.
+I, [2017-09-18T21:43:50.243729 #11456]  INFO -- default-ubuntu-1604: Finished creating <default-ubuntu-1604> (0m36.77s).
+I, [2017-09-18T21:43:50.244056 #11456]  INFO -- default-ubuntu-1604: -----> Converging <default-ubuntu-1604>...
+I, [2017-09-18T21:43:50.244672 #11456]  INFO -- default-ubuntu-1604: Preparing files for transfer
+I, [2017-09-18T21:43:50.244796 #11456]  INFO -- default-ubuntu-1604: Preparing dna.json
+I, [2017-09-18T21:43:50.245125 #11456]  INFO -- default-ubuntu-1604: Resolving cookbook dependencies with Berkshelf 6.3.1...
+I, [2017-09-18T21:43:54.393739 #11456]  INFO -- default-ubuntu-1604: Removing non-cookbook files before transfer
+I, [2017-09-18T21:43:54.402636 #11456]  INFO -- default-ubuntu-1604: Preparing validation.pem
+I, [2017-09-18T21:43:54.404254 #11456]  INFO -- default-ubuntu-1604: Preparing client.rb
+I, [2017-09-18T21:43:54.428881 #11456]  INFO -- default-ubuntu-1604: -----> Installing Chef Omnibus (install only if missing)
+I, [2017-09-18T21:43:54.430042 #11456]  INFO -- default-ubuntu-1604: Downloading https://omnitruck.chef.io/install.sh to file /tmp/install.sh
+I, [2017-09-18T21:43:54.430272 #11456]  INFO -- default-ubuntu-1604: Trying wget...
+I, [2017-09-18T21:43:55.189093 #11456]  INFO -- default-ubuntu-1604: Download complete.
+I, [2017-09-18T21:43:55.202258 #11456]  INFO -- default-ubuntu-1604: ubuntu 16.04 x86_64
+I, [2017-09-18T21:43:55.202314 #11456]  INFO -- default-ubuntu-1604: Getting information for chef stable  for ubuntu...
+I, [2017-09-18T21:43:55.202334 #11456]  INFO -- default-ubuntu-1604: downloading https://omnitruck.chef.io/stable/chef/metadata?v=&p=ubuntu&pv=16.04&m=x86_64
+I, [2017-09-18T21:43:55.202350 #11456]  INFO -- default-ubuntu-1604:   to file /tmp/install.sh.1629/metadata.txt
+I, [2017-09-18T21:43:55.202566 #11456]  INFO -- default-ubuntu-1604: trying wget...
+I, [2017-09-18T21:43:55.648820 #11456]  INFO -- default-ubuntu-1604: sha1	3eef728d8a096b6fce191216b51ba5fe4b064ea8
+I, [2017-09-18T21:43:55.649281 #11456]  INFO -- default-ubuntu-1604: sha256	df7201e5fb5113b8f68caa0cf4172dd7004282e947b449e0eeb094ea6e630227
+I, [2017-09-18T21:43:55.649768 #11456]  INFO -- default-ubuntu-1604: url	https://packages.chef.io/files/stable/chef/13.4.24/ubuntu/16.04/chef_13.4.24-1_amd64.deb
+I, [2017-09-18T21:43:55.650026 #11456]  INFO -- default-ubuntu-1604: version	13.4.24
+I, [2017-09-18T21:43:55.651479 #11456]  INFO -- default-ubuntu-1604: downloaded metadata file looks valid...
+I, [2017-09-18T21:43:55.666079 #11456]  INFO -- default-ubuntu-1604: /tmp/omnibus/cache/chef_13.4.24-1_amd64.deb already exists, verifiying checksum...
+I, [2017-09-18T21:43:55.666323 #11456]  INFO -- default-ubuntu-1604: Comparing checksum with sha256sum...
+I, [2017-09-18T21:43:56.075287 #11456]  INFO -- default-ubuntu-1604: checksum compare succeeded, using existing file!
+I, [2017-09-18T21:43:56.075335 #11456]  INFO -- default-ubuntu-1604: 
+I, [2017-09-18T21:43:56.075352 #11456]  INFO -- default-ubuntu-1604: WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+I, [2017-09-18T21:43:56.075366 #11456]  INFO -- default-ubuntu-1604: 
+I, [2017-09-18T21:43:56.075379 #11456]  INFO -- default-ubuntu-1604: You are installing an omnibus package without a version pin.  If you are installing
+I, [2017-09-18T21:43:56.075392 #11456]  INFO -- default-ubuntu-1604: on production servers via an automated process this is DANGEROUS and you will
+I, [2017-09-18T21:43:56.075425 #11456]  INFO -- default-ubuntu-1604: be upgraded without warning on new releases, even to new major releases.
+I, [2017-09-18T21:43:56.075439 #11456]  INFO -- default-ubuntu-1604: Letting the version float is only appropriate in desktop, test, development or
+I, [2017-09-18T21:43:56.075451 #11456]  INFO -- default-ubuntu-1604: CI/CD environments.
+I, [2017-09-18T21:43:56.075461 #11456]  INFO -- default-ubuntu-1604: 
+I, [2017-09-18T21:43:56.075472 #11456]  INFO -- default-ubuntu-1604: WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+I, [2017-09-18T21:43:56.075483 #11456]  INFO -- default-ubuntu-1604: 
+I, [2017-09-18T21:43:56.075494 #11456]  INFO -- default-ubuntu-1604: Installing chef 
+I, [2017-09-18T21:43:56.075504 #11456]  INFO -- default-ubuntu-1604: installing with dpkg...
+I, [2017-09-18T21:43:56.124312 #11456]  INFO -- default-ubuntu-1604: Selecting previously unselected package chef.
+I, [2017-09-18T21:43:56.316442 #11456]  INFO -- default-ubuntu-1604: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 35871 files and directories currently installed.)
+I, [2017-09-18T21:43:56.317874 #11456]  INFO -- default-ubuntu-1604: Preparing to unpack .../cache/chef_13.4.24-1_amd64.deb ...
+I, [2017-09-18T21:43:56.322514 #11456]  INFO -- default-ubuntu-1604: Unpacking chef (13.4.24-1) ...
+I, [2017-09-18T21:44:02.814445 #11456]  INFO -- default-ubuntu-1604: Setting up chef (13.4.24-1) ...
+I, [2017-09-18T21:44:02.867051 #11456]  INFO -- default-ubuntu-1604: Thank you for installing Chef!
+I, [2017-09-18T21:44:02.893688 #11456]  INFO -- default-ubuntu-1604: Transferring files to <default-ubuntu-1604>
+I, [2017-09-18T21:44:04.418044 #11456]  INFO -- default-ubuntu-1604: Starting Chef Client, version 13.4.24
+I, [2017-09-18T21:44:05.881690 #11456]  INFO -- default-ubuntu-1604: Creating a new client identity for default-ubuntu-1604 using the validator key.
+I, [2017-09-18T21:44:05.953539 #11456]  INFO -- default-ubuntu-1604: resolving cookbooks for run list: ["nexus3::default"]
+I, [2017-09-18T21:44:06.107206 #11456]  INFO -- default-ubuntu-1604: Synchronizing Cookbooks:
+I, [2017-09-18T21:44:06.138517 #11456]  INFO -- default-ubuntu-1604:   - nexus3 (0.1.0)
+I, [2017-09-18T21:44:06.172507 #11456]  INFO -- default-ubuntu-1604:   - java (1.50.0)
+I, [2017-09-18T21:44:06.180746 #11456]  INFO -- default-ubuntu-1604:   - tar (2.1.1)
+I, [2017-09-18T21:44:06.206712 #11456]  INFO -- default-ubuntu-1604:   - apt (6.1.4)
+I, [2017-09-18T21:44:06.240468 #11456]  INFO -- default-ubuntu-1604:   - homebrew (4.2.0)
+I, [2017-09-18T21:44:06.241974 #11456]  INFO -- default-ubuntu-1604:   - windows (3.1.3)
+I, [2017-09-18T21:44:06.243988 #11456]  INFO -- default-ubuntu-1604:   - ohai (5.2.0)
+I, [2017-09-18T21:44:06.248719 #11456]  INFO -- default-ubuntu-1604: Installing Cookbook Gems:
+I, [2017-09-18T21:44:06.295784 #11456]  INFO -- default-ubuntu-1604: Compiling Cookbooks...
+I, [2017-09-18T21:44:06.413654 #11456]  INFO -- default-ubuntu-1604: Converging 13 resources
+I, [2017-09-18T21:44:06.414104 #11456]  INFO -- default-ubuntu-1604: Recipe: java::notify
+I, [2017-09-18T21:44:06.414883 #11456]  INFO -- default-ubuntu-1604:   * log[jdk-version-changed] action nothing (skipped due to action :nothing)
+I, [2017-09-18T21:44:06.415366 #11456]  INFO -- default-ubuntu-1604: Recipe: java::oracle
+I, [2017-09-18T21:44:06.416860 #11456]  INFO -- default-ubuntu-1604:   * log[WARNING - Downloading directly from Oracle is unreliable. Change download url.] action write[2017-09-19T03:44:04+00:00] WARN: WARNING - Downloading directly from Oracle is unreliable. Change download url.
+I, [2017-09-18T21:44:06.417154 #11456]  INFO -- default-ubuntu-1604: [2017-09-19T03:44:04+00:00] WARN: WARNING - Downloading directly from Oracle is unreliable. Change download url.
+I, [2017-09-18T21:44:06.417355 #11456]  INFO -- default-ubuntu-1604: 
+I, [2017-09-18T21:44:06.417561 #11456]  INFO -- default-ubuntu-1604:   
+I, [2017-09-18T21:44:06.418006 #11456]  INFO -- default-ubuntu-1604: Recipe: java::set_java_home
+I, [2017-09-18T21:44:06.422316 #11456]  INFO -- default-ubuntu-1604:   * directory[/etc/profile.d] action create (up to date)
+I, [2017-09-18T21:44:06.426533 #11456]  INFO -- default-ubuntu-1604:   * template[/etc/profile.d/jdk.sh] action create
+I, [2017-09-18T21:44:06.428888 #11456]  INFO -- default-ubuntu-1604:     - create new file /etc/profile.d/jdk.sh
+I, [2017-09-18T21:44:06.429202 #11456]  INFO -- default-ubuntu-1604:     - update content in file /etc/profile.d/jdk.sh from none to 973b46
+I, [2017-09-18T21:44:06.429684 #11456]  INFO -- default-ubuntu-1604:     --- /etc/profile.d/jdk.sh	2017-09-19 03:44:04.343668373 +0000
+I, [2017-09-18T21:44:06.430250 #11456]  INFO -- default-ubuntu-1604:     +++ /etc/profile.d/.chef-jdk20170919-1713-5alv11.sh	2017-09-19 03:44:04.343668373 +0000
+I, [2017-09-18T21:44:06.430635 #11456]  INFO -- default-ubuntu-1604:     @@ -1 +1,2 @@
+I, [2017-09-18T21:44:06.431778 #11456]  INFO -- default-ubuntu-1604:     +export JAVA_HOME=/usr/lib/jvm/java-8-oracle-amd64
+I, [2017-09-18T21:44:06.432892 #11456]  INFO -- default-ubuntu-1604:     - change mode from '' to '0755'
+I, [2017-09-18T21:44:06.433372 #11456]  INFO -- default-ubuntu-1604: Recipe: java::oracle
+I, [2017-09-18T21:44:06.851237 #11456]  INFO -- default-ubuntu-1604:   * apt_package[tar] action install (up to date)
+I, [2017-09-18T21:44:06.854101 #11456]  INFO -- default-ubuntu-1604:   * java_ark[jdk] action install
+I, [2017-09-18T21:44:06.856184 #11456]  INFO -- default-ubuntu-1604:     - create dir /usr/lib/jvm and change owner to root:root
+I, [2017-09-18T21:44:06.922863 #11456]  INFO -- default-ubuntu-1604:     * apt_package[curl for download_direct_from_oracle] action install (up to date)
+I, [2017-09-18T21:47:03.257991 #11456]  INFO -- default-ubuntu-1604:     - download oracle tarball straight from the server
+I, [2017-09-18T21:47:03.258556 #11456]  INFO -- default-ubuntu-1604:     - extract compressed data into Chef file cache path and
+I, [2017-09-18T21:47:03.259178 #11456]  INFO -- default-ubuntu-1604:                  move extracted data to /usr/lib/jvm/jdk1.8.0_131
+I, [2017-09-18T21:47:03.259807 #11456]  INFO -- default-ubuntu-1604:     - Add /usr/lib/jvm/.java-8-oracle-amd64.jinfo for debian
+I, [2017-09-18T21:47:03.260684 #11456]  INFO -- default-ubuntu-1604:     - Symlink /usr/lib/jvm/jdk1.8.0_131 to /usr/lib/jvm/java-8-oracle-amd64
+I, [2017-09-18T21:47:03.261095 #11456]  INFO -- default-ubuntu-1604:     * apt_package[curl for download_direct_from_oracle] action nothing (skipped due to action :nothing)
+I, [2017-09-18T21:47:03.264808 #11456]  INFO -- default-ubuntu-1604:     * template[/usr/lib/jvm/.java-8-oracle-amd64.jinfo] action create
+I, [2017-09-18T21:47:03.267273 #11456]  INFO -- default-ubuntu-1604:       - create new file /usr/lib/jvm/.java-8-oracle-amd64.jinfo
+I, [2017-09-18T21:47:03.267678 #11456]  INFO -- default-ubuntu-1604:       - update content in file /usr/lib/jvm/.java-8-oracle-amd64.jinfo from none to ea344c
+I, [2017-09-18T21:47:03.267981 #11456]  INFO -- default-ubuntu-1604:       --- /usr/lib/jvm/.java-8-oracle-amd64.jinfo	2017-09-19 03:47:01.272088373 +0000
+I, [2017-09-18T21:47:03.268400 #11456]  INFO -- default-ubuntu-1604:       +++ /usr/lib/jvm/.chef-.java-8-oracle-amd64.jinfo20170919-1713-5v7uel.java-8-oracle-amd64.jinfo	2017-09-19 03:47:01.272088373 +0000
+I, [2017-09-18T21:47:03.268664 #11456]  INFO -- default-ubuntu-1604:       @@ -1 +1,52 @@
+I, [2017-09-18T21:47:03.268960 #11456]  INFO -- default-ubuntu-1604:       +name=java-8-oracle-amd64
+I, [2017-09-18T21:47:03.269142 #11456]  INFO -- default-ubuntu-1604:       +priority=1062
+I, [2017-09-18T21:47:03.269465 #11456]  INFO -- default-ubuntu-1604:       +section=main
+I, [2017-09-18T21:47:03.269817 #11456]  INFO -- default-ubuntu-1604:       +
+I, [2017-09-18T21:47:03.270041 #11456]  INFO -- default-ubuntu-1604:       +jdk appletviewer /usr/lib/jvm/java-8-oracle-amd64/bin/appletviewer
+I, [2017-09-18T21:47:03.270354 #11456]  INFO -- default-ubuntu-1604:       +jdk apt /usr/lib/jvm/java-8-oracle-amd64/bin/apt
+I, [2017-09-18T21:47:03.270659 #11456]  INFO -- default-ubuntu-1604:       +jdk ControlPanel /usr/lib/jvm/java-8-oracle-amd64/bin/ControlPanel
+I, [2017-09-18T21:47:03.270896 #11456]  INFO -- default-ubuntu-1604:       +jdk extcheck /usr/lib/jvm/java-8-oracle-amd64/bin/extcheck
+I, [2017-09-18T21:47:03.271095 #11456]  INFO -- default-ubuntu-1604:       +jdk idlj /usr/lib/jvm/java-8-oracle-amd64/bin/idlj
+I, [2017-09-18T21:47:03.271472 #11456]  INFO -- default-ubuntu-1604:       +jdk jar /usr/lib/jvm/java-8-oracle-amd64/bin/jar
+I, [2017-09-18T21:47:03.271741 #11456]  INFO -- default-ubuntu-1604:       +jdk jarsigner /usr/lib/jvm/java-8-oracle-amd64/bin/jarsigner
+I, [2017-09-18T21:47:03.272130 #11456]  INFO -- default-ubuntu-1604:       +jdk java /usr/lib/jvm/java-8-oracle-amd64/bin/java
+I, [2017-09-18T21:47:03.272459 #11456]  INFO -- default-ubuntu-1604:       +jdk javac /usr/lib/jvm/java-8-oracle-amd64/bin/javac
+I, [2017-09-18T21:47:03.272724 #11456]  INFO -- default-ubuntu-1604:       +jdk javadoc /usr/lib/jvm/java-8-oracle-amd64/bin/javadoc
+I, [2017-09-18T21:47:03.272948 #11456]  INFO -- default-ubuntu-1604:       +jdk javafxpackager /usr/lib/jvm/java-8-oracle-amd64/bin/javafxpackager
+I, [2017-09-18T21:47:03.273238 #11456]  INFO -- default-ubuntu-1604:       +jdk javah /usr/lib/jvm/java-8-oracle-amd64/bin/javah
+I, [2017-09-18T21:47:03.273500 #11456]  INFO -- default-ubuntu-1604:       +jdk javap /usr/lib/jvm/java-8-oracle-amd64/bin/javap
+I, [2017-09-18T21:47:03.273794 #11456]  INFO -- default-ubuntu-1604:       +jdk javaws /usr/lib/jvm/java-8-oracle-amd64/bin/javaws
+I, [2017-09-18T21:47:03.274048 #11456]  INFO -- default-ubuntu-1604:       +jdk jcmd /usr/lib/jvm/java-8-oracle-amd64/bin/jcmd
+I, [2017-09-18T21:47:03.274073 #11456]  INFO -- default-ubuntu-1604:       +jdk jconsole /usr/lib/jvm/java-8-oracle-amd64/bin/jconsole
+I, [2017-09-18T21:47:03.274090 #11456]  INFO -- default-ubuntu-1604:       +jdk jcontrol /usr/lib/jvm/java-8-oracle-amd64/bin/jcontrol
+I, [2017-09-18T21:47:03.274375 #11456]  INFO -- default-ubuntu-1604:       +jdk jdb /usr/lib/jvm/java-8-oracle-amd64/bin/jdb
+I, [2017-09-18T21:47:03.274403 #11456]  INFO -- default-ubuntu-1604:       +jdk jdeps /usr/lib/jvm/java-8-oracle-amd64/bin/jdeps
+I, [2017-09-18T21:47:03.274421 #11456]  INFO -- default-ubuntu-1604:       +jdk jhat /usr/lib/jvm/java-8-oracle-amd64/bin/jhat
+I, [2017-09-18T21:47:03.274435 #11456]  INFO -- default-ubuntu-1604:       +jdk jinfo /usr/lib/jvm/java-8-oracle-amd64/bin/jinfo
+I, [2017-09-18T21:47:03.274449 #11456]  INFO -- default-ubuntu-1604:       +jdk jjs /usr/lib/jvm/java-8-oracle-amd64/bin/jjs
+I, [2017-09-18T21:47:03.274696 #11456]  INFO -- default-ubuntu-1604:       +jdk jmap /usr/lib/jvm/java-8-oracle-amd64/bin/jmap
+I, [2017-09-18T21:47:03.274723 #11456]  INFO -- default-ubuntu-1604:       +jdk jmc /usr/lib/jvm/java-8-oracle-amd64/bin/jmc
+I, [2017-09-18T21:47:03.274740 #11456]  INFO -- default-ubuntu-1604:       +jdk jps /usr/lib/jvm/java-8-oracle-amd64/bin/jps
+I, [2017-09-18T21:47:03.274758 #11456]  INFO -- default-ubuntu-1604:       +jdk jrunscript /usr/lib/jvm/java-8-oracle-amd64/bin/jrunscript
+I, [2017-09-18T21:47:03.274946 #11456]  INFO -- default-ubuntu-1604:       +jdk jsadebugd /usr/lib/jvm/java-8-oracle-amd64/bin/jsadebugd
+I, [2017-09-18T21:47:03.274969 #11456]  INFO -- default-ubuntu-1604:       +jdk jstack /usr/lib/jvm/java-8-oracle-amd64/bin/jstack
+I, [2017-09-18T21:47:03.274985 #11456]  INFO -- default-ubuntu-1604:       +jdk jstat /usr/lib/jvm/java-8-oracle-amd64/bin/jstat
+I, [2017-09-18T21:47:03.274999 #11456]  INFO -- default-ubuntu-1604:       +jdk jstatd /usr/lib/jvm/java-8-oracle-amd64/bin/jstatd
+I, [2017-09-18T21:47:03.275021 #11456]  INFO -- default-ubuntu-1604:       +jdk jvisualvm /usr/lib/jvm/java-8-oracle-amd64/bin/jvisualvm
+I, [2017-09-18T21:47:03.275183 #11456]  INFO -- default-ubuntu-1604:       +jdk keytool /usr/lib/jvm/java-8-oracle-amd64/bin/keytool
+I, [2017-09-18T21:47:03.275362 #11456]  INFO -- default-ubuntu-1604:       +jdk native2ascii /usr/lib/jvm/java-8-oracle-amd64/bin/native2ascii
+I, [2017-09-18T21:47:03.275384 #11456]  INFO -- default-ubuntu-1604:       +jdk orbd /usr/lib/jvm/java-8-oracle-amd64/bin/orbd
+I, [2017-09-18T21:47:03.275399 #11456]  INFO -- default-ubuntu-1604:       +jdk pack200 /usr/lib/jvm/java-8-oracle-amd64/bin/pack200
+I, [2017-09-18T21:47:03.275412 #11456]  INFO -- default-ubuntu-1604:       +jdk policytool /usr/lib/jvm/java-8-oracle-amd64/bin/policytool
+I, [2017-09-18T21:47:03.275426 #11456]  INFO -- default-ubuntu-1604:       +jdk rmic /usr/lib/jvm/java-8-oracle-amd64/bin/rmic
+I, [2017-09-18T21:47:03.275439 #11456]  INFO -- default-ubuntu-1604:       +jdk rmid /usr/lib/jvm/java-8-oracle-amd64/bin/rmid
+I, [2017-09-18T21:47:03.275452 #11456]  INFO -- default-ubuntu-1604:       +jdk rmiregistry /usr/lib/jvm/java-8-oracle-amd64/bin/rmiregistry
+I, [2017-09-18T21:47:03.275692 #11456]  INFO -- default-ubuntu-1604:       +jdk schemagen /usr/lib/jvm/java-8-oracle-amd64/bin/schemagen
+I, [2017-09-18T21:47:03.275715 #11456]  INFO -- default-ubuntu-1604:       +jdk serialver /usr/lib/jvm/java-8-oracle-amd64/bin/serialver
+I, [2017-09-18T21:47:03.275731 #11456]  INFO -- default-ubuntu-1604:       +jdk servertool /usr/lib/jvm/java-8-oracle-amd64/bin/servertool
+I, [2017-09-18T21:47:03.275745 #11456]  INFO -- default-ubuntu-1604:       +jdk tnameserv /usr/lib/jvm/java-8-oracle-amd64/bin/tnameserv
+I, [2017-09-18T21:47:03.275759 #11456]  INFO -- default-ubuntu-1604:       +jdk unpack200 /usr/lib/jvm/java-8-oracle-amd64/bin/unpack200
+I, [2017-09-18T21:47:03.275772 #11456]  INFO -- default-ubuntu-1604:       +jdk wsgen /usr/lib/jvm/java-8-oracle-amd64/bin/wsgen
+I, [2017-09-18T21:47:03.275785 #11456]  INFO -- default-ubuntu-1604:       +jdk wsimport /usr/lib/jvm/java-8-oracle-amd64/bin/wsimport
+I, [2017-09-18T21:47:03.276722 #11456]  INFO -- default-ubuntu-1604:       +jdk xjc /usr/lib/jvm/java-8-oracle-amd64/bin/xjc
+I, [2017-09-18T21:47:03.277042 #11456]  INFO -- default-ubuntu-1604:       - change owner from '' to 'root'
+I, [2017-09-18T21:47:03.277648 #11456]  INFO -- default-ubuntu-1604:       - change group from '' to 'root'
+I, [2017-09-18T21:47:03.406151 #11456]  INFO -- default-ubuntu-1604:     * java_alternatives[set-java-alternatives] action set
+I, [2017-09-18T21:47:03.514311 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for appletviewer
+I, [2017-09-18T21:47:03.624797 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for ControlPanel
+I, [2017-09-18T21:47:03.735449 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for extcheck
+I, [2017-09-18T21:47:03.849862 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for idlj
+I, [2017-09-18T21:47:03.961317 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jar
+I, [2017-09-18T21:47:04.070021 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jarsigner
+I, [2017-09-18T21:47:04.179112 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for java
+I, [2017-09-18T21:47:04.289889 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for javac
+I, [2017-09-18T21:47:04.403777 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for javadoc
+I, [2017-09-18T21:47:04.513229 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for javafxpackager
+I, [2017-09-18T21:47:04.622406 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for javah
+I, [2017-09-18T21:47:04.737447 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for javap
+I, [2017-09-18T21:47:04.849641 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for javaws
+I, [2017-09-18T21:47:04.962344 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jcmd
+I, [2017-09-18T21:47:05.065546 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jconsole
+I, [2017-09-18T21:47:05.179526 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jcontrol
+I, [2017-09-18T21:47:05.290392 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jdb
+I, [2017-09-18T21:47:05.411486 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jdeps
+I, [2017-09-18T21:47:05.529003 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jhat
+I, [2017-09-18T21:47:05.641881 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jinfo
+I, [2017-09-18T21:47:05.754983 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jjs
+I, [2017-09-18T21:47:05.870407 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jmap
+I, [2017-09-18T21:47:05.986617 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jmc
+I, [2017-09-18T21:47:06.104873 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jps
+I, [2017-09-18T21:47:06.217654 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jrunscript
+I, [2017-09-18T21:47:06.337395 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jsadebugd
+I, [2017-09-18T21:47:06.458691 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jstack
+I, [2017-09-18T21:47:06.571563 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jstat
+I, [2017-09-18T21:47:06.684533 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jstatd
+I, [2017-09-18T21:47:06.799456 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for jvisualvm
+I, [2017-09-18T21:47:06.914282 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for keytool
+I, [2017-09-18T21:47:07.034625 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for native2ascii
+I, [2017-09-18T21:47:07.152637 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for orbd
+I, [2017-09-18T21:47:07.266847 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for pack200
+I, [2017-09-18T21:47:07.384139 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for policytool
+I, [2017-09-18T21:47:07.502820 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for rmic
+I, [2017-09-18T21:47:07.616418 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for rmid
+I, [2017-09-18T21:47:07.733757 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for rmiregistry
+I, [2017-09-18T21:47:07.923353 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for schemagen
+I, [2017-09-18T21:47:08.034629 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for serialver
+I, [2017-09-18T21:47:08.149230 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for servertool
+I, [2017-09-18T21:47:08.263605 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for tnameserv
+I, [2017-09-18T21:47:08.374095 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for unpack200
+I, [2017-09-18T21:47:08.484155 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for wsgen
+I, [2017-09-18T21:47:08.595048 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for wsimport
+I, [2017-09-18T21:47:08.612857 #11456]  INFO -- default-ubuntu-1604:       - Add alternative for xjc
+I, [2017-09-18T21:47:08.613527 #11456]  INFO -- default-ubuntu-1604:   
+I, [2017-09-18T21:47:08.614041 #11456]  INFO -- default-ubuntu-1604: Recipe: java::notify
+I, [2017-09-18T21:47:08.614978 #11456]  INFO -- default-ubuntu-1604:   * log[jdk-version-changed] action write
+I, [2017-09-18T21:47:08.615167 #11456]  INFO -- default-ubuntu-1604:   
+I, [2017-09-18T21:47:08.615499 #11456]  INFO -- default-ubuntu-1604: Recipe: java::default_java_symlink
+I, [2017-09-18T21:47:08.617482 #11456]  INFO -- default-ubuntu-1604:   * link[/usr/lib/jvm/default-java] action create
+I, [2017-09-18T21:47:08.618144 #11456]  INFO -- default-ubuntu-1604:     - create symlink at /usr/lib/jvm/default-java to /usr/lib/jvm/java-8-oracle-amd64
+I, [2017-09-18T21:47:08.618455 #11456]  INFO -- default-ubuntu-1604: Recipe: nexus3::download
+I, [2017-09-18T21:47:08.674295 #11456]  INFO -- default-ubuntu-1604:   * linux_user[nexus] action create
+I, [2017-09-18T21:47:08.674724 #11456]  INFO -- default-ubuntu-1604:     - create user nexus
+I, [2017-09-18T21:47:08.725682 #11456]  INFO -- default-ubuntu-1604:   * group[nexus] action create
+I, [2017-09-18T21:47:08.726394 #11456]  INFO -- default-ubuntu-1604:     - alter group nexus
+I, [2017-09-18T21:47:08.726473 #11456]  INFO -- default-ubuntu-1604:     - replace group members with new list of members
+I, [2017-09-18T21:47:08.729210 #11456]  INFO -- default-ubuntu-1604:   * directory[/opt/nexus3] action create
+I, [2017-09-18T21:47:08.731230 #11456]  INFO -- default-ubuntu-1604:     - create new directory /opt/nexus3
+I, [2017-09-18T21:47:08.731580 #11456]  INFO -- default-ubuntu-1604:     - change mode from '' to '0755'
+I, [2017-09-18T21:47:08.731877 #11456]  INFO -- default-ubuntu-1604:     - change owner from '' to 'nexus'
+I, [2017-09-18T21:47:08.732487 #11456]  INFO -- default-ubuntu-1604:     - change group from '' to 'nexus'
+I, [2017-09-18T21:47:08.744835 #11456]  INFO -- default-ubuntu-1604:   * tar_extract[https://download.sonatype.com/nexus/3/nexus-3.5.2-01-unix.tar.gz] action extract
+I, [2017-09-18T21:47:08.747354 #11456]  INFO -- default-ubuntu-1604:     * directory[/tmp/kitchen/cache] action create (up to date)
+I, [2017-09-18T21:47:59.190561 #11456]  INFO -- default-ubuntu-1604:     * remote_file[nexus-3.5.2-01-unix.tar.gz] action create
+I, [2017-09-18T21:47:59.988561 #11456]  INFO -- default-ubuntu-1604:       - create new file /tmp/kitchen/cache/nexus-3.5.2-01-unix.tar.gz
+I, [2017-09-18T21:47:59.988957 #11456]  INFO -- default-ubuntu-1604:       - update content in file /tmp/kitchen/cache/nexus-3.5.2-01-unix.tar.gz from none to 477969
+I, [2017-09-18T21:47:59.990701 #11456]  INFO -- default-ubuntu-1604:       (file sizes exceed 10000000 bytes, diff output suppressed)
+I, [2017-09-18T21:47:59.990952 #11456]  INFO -- default-ubuntu-1604:       - change mode from '' to '0755'
+I, [2017-09-18T21:47:59.991465 #11456]  INFO -- default-ubuntu-1604:       - change owner from '' to 'nexus'
+I, [2017-09-18T21:47:59.999560 #11456]  INFO -- default-ubuntu-1604:       - change group from '' to 'nexus'
+I, [2017-09-18T21:47:59.999851 #11456]  INFO -- default-ubuntu-1604:     * execute[extract /tmp/kitchen/cache/nexus-3.5.2-01-unix.tar.gz] action nothing (skipped due to action :nothing)
+I, [2017-09-18T21:48:01.067988 #11456]  INFO -- default-ubuntu-1604:     * execute[extract /tmp/kitchen/cache/nexus-3.5.2-01-unix.tar.gz] action run
+I, [2017-09-18T21:48:01.068599 #11456]  INFO -- default-ubuntu-1604:       - execute tar xfz /tmp/kitchen/cache/nexus-3.5.2-01-unix.tar.gz 
+I, [2017-09-18T21:48:01.069099 #11456]  INFO -- default-ubuntu-1604:   
+I, [2017-09-18T21:48:01.069617 #11456]  INFO -- default-ubuntu-1604: Recipe: nexus3::configure
+I, [2017-09-18T21:48:01.079778 #11456]  INFO -- default-ubuntu-1604:   * template[/opt/nexus3/start-nexus3.sh] action create
+I, [2017-09-18T21:48:01.081211 #11456]  INFO -- default-ubuntu-1604:     - create new file /opt/nexus3/start-nexus3.sh
+I, [2017-09-18T21:48:01.081509 #11456]  INFO -- default-ubuntu-1604:     - update content in file /opt/nexus3/start-nexus3.sh from none to 073669
+I, [2017-09-18T21:48:01.082089 #11456]  INFO -- default-ubuntu-1604:     --- /opt/nexus3/start-nexus3.sh	2017-09-19 03:47:59.112994373 +0000
+I, [2017-09-18T21:48:01.082580 #11456]  INFO -- default-ubuntu-1604:     +++ /opt/nexus3/.chef-start-nexus320170919-1713-1ctah5u.sh	2017-09-19 03:47:59.112994373 +0000
+I, [2017-09-18T21:48:01.082976 #11456]  INFO -- default-ubuntu-1604:     @@ -1 +1,8 @@
+I, [2017-09-18T21:48:01.083286 #11456]  INFO -- default-ubuntu-1604:     +#!/bin/bash
+I, [2017-09-18T21:48:01.083791 #11456]  INFO -- default-ubuntu-1604:     +#
+I, [2017-09-18T21:48:01.084192 #11456]  INFO -- default-ubuntu-1604:     +# Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+I, [2017-09-18T21:48:01.084666 #11456]  INFO -- default-ubuntu-1604:     +#
+I, [2017-09-18T21:48:01.084919 #11456]  INFO -- default-ubuntu-1604:     +
+I, [2017-09-18T21:48:01.085319 #11456]  INFO -- default-ubuntu-1604:     +cd /opt/nexus3/nexus-3.5.2-01
+I, [2017-09-18T21:48:01.087595 #11456]  INFO -- default-ubuntu-1604:     +exec ./bin/nexus run
+I, [2017-09-18T21:48:01.088030 #11456]  INFO -- default-ubuntu-1604:     - change mode from '' to '0755'
+I, [2017-09-18T21:48:01.088298 #11456]  INFO -- default-ubuntu-1604:     - change owner from '' to 'root'
+I, [2017-09-18T21:48:01.089571 #11456]  INFO -- default-ubuntu-1604:     - change group from '' to 'root'
+I, [2017-09-18T21:48:01.089726 #11456]  INFO -- default-ubuntu-1604: Recipe: nexus3::systemd
+I, [2017-09-18T21:48:01.229005 #11456]  INFO -- default-ubuntu-1604:   * systemd_unit[nxrm.service] action create
+I, [2017-09-18T21:48:01.229639 #11456]  INFO -- default-ubuntu-1604:   Recipe: <Dynamically Defined Resource>
+I, [2017-09-18T21:48:01.351793 #11456]  INFO -- default-ubuntu-1604:     * file[/etc/systemd/system/nxrm.service] action create
+I, [2017-09-18T21:48:01.354296 #11456]  INFO -- default-ubuntu-1604:       - create new file /etc/systemd/system/nxrm.service
+I, [2017-09-18T21:48:01.354693 #11456]  INFO -- default-ubuntu-1604:       - update content in file /etc/systemd/system/nxrm.service from none to 565286
+I, [2017-09-18T21:48:01.355455 #11456]  INFO -- default-ubuntu-1604:       --- /etc/systemd/system/nxrm.service	2017-09-19 03:47:59.385130373 +0000
+I, [2017-09-18T21:48:01.355978 #11456]  INFO -- default-ubuntu-1604:       +++ /etc/systemd/system/.chef-nxrm20170919-1713-1ll4uff.service	2017-09-19 03:47:59.265070373 +0000
+I, [2017-09-18T21:48:01.356336 #11456]  INFO -- default-ubuntu-1604:       @@ -1 +1,13 @@
+I, [2017-09-18T21:48:01.356732 #11456]  INFO -- default-ubuntu-1604:       +[Unit]
+I, [2017-09-18T21:48:01.357174 #11456]  INFO -- default-ubuntu-1604:       +Description=nexus3 service
+I, [2017-09-18T21:48:01.357401 #11456]  INFO -- default-ubuntu-1604:       +After=network.target
+I, [2017-09-18T21:48:01.357649 #11456]  INFO -- default-ubuntu-1604:       +[Service]
+I, [2017-09-18T21:48:01.357932 #11456]  INFO -- default-ubuntu-1604:       +Type=simple
+I, [2017-09-18T21:48:01.358307 #11456]  INFO -- default-ubuntu-1604:       +LimitNOFILE=65536
+I, [2017-09-18T21:48:01.358540 #11456]  INFO -- default-ubuntu-1604:       +WorkingDirectory=/opt/nexus3
+I, [2017-09-18T21:48:01.358567 #11456]  INFO -- default-ubuntu-1604:       +ExecStart=/opt/nexus3/start-nexus3.sh
+I, [2017-09-18T21:48:01.359252 #11456]  INFO -- default-ubuntu-1604:       +User=nexus
+I, [2017-09-18T21:48:01.359286 #11456]  INFO -- default-ubuntu-1604:       +Restart=on-abort
+I, [2017-09-18T21:48:01.359303 #11456]  INFO -- default-ubuntu-1604:       +[Install]
+I, [2017-09-18T21:48:01.361095 #11456]  INFO -- default-ubuntu-1604:       +WantedBy=multi-user.target
+I, [2017-09-18T21:48:01.361380 #11456]  INFO -- default-ubuntu-1604:       - change mode from '' to '0644'
+I, [2017-09-18T21:48:01.361674 #11456]  INFO -- default-ubuntu-1604:       - change owner from '' to 'root'
+I, [2017-09-18T21:48:01.362424 #11456]  INFO -- default-ubuntu-1604:       - change group from '' to 'root'
+I, [2017-09-18T21:48:01.509443 #11456]  INFO -- default-ubuntu-1604:     - creating unit: nxrm.service
+I, [2017-09-18T21:48:01.509496 #11456]  INFO -- default-ubuntu-1604: Recipe: nexus3::systemd
+I, [2017-09-18T21:48:01.722232 #11456]  INFO -- default-ubuntu-1604:   * systemd_unit[nxrm.service] action enable
+I, [2017-09-18T21:48:01.722285 #11456]  INFO -- default-ubuntu-1604:     - enabling unit: nxrm.service
+I, [2017-09-18T21:48:01.915004 #11456]  INFO -- default-ubuntu-1604:   * systemd_unit[nxrm.service] action start
+I, [2017-09-18T21:48:01.915051 #11456]  INFO -- default-ubuntu-1604:     - starting unit: nxrm.service
+I, [2017-09-18T21:48:02.024081 #11456]  INFO -- default-ubuntu-1604: 
+I, [2017-09-18T21:48:02.024555 #11456]  INFO -- default-ubuntu-1604: Running handlers:
+I, [2017-09-18T21:48:02.025576 #11456]  INFO -- default-ubuntu-1604: Running handlers complete
+I, [2017-09-18T21:48:02.026131 #11456]  INFO -- default-ubuntu-1604: Chef Client finished, 18/25 resources updated in 03 minutes 57 seconds
+I, [2017-09-18T21:48:02.116254 #11456]  INFO -- default-ubuntu-1604: Finished converging <default-ubuntu-1604> (4m11.87s).
+I, [2017-09-18T21:48:02.116638 #11456]  INFO -- default-ubuntu-1604: -----> Setting up <default-ubuntu-1604>...
+I, [2017-09-18T21:48:02.117502 #11456]  INFO -- default-ubuntu-1604: Finished setting up <default-ubuntu-1604> (0m0.00s).
+I, [2017-09-18T21:48:02.117589 #11456]  INFO -- default-ubuntu-1604: -----> Verifying <default-ubuntu-1604>...
+I, [2017-09-18T21:48:02.378466 #11456]  INFO -- default-ubuntu-1604: Loaded tests from test/smoke/default 
+I, [2017-09-18T21:48:02.553859 #11456]  INFO -- default-ubuntu-1604: Finished verifying <default-ubuntu-1604> (0m0.44s).
+I, [2017-09-18T21:48:02.554305 #11456]  INFO -- default-ubuntu-1604: -----> Destroying <default-ubuntu-1604>...
+I, [2017-09-18T21:48:05.339835 #11456]  INFO -- default-ubuntu-1604: ==> default: Forcing shutdown of VM...
+I, [2017-09-18T21:48:07.021186 #11456]  INFO -- default-ubuntu-1604: ==> default: Destroying VM and associated drives...
+I, [2017-09-18T21:48:07.380042 #11456]  INFO -- default-ubuntu-1604: Vagrant instance <default-ubuntu-1604> destroyed.
+I, [2017-09-18T21:48:07.380830 #11456]  INFO -- default-ubuntu-1604: Finished destroying <default-ubuntu-1604> (0m4.83s).
+I, [2017-09-18T21:48:07.384303 #11456]  INFO -- default-ubuntu-1604: Finished testing <default-ubuntu-1604> (4m59.03s).
