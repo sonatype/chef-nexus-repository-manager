@@ -22,6 +22,7 @@ directory node['nexus3']['install_dir'] do
   group 'nexus'
   mode '755'
   action :create
+  recursive true
 end
 
 tar_extract "https://download.sonatype.com/nexus/3/nexus-#{node['nexus3']['version']}-unix.tar.gz" do

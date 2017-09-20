@@ -9,4 +9,4 @@ default['java']['oracle']['accept_oracle_download_terms'] = true
 
 default['nexus3']['version'] = '3.5.2-01'
 default['nexus3']['checksum'] = '10d387c4089c00d88388aefec12eef132d3c2d67'
-default['nexus3']['install_dir'] = '/opt/nexus3'
+default['nexus3']['install_dir'] = '/opt/sonatype'
