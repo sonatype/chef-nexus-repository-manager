@@ -30,3 +30,10 @@ tar_extract "https://download.sonatype.com/nexus/3/nexus-#{node['nexus3']['versi
   user 'nexus'
   group 'nexus'
 end
+
+ruby_block "Rename file" do
+  block do
+    ::File.rename(node['nexus3']['install_dir'] + '/nexus-' + node['nexus3']['version'], node['nexus3']['install_dir'] + '/nexus')
+  end
+  not_if {File.exists?(node['nexus3']['install_dir'] + '/nexus')}
+end
