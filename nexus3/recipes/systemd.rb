@@ -12,8 +12,8 @@ systemd_unit 'nxrm.service' do
   [Service]
   Type=simple
   LimitNOFILE=65536
-  WorkingDirectory=#{ node['nexus3']['install_dir'] }
-  ExecStart=#{ node['nexus3']['install_dir'] }/start-nexus3.sh
+  WorkingDirectory=#{ node['nexus3']['nexus_home'] }
+  ExecStart=#{ node['nexus3']['nexus_home'] }/start-nexus3.sh
   User=nexus
   Restart=on-abort
   [Install]

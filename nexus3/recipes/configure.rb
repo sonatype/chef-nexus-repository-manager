@@ -4,7 +4,7 @@
 #
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
 
-start_script = node['nexus3']['install_dir'] + '/start-nexus3.sh'
+start_script = node['nexus3']['nexus_home'] + '/start-nexus3.sh'
 
 template start_script do
   source 'start-nexus3.sh.erb'
