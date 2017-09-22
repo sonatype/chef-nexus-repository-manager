@@ -4,7 +4,7 @@
 #
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
 
-start_script = node['start-nexus-repository-manager']['sonatype_dir'] + '/start-nexus-repository-manager.sh'
+start_script = node['nexus-repository-manager']['sonatype_dir'] + '/start-nexus-repository-manager.sh'
 
 template start_script do
   source 'start-nexus-repository-manager.sh.erb'
