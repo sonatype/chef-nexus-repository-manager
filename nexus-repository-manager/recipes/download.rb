@@ -33,7 +33,7 @@ directory node['nexus-repository-manager']['nexus_home'] do
   action :create
 end
 
-tar_extract "https://download.sonatype.com/nexus/3/nexus-#{node['nexus-repository-manager']['version']}-unix.tar.gz" do
+tar_extract node['nexus-repository-manager']['nexus_download_url'] do
   target_dir node['nexus-repository-manager']['nexus_home']
   checksum node['nexus-repository-manager']['checksum']
   creates node['nexus-repository-manager']['nexus_home_bin']
