@@ -26,8 +26,8 @@ directory node['nexus-repository-manager']['sonatype_dir'] do
 end
 
 directory node['nexus-repository-manager']['nexus_home'] do
-  owner 'nexus'
-  group 'nexus'
+  owner 'root'
+  group 'root'
   mode '755'
   recursive true
   action :create
@@ -38,8 +38,8 @@ tar_extract "https://download.sonatype.com/nexus/3/nexus-#{node['nexus-repositor
   checksum node['nexus-repository-manager']['checksum']
   creates node['nexus-repository-manager']['nexus_home_bin']
   tar_flags [ '-P', '--strip-components 1' ]
-  user 'nexus'
-  group 'nexus'
+  user 'root'
+  group 'root'
 end
 
 directory node['nexus-repository-manager']['nexus_data'] do
