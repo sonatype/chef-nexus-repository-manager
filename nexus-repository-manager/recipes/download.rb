@@ -18,8 +18,8 @@ group 'nexus' do
 end
 
 directory node['nexus-repository-manager']['sonatype_dir'] do
-  owner 'nexus'
-  group 'nexus'
+  owner 'root'
+  group 'root'
   mode '755'
   recursive true
   action :create
@@ -75,8 +75,8 @@ directory node['nexus-repository-manager']['nexus_data_tmp'] do
 end
 
 directory node['nexus-repository-manager']['sonatype_work'] do
-  owner 'nexus'
-  group 'nexus'
+  owner 'root'
+  group 'root'
   mode '755'
   recursive true
   action :create
@@ -84,6 +84,6 @@ end
 
 link node['nexus-repository-manager']['sonatype_work_nexus3'] do
   to node['nexus-repository-manager']['nexus_data']
-  owner 'nexus'
-  group 'nexus'
+  owner 'root'
+  group 'root'
 end
