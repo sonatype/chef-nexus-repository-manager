@@ -22,7 +22,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[nexus3::default]
+      - recipe[nexus-repository-manager::default]
     verifier:
       inspec_tests:
         - test/smoke/default
