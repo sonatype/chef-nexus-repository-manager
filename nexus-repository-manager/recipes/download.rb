@@ -5,6 +5,7 @@
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
 
 user 'nexus' do
+  uid '200'
   comment 'Nexus Repository Manager user'
   system true
   shell '/bin/false'
