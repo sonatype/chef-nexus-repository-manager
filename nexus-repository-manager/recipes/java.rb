@@ -16,4 +16,3 @@ link '/opt/java' do
   owner 'root'
   group 'root'
 end
-
