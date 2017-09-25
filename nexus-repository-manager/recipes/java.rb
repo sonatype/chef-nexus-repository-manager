@@ -1,6 +1,6 @@
 #
 # Cookbook:: nexus-repository-manager
-# Recipe:: download
+# Recipe:: java
 #
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
 
