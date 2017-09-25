@@ -13,5 +13,4 @@ chef_version '>= 12.1' if respond_to?(:chef_version)
 issues_url 'https://github.com/sonatype/nexus-chef-cookbook/issues'
 source_url 'https://github.com/sonatype/nexus-chef-cookbook'
 
-depends 'java', '~> 1.50'
 depends 'tar', '~> 2.1'

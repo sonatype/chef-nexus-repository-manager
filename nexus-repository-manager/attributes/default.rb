@@ -3,9 +3,10 @@
 
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
 
-default['java']['jdk_version'] = '8'
-default['java']['install_flavor'] = 'oracle'
-default['java']['oracle']['accept_oracle_download_terms'] = true
+default['java']['version_major'] = '8'
+default['java']['version_minor'] = '144'
+default['java']['version_build'] = '01'
+default['java']['download_hash'] = '090f390dda5b47b9b721c7dfaa008135'
 
 default['nexus-repository-manager']['version'] = '3.5.2-01'
 default['nexus-repository-manager']['nexus_download_url'] = "https://download.sonatype.com/nexus/3/nexus-#{node['nexus-repository-manager']['version']}-unix.tar.gz"
