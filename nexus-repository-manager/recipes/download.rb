@@ -39,8 +39,6 @@ tar_extract node['nexus-repository-manager']['nexus_download_url'] do
   checksum node['nexus-repository-manager']['checksum']
   creates node['nexus-repository-manager']['nexus_home_bin']
   tar_flags [ '-P', '--strip-components 1' ]
-  user 'root'
-  group 'root'
 end
 
 directory node['nexus-repository-manager']['nexus_data'] do
