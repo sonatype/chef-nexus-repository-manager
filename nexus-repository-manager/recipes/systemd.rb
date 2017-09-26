@@ -12,7 +12,6 @@ systemd_unit 'nexus-repository-manager.service' do
   [Service]
   Type=simple
   LimitNOFILE=65536
-  WorkingDirectory=#{ node['nexus-repository-manager']['nexus_home'] }
   ExecStart=#{ node['nexus-repository-manager']['sonatype_dir'] }/start-nexus-repository-manager.sh
   User=nexus
   Restart=on-abort
