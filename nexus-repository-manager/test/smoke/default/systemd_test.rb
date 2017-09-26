@@ -1,7 +1,7 @@
 #
 # Cookbook:: nexus-repository-manager
 #
-# Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 #
 
 # Inspec test for recipe nexus3::systemd

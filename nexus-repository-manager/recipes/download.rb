@@ -2,7 +2,7 @@
 # Cookbook:: nexus-repository-manager
 # Recipe:: download
 #
-# Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
 user 'nexus' do
   uid '200'

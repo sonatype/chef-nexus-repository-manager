@@ -2,7 +2,7 @@
 # Cookbook:: nexus-repository-manager
 # Recipe:: systemd
 #
-# Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
 systemd_unit 'nexus-repository-manager.service' do
   content <<-EOU.gsub(/^\s+/, '')

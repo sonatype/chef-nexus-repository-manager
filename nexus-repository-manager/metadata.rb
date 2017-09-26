@@ -1,11 +1,12 @@
 #
 # Cookbook:: nexus-repository-manager
 #
-# Copyright:: Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
 name 'nexus-repository-manager'
 maintainer 'Copyright (c) 2017-present Sonatype, Inc.'
-license 'All Rights Reserved.'
+maintainer_email 'cloud-ops@sonatype.com'
+license 'Apache-2.0'
 description 'Installs/Configures Nexus Repository Manager'
 long_description 'Installs/Configures Nexus Repository Manager'
 version '0.1.0'
