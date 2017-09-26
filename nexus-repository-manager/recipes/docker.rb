@@ -6,3 +6,17 @@
 
 include_recipe 'java'
 include_recipe 'nexus-repository-manager::download'
+
+set_limit 'nexus' do
+  type 'hard'
+  item 'nofile'
+  value 2048
+  use_system true
+end
+
+set_limit 'nexus' do
+  type 'soft'
+  item 'nofile'
+  value 2048
+  use_system true
+end

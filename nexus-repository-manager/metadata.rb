@@ -21,3 +21,4 @@ recipe 'nexus-repository-manager::docker', 'Installs Nexus Repository Manager. I
 
 depends 'java', '~> 1.50'
 depends 'tar', '~> 2.1'
+depends 'limits', '~> 1.0.0'
