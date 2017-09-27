@@ -41,6 +41,11 @@ tar_extract node['nexus-repository-manager']['nexus_download_url'] do
   tar_flags [ '-P', '--strip-components 1' ]
 end
 
+directory node['nexus-repository-manager']['nexus_home'] + '/nexus3' do
+  recursive true
+  action :delete
+end
+
 directory node['nexus-repository-manager']['nexus_data'] do
   owner 'nexus'
   group 'nexus'
