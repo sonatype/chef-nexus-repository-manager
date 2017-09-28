@@ -13,12 +13,15 @@ default['java']['jdk']['8']['bin_cmds'] = [];
 default['nexus-repository-manager']['version'] = '3.6.0-02'
 default['nexus-repository-manager']['nexus_download_url'] = "https://download.sonatype.com/nexus/3/nexus-#{node['nexus-repository-manager']['version']}-unix.tar.gz"
 default['nexus-repository-manager']['checksum'] = '477969da1ea3a532247be628e5ca2b466c9653e88ba51d51a1609eacb0a45b4b'
-default['nexus-repository-manager']['sonatype_dir'] = '/opt/sonatype'
-default['nexus-repository-manager']['nexus_home'] = default['nexus-repository-manager']['sonatype_dir'] + '/nexus'
-default['nexus-repository-manager']['nexus_home_bin'] = default['nexus-repository-manager']['nexus_home'] + '/bin'
-default['nexus-repository-manager']['nexus_data'] = '/nexus-data'
-default['nexus-repository-manager']['nexus_data_etc'] = default['nexus-repository-manager']['nexus_data'] + '/etc'
-default['nexus-repository-manager']['nexus_data_log'] = default['nexus-repository-manager']['nexus_data'] + '/log'
-default['nexus-repository-manager']['nexus_data_tmp'] = default['nexus-repository-manager']['nexus_data'] + '/tmp'
-default['nexus-repository-manager']['sonatype_work'] = default['nexus-repository-manager']['sonatype_dir'] + '/sonatype-work'
-default['nexus-repository-manager']['sonatype_work_nexus3'] = default['nexus-repository-manager']['sonatype_work'] + '/nexus3'
+
+default['nexus-repository-manager']['sonatype']['dir'] = '/opt/sonatype'
+default['nexus-repository-manager']['sonatype']['work']['dir'] = default['nexus-repository-manager']['sonatype']['dir'] + '/sonatype_work'
+default['nexus-repository-manager']['sonatype']['work']['nexus3']['dir'] = default['nexus-repository-manager']['sonatype']['work']['dir'] + '/nexus3'
+
+default['nexus-repository-manager']['nexus']['home']['dir'] = default['nexus-repository-manager']['sonatype']['dir'] + '/nexus'
+default['nexus-repository-manager']['nexus']['home']['bin']['dir'] = default['nexus-repository-manager']['nexus']['home']['dir'] + '/bin'
+
+default['nexus-repository-manager']['nexus']['data']['dir'] = '/nexus-data'
+default['nexus-repository-manager']['nexus']['data']['etc']['dir'] = default['nexus-repository-manager']['nexus']['data']['dir'] + '/etc'
+default['nexus-repository-manager']['nexus']['data']['log']['dir'] = default['nexus-repository-manager']['nexus']['data']['dir'] + '/log'
+default['nexus-repository-manager']['nexus']['data']['tmp']['dir'] = default['nexus-repository-manager']['nexus']['data']['dir'] + '/tmp'

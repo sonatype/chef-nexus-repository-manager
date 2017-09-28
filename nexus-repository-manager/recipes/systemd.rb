@@ -12,7 +12,7 @@ systemd_unit 'nexus-repository-manager.service' do
   [Service]
   Type=simple
   LimitNOFILE=65536
-  ExecStart=#{ node['nexus-repository-manager']['sonatype_dir'] }/start-nexus-repository-manager.sh
+  ExecStart=#{ node['nexus-repository-manager']['sonatype']['dir'] }/start-nexus-repository-manager.sh
   User=nexus
   Restart=on-abort
   [Install]
