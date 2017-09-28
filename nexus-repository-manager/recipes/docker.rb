@@ -1,6 +1,6 @@
 #
-# Cookbook:: nexus-iq-server
-# Recipe:: default
+# Cookbook:: nexus-repository-manager
+# Recipe:: docker
 #
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 

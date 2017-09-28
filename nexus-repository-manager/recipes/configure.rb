@@ -1,5 +1,5 @@
 #
-# Cookbook:: Nexus Repository Manager
+# Cookbook:: nexus-repository-manager
 # Recipe:: configure
 #
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
