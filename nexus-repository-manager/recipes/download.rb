@@ -41,6 +41,7 @@ tar_extract node['nexus-repository-manager']['nexus_download_url'] do
   tar_flags [ '-P', '--strip-components 1' ]
 end
 
+# Delete the nexus3 folder that is not used.
 directory node['nexus-repository-manager']['nexus']['home']['path'] + '/nexus3' do
   recursive true
   action :delete
