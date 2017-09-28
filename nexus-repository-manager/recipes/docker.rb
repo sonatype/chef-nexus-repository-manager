@@ -11,13 +11,13 @@ include_recipe 'nexus-repository-manager::configure'
 set_limit 'nexus' do
   type 'hard'
   item 'nofile'
-  value 2048
+  value 65536
   use_system true
 end
 
 set_limit 'nexus' do
   type 'soft'
   item 'nofile'
-  value 2048
+  value 65536
   use_system true
 end
