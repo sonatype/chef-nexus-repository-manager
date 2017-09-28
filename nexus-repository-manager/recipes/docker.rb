@@ -6,6 +6,7 @@
 
 include_recipe 'java'
 include_recipe 'nexus-repository-manager::download'
+include_recipe 'nexus-repository-manager::configure'
 
 set_limit 'nexus' do
   type 'hard'
