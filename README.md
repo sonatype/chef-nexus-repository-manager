@@ -1,15 +1,29 @@
-## Nexus Chef Cookbooks
+## Cookbook for Nexus Repository Manager
 
-This project contains cookbooks for the following products:
+#### Usage
 
-### Nexus IQ Server
+Simply include the `nexus-repository-manager` recipe wherever you would like Nexus Repository Manager installed. Simply add
+`recipe['nexus-repository-manager']` to your runlist or `include_recipe 'nexus-repository-manager'` to your cookbook. This will
+install Nexus Repository Manager managed as a systemd service.
 
-Please see [Nexus IQ Server cookbook](nexus-iq-server/README.md)
+We also provide a `nexus-repository-manager::docker` recipe which is exactly the same but without installing a systemd service.
 
-### Nexus Repository Manager
+#### Recipes
 
-Please see [Nexus Repository Manager cookbook](nexus-repository-manager/README.md)
+ - nexus-repository-manager::default
+   Installs Nexus Repository Manager and starts it as systemd service.
+ - nexus-repository-manager::docker
+   Installs Nexus Repository Manager. Instead of a systemd service a startup script `start-nexus-repository-manager.sh` is provided in install_dir.
 
-## License
+#### Testing
 
-The cookbooks are licensed under the [Apache v2 license](LICENSE)
+We provide a simple smoke test for this cookbook. Use this command to run it:
+
+    kitchen test
+
+#### Supported platforms
+
+We run our tests against `centos-7.3` as well as `ubuntu-16.04`. However all major systemd based distributions should
+work fine.
+
+The alternative `nexus-repository-manager::docker` recipe does not require systemd.
