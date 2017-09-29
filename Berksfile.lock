@@ -1,5 +1,5 @@
 DEPENDENCIES
-  nexus-repository-manager
+  nexus_repository_manager
     path: .
     metadata: true
 
@@ -11,7 +11,7 @@ GRAPH
     homebrew (>= 0.0.0)
     windows (>= 0.0.0)
   limits (1.0.0)
-  nexus-repository-manager (0.1.0)
+  nexus_repository_manager (0.1.0)
     java (~> 1.50)
     limits (~> 1.0.0)
     tar (~> 2.1)
