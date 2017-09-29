@@ -6,7 +6,7 @@
 
 # Inspec test for recipe nexus_repository_manager::systemd
 
-describe service 'nexus_repository_manager' do
+describe service 'nexus-repository-manager' do
   it { should be_enabled }
   it { should be_running }
 end

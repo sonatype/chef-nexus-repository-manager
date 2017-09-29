@@ -17,7 +17,7 @@ supports 'ubuntu', '>= 16.04'
 supports 'centos', '>= 7.3'
 
 recipe 'nexus_repository_manager::default', 'Installs Nexus Repository Manager and starts it as systemd service.'
-recipe 'nexus_repository_manager::docker', 'Installs Nexus Repository Manager. Instead of a systemd service start_nexus_repository_manager.sh is provided in SONATYPE_DIR.'
+recipe 'nexus_repository_manager::docker', 'Installs Nexus Repository Manager. Instead of a systemd service start-nexus-repository-manager.sh is provided in SONATYPE_DIR.'
 
 depends 'java', '~> 1.50'
 depends 'tar', '~> 2.1'
