@@ -1,16 +1,4 @@
-## nexus-repository-manager
-
-Cookbook for Nexus Repository Manager.
-
-Because this cookbook isn't public (yet) it can only be accessed by the docker/nexus3 Dockerfile via a public bucket as intermediary.
-
-To update the cookbook run:
-
-    berks package
-
-Then upload the resulting archive to the `int-public` bucket like this:
-
-    aws s3 cp cookbooks-nnnnnnn.tar.gz s3://int-public/nexus-repository-manager-cookbook.tar.gz --acl public-read
+## Cookbook for Nexus Repository Manager
 
 #### Usage
 
