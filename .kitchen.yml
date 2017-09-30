@@ -3,7 +3,7 @@
 driver:
   name: vagrant
   network:
-    - ["private_network", {ip: "192.168.35.35"}]
+    - ["private_network", {ip: "192.168.35.36"}]
 
 provisioner:
   name: chef_zero
@@ -22,7 +22,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[nexus-repository-manager::default]
+      - recipe[nexus_repository_manager::default]
     verifier:
       inspec_tests:
         - test/smoke/default
