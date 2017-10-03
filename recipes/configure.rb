@@ -12,3 +12,21 @@ template start_script do
   group 'root'
   mode '0755'
 end
+
+hazelcast_xml = node['nexus_repository_manager']['nexus']['home']['path'] + '/etc/fabric/hazelcast.xml'
+
+template hazelcast_xml do
+  source 'hazelcast.xml.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
+end
+
+nexus_properties = node['nexus_repository_manager']['nexus']['data']['etc']['path'] + '/nexus.properties'
+
+template nexus_properties do
+  source 'nexus.properties.erb'
+  owner 'nexus'
+  group 'nexus'
+  mode '0755'
+end

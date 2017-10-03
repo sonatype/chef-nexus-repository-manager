@@ -23,3 +23,21 @@ default['nexus_repository_manager']['nexus']['data']['path'] = '/nexus-data'
 default['nexus_repository_manager']['nexus']['data']['etc']['path'] = default['nexus_repository_manager']['nexus']['data']['path'] + '/etc'
 default['nexus_repository_manager']['nexus']['data']['log']['path'] = default['nexus_repository_manager']['nexus']['data']['path'] + '/log'
 default['nexus_repository_manager']['nexus']['data']['tmp']['path'] = default['nexus_repository_manager']['nexus']['data']['path'] + '/tmp'
+
+# hazelcast configuration
+default['nexus_repository_manager']['hazelcast']['network']['join']['multicast']['enabled'] = true
+default['nexus_repository_manager']['hazelcast']['network']['join']['multicast']['multicast_group'] = '224.2.2.3'
+default['nexus_repository_manager']['hazelcast']['network']['join']['multicast']['multicast_port'] = 54327
+default['nexus_repository_manager']['hazelcast']['network']['join']['aws']['enabled'] = false
+default['nexus_repository_manager']['hazelcast']['network']['join']['aws']['iam_role'] = ''
+default['nexus_repository_manager']['hazelcast']['network']['join']['aws']['region'] = 'us-east-1'
+default['nexus_repository_manager']['hazelcast']['network']['join']['aws']['tag_key'] = 'Platform'
+default['nexus_repository_manager']['hazelcast']['network']['join']['aws']['tag_value'] = 'nexus-repository-manager'
+
+# nexus.properties configuration
+default['nexus_repository_manager']['nexus_properties']['application_port'] = '8081'
+default['nexus_repository_manager']['nexus_properties']['application_host'] = '0.0.0.0'
+default['nexus_repository_manager']['nexus_properties']['nexus_context_path'] = '/'
+default['nexus_repository_manager']['nexus_properties']['nexus_loadAsOSS'] = false
+default['nexus_repository_manager']['nexus_properties']['nexus_clustered'] = false
+default['nexus_repository_manager']['nexus_properties']['nexus_licenseFile'] = ''
