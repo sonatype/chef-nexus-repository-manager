@@ -35,6 +35,8 @@
     <property name="hazelcast.icmp.enabled">true</property>
     <property name="hazelcast.icmp.timeout">5000</property>
     <property name="hazelcast.icmp.ttl">3</property>
+
+     <property name="hazelcast.discovery.enabled"><%= node['nexus_repository_manager']['hazelcast']['properties']['discover']['enabled'] %></property>
   </properties>
 
   <network>
@@ -71,6 +73,18 @@
         <tag-value><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['tag_value'] %></tag-value>
       </aws>
       <discovery-strategies>
+          <!-- class equals to the DiscoveryStrategy not the factory! -->
+          <discovery-strategy enabled="true" class="com.hazelcast.aws.AwsDiscoveryStrategy">
+              <properties>
+                 <property name="iam-role"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['iam_role'] %></property>
+                 <property name="region"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['region'] %></property>
+                 <property name="host-header">ec2.amazonaws.com</property>
+                 <property name="security-group-name">hazelcast</property>
+                 <property name="tag-key"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['tag_key'] %></property>
+                 <property name="tag-value"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['tag_value'] %></property>
+                 <property name="hz-port">5701</property>
+              </properties>
+          </discovery-strategy>
       </discovery-strategies>
     </join>
 

@@ -27,3 +27,31 @@ suites:
       inspec_tests:
         - test/smoke/default
     attributes:
+  - name: configured
+    run_list:
+      - recipe[nexus_repository_manager::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/configured
+    attributes:
+      nexus_repository_manager:
+        hazelcast:
+          network:
+            join:
+              multicast:
+                enabled: false
+                multicast_group: 123.4.5.6
+                multicast_port: 54321
+              aws:
+                enabled: true
+                iam_role: "test-iam-role"
+                region: "test-region"
+                tag_key: "test-tag-key"
+                tag_value: "test-tag-value"
+        nexus_properties:
+          application_port: 8082
+          application_host: 127.0.0.1
+          nexus_context_path: "/test-context"
+          nexus_loadAsOSS: true
+          nexus_clustered: true
+          nexus_licenseFile: "/opt/sonatype/license.lic"
