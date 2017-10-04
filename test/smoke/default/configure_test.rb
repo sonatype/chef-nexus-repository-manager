@@ -9,6 +9,11 @@
 describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
   it { should exist }
 
+  context 'when hazelcast discovery is disabled' do
+    its('content') { should include '<property name="hazelcast.discovery.enabled">false</property>' }
+    its('content') { should_not include '<discovery-strategy enabled="false" class="com.hazelcast.aws.AwsDiscoveryStrategy">' }
+  end
+
   context 'when multicast is enabled' do
     its('content') { should include '<multicast enabled="true">' }
   end
@@ -58,14 +63,14 @@ describe file('/nexus-data/etc/nexus.properties') do
   end
 
   context 'when nexus_loadAsOSS is false' do
-    its('content') { should_not include 'nexus_loadAsOSS' }
+    its('content') { should_not include 'nexus.loadAsOSS' }
   end
 
   context 'when nexus_clustered is false' do
-    its('content') { should_not include 'nexus_clustered' }
+    its('content') { should_not include 'nexus.clustered' }
   end
 
   context 'when nexus_licenseFile is blank' do
-    its('content') { should_not include 'nexus_licenseFile' }
+    its('content') { should_not include 'nexus.licenseFile' }
   end
 end

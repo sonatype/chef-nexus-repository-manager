@@ -55,3 +55,29 @@ suites:
           nexus_loadAsOSS: true
           nexus_clustered: true
           nexus_licenseFile: "/opt/sonatype/license.lic"
+  - name: hazelcast_discovery
+    run_list:
+      - recipe[nexus_repository_manager::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/hazelcast_discovery
+    attributes:
+      nexus_repository_manager:
+        properties:
+          hazelcast:
+            discovery:
+              enabled: true
+        hazelcast:
+          network:
+            join:
+              multicast:
+                enabled: false
+              aws:
+                enabled: false
+              hazelcast_discovery:
+                iam_role: "test-hz-iam-role"
+                region: "test-hz-region"
+                tag_key: "test-hz-tag-key"
+                tag_value: "test-hz-tag-value"
+                security_group_name: "test-hz-security-group-name"
+
