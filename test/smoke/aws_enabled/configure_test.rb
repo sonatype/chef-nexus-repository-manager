@@ -9,7 +9,7 @@
 describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
   it { should exist }
 
-  context 'when aws enabled is default' do
+  context 'when aws is enabled' do
     its('content') { should include '<aws enabled="true">' }
   end
 

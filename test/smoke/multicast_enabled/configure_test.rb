@@ -9,8 +9,8 @@
 describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
   it { should exist }
 
-  context 'when multicast is disabled' do
-    its('content') { should include '<multicast enabled="false">' }
+  context 'when multicast is enabled' do
+    its('content') { should include '<multicast enabled="true">' }
   end
 
   context 'when multicast group is set' do
