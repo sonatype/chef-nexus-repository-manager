@@ -80,4 +80,4 @@ suites:
                 tag_key: "test-hz-tag-key"
                 tag_value: "test-hz-tag-value"
                 security_group_name: "test-hz-security-group-name"
-
+                hz_port: 5708

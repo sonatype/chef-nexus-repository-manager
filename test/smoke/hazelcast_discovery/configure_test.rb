@@ -41,4 +41,8 @@ describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
   context 'when tag_value is set' do
     its('content') { should include '<property name="tag-value">test-hz-tag-value</property>' }
   end
+
+  context 'when hz_port is set' do
+    its('content') { should include '<property name="hz-port">5708</property>' }
+  end
 end
