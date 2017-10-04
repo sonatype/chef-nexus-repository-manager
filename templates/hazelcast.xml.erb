@@ -3,8 +3,8 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://www.hazelcast.com/schema/config hazelcast-config-3.6.xsd">
   <group>
-    <name>nexus</name>
-    <password>nexus123</password>
+    <name><%= node['nexus_repository_manager']['hazelcast']['group']['name'] %></name>
+    <password><%= node['nexus_repository_manager']['hazelcast']['group']['password'] %></password>
   </group>
 
   <management-center enabled="true">http://localhost:8080/</management-center>
@@ -55,10 +55,12 @@
         <multicast-group><%= node['nexus_repository_manager']['hazelcast']['network']['join']['multicast']['multicast_group'] %></multicast-group>
         <multicast-port><%= node['nexus_repository_manager']['hazelcast']['network']['join']['multicast']['multicast_port'] %></multicast-port>
       </multicast>
-      <tcp-ip enabled="false">
-        <interface>127.0.0.1</interface>
+      <tcp-ip enabled="<%= node['nexus_repository_manager']['hazelcast']['network']['join']['tcp_ip']['enabled'] %>">
+        <interface><%= node['nexus_repository_manager']['hazelcast']['network']['join']['tcp_ip']['interface'] %></interface>
         <member-list>
-          <member>127.0.0.1</member>
+          <% node['nexus_repository_manager']['hazelcast']['network']['join']['tcp_ip']['members'].each do |ip| %>
+          <member><%= "#{ip}" %></member>
+          <% end %>
         </member-list>
       </tcp-ip>
       <aws enabled="<%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['enabled'] %>">

@@ -81,3 +81,26 @@ suites:
                 tag_value: "test-hz-tag-value"
                 security_group_name: "test-hz-security-group-name"
                 hz_port: 5708
+  - name: tcp_ip_enabled
+    run_list:
+      - recipe[nexus_repository_manager::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/tcp_ip_enabled
+    attributes:
+      nexus_repository_manager:
+        properties:
+          hazelcast:
+            discovery:
+              enabled: false
+        hazelcast:
+          network:
+            join:
+              multicast:
+                enabled: false
+              aws:
+                enabled: false
+              tcp_ip:
+                enabled: true
+                interface: '10.0.1.1'
+                members: ['10.0.1.2', '10.0.1.3', '10.0.1.4']

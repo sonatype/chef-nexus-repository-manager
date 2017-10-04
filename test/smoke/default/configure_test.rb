@@ -9,6 +9,14 @@
 describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
   it { should exist }
 
+  context 'when group name is set' do
+    its('content') { should include '<name>nexus</name>' }
+  end
+
+  context 'when group password is set' do
+    its('content') { should include '<password>nexus123</password>' }
+  end
+
   context 'when hazelcast discovery is disabled' do
     its('content') { should include '<property name="hazelcast.discovery.enabled">false</property>' }
     its('content') { should_not include '<discovery-strategy enabled="false" class="com.hazelcast.aws.AwsDiscoveryStrategy">' }
@@ -24,6 +32,18 @@ describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
 
   context 'when multicast port is set' do
     its('content') { should include '<multicast-port>54327</multicast-port>' }
+  end
+
+  context 'when tcp-ip enabled is default' do
+    its('content') { should include '<tcp-ip enabled="false">' }
+  end
+
+  context 'when tcp-ip interface is default' do
+    its('content') { should include '<interface>127.0.0.1</interface>' }
+  end
+
+  context 'when tcp-ip members are default' do
+    its('content') { should include '<member>127.0.0.1</member>' }
   end
 
   context 'when aws enabled is default' do
