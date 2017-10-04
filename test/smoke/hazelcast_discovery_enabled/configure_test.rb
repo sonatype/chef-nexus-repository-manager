@@ -14,14 +14,6 @@ describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
     its('content') { should include '<discovery-strategy enabled="true" class="com.hazelcast.aws.AwsDiscoveryStrategy">' }
   end
 
-  context 'when multicast is disabled' do
-    its('content') { should include '<multicast enabled="false">' }
-  end
-
-  context 'when aws is disabled' do
-    its('content') { should include '<aws enabled="false">' }
-  end
-
   context 'when iam_role is set' do
     its('content') { should include '<property name="iam-role">test-hz-iam-role</property>' }
   end
@@ -45,4 +37,16 @@ describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
   context 'when hz_port is set' do
     its('content') { should include '<property name="hz-port">5708</property>' }
   end
+
+  context 'when multicast is disabled' do
+    its('content') { should include '<multicast enabled="false">' }
+  end
+
+  context 'when tcp_ip is disabled' do
+    its('content') { should include '<tcp-ip enabled="false">' }
+  end
+
+  context 'when aws is disabled' do
+    its('content') { should include '<aws enabled="false">' }
+  end  
 end

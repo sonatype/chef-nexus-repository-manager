@@ -17,11 +17,6 @@ describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
     its('content') { should include '<password>nexus123</password>' }
   end
 
-  context 'when hazelcast discovery is disabled' do
-    its('content') { should include '<property name="hazelcast.discovery.enabled">false</property>' }
-    its('content') { should_not include '<discovery-strategy enabled="false" class="com.hazelcast.aws.AwsDiscoveryStrategy">' }
-  end
-
   context 'when multicast is enabled' do
     its('content') { should include '<multicast enabled="true">' }
   end
@@ -34,7 +29,7 @@ describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
     its('content') { should include '<multicast-port>54327</multicast-port>' }
   end
 
-  context 'when tcp-ip enabled is default' do
+  context 'when tcp-ip is disabled' do
     its('content') { should include '<tcp-ip enabled="false">' }
   end
 
@@ -46,7 +41,7 @@ describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
     its('content') { should include '<member>127.0.0.1</member>' }
   end
 
-  context 'when aws enabled is default' do
+  context 'when aws is disabled' do
     its('content') { should include '<aws enabled="false">' }
   end
 
@@ -65,6 +60,11 @@ describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
   context 'when tag_value is set' do
     its('content') { should include '<tag-value>nexus-repository-manager</tag-value>' }
   end
+
+  context 'when hazelcast discovery is disabled' do
+    its('content') { should include '<property name="hazelcast.discovery.enabled">false</property>' }
+    its('content') { should_not include '<discovery-strategy enabled="false" class="com.hazelcast.aws.AwsDiscoveryStrategy">' }
+  end  
 end
 
 describe file('/nexus-data/etc/nexus.properties') do
