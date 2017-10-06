@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
+#
+
+is_instance_healthy()
+{
+ instance_state=`aws elb describe-instance-health --region $2 --load-balancer-name $3 --instances $1 --query InstanceStates[0].State --output text`
+ echo load balancer state is ${instance_state} lb: $3 instance: $1
+ test ${instance_state} == "InService"
+ return $?
+}
+
+instance_id=`cat /var/lib/cloud/data/instance-id`
+region=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/\(.*\)[a-z]/\1/'`
+stack_name=`aws ec2 describe-instances --instance-id ${instance_id} --query 'Reservations[*].Instances[*].Tags[?Key==\`aws:cloudformation:stack-name\`].Value' --output text --region ${region}`
+exit_code=""
+auto_scaling_group=`aws autoscaling describe-auto-scaling-instances --region ${region} --instance-ids=${instance_id} --query 'AutoScalingInstances[0].AutoScalingGroupName' --output text`
+auto_scaling_group_logical_id=`aws autoscaling describe-tags --region ${region} --filters "Name=Key,Values=aws:cloudformation:logical-id" "Name=auto-scaling-group,Values=${auto_scaling_group}" --query 'Tags[0].Value' --output text`
+if type systemctl ; then
+ until systemctl is-system-running | grep -E 'running|degraded|maintenance|stopping|offline|unknown' ; do sleep 1 ; done
+ if systemctl is-system-running; then
+   if /opt/cloudformation/verify-cloud-init.py ; then
+     until grep -m 1 "Started Sonatype Nexus" <%= node['nexus_repository_manager']['nexus']['data']['log']['path'] %>/nexus.log || ! systemctl is-system-running ; do sleep 1 ; done
+     if systemctl is-system-running; then
+       load_balancer=`aws elb describe-load-balancers --region ${region} | python -c "import json,sys;describeLoadBalancersResult=json.load(sys.stdin);print [loadBalancerDescription['LoadBalancerName'] for loadBalancerDescription in describeLoadBalancersResult['LoadBalancerDescriptions'] if(any(instance['InstanceId'] == '$instance_id' for instance in loadBalancerDescription['Instances']))][0]"`
+       until is_instance_healthy ${instance_id} ${region} ${load_balancer} ; do sleep 1 ; done
+       exit_code=" -s true"
+     else
+       echo nexus failed to start
+       exit_code=" -s false"
+     fi
+   else
+     echo cloud-ssh services failed to initialise
+     exit_code=" -s false"
+   fi
+ else
+   echo systemctl services failed to start
+   exit_code=" -s false"
+ fi
+fi
+cfn-signal ${exit_code} --stack=${stack_name} --resource=${auto_scaling_group_logical_id} --region=${region}
