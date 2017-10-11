@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2017-present Sonatype, Inc.
+    All rights reserved. Includes the third-party code listed at http://links.sonatype.com/products/nexus/pro/attributions
+    Sonatype and Sonatype Nexus are trademarks of Sonatype, Inc. Apache Maven is a trademark of the Apache Foundation.
+    M2Eclipse is a trademark of the Eclipse Foundation. All other trademarks are the property of their respective owners.
+-->
 <hazelcast xmlns="http://www.hazelcast.com/schema/config"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://www.hazelcast.com/schema/config hazelcast-config-3.6.xsd">
@@ -36,7 +42,7 @@
     <property name="hazelcast.icmp.timeout">5000</property>
     <property name="hazelcast.icmp.ttl">3</property>
 
-    <property name="hazelcast.discovery.enabled"><%= node['nexus_repository_manager']['properties']['hazelcast']['discovery']['enabled'] %></property>
+    <property name="hazelcast.discovery.enabled"><%= node['nexus_repository_manager']['hazelcast']['properties']['discovery']['enabled'] %></property>
   </properties>
 
   <network>
@@ -75,9 +81,9 @@
         <tag-value><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['tag_value'] %></tag-value>
       </aws>
       <discovery-strategies>
-          <% if node['nexus_repository_manager']['properties']['hazelcast']['discovery']['enabled'] %>
+          <% if node['nexus_repository_manager']['hazelcast']['properties']['discovery']['enabled'] %>
           <!-- class equals to the DiscoveryStrategy not the factory! -->
-          <discovery-strategy enabled="<%= node['nexus_repository_manager']['properties']['hazelcast']['discovery']['enabled'] %>" class="com.hazelcast.aws.AwsDiscoveryStrategy">
+          <discovery-strategy enabled="<%= node['nexus_repository_manager']['hazelcast']['properties']['discovery']['enabled'] %>" class="com.hazelcast.aws.AwsDiscoveryStrategy">
               <properties>
                  <property name="iam-role"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['hazelcast_discovery']['iam_role'] %></property>
                  <property name="region"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['hazelcast_discovery']['region'] %></property>

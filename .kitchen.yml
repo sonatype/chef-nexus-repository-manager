@@ -17,6 +17,7 @@ verifier:
 
 platforms:
   - name: ubuntu-16.04
+  - name: centos-7.3
 
 suites:
   - name: default
@@ -111,11 +112,10 @@ suites:
         - test/smoke/hazelcast_discovery_enabled
     attributes:
       nexus_repository_manager:
-        properties:
-          hazelcast:
+        hazelcast:
+          properties:
             discovery:
               enabled: true
-        hazelcast:
           network:
             join:
               multicast:
