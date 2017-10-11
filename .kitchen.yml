@@ -17,7 +17,6 @@ verifier:
 
 platforms:
   - name: ubuntu-16.04
-  - name: centos-7.3
 
 suites:
   - name: default
@@ -39,8 +38,8 @@ suites:
           application_port: 8082
           application_host: 127.0.0.1
           nexus_context_path: "/test-context"
-          nexus_loadAsOSS: true
-          nexus_clustered: true
+          nexus_loadAsOSS: false
+          nexus_clustered: false
           nexus_licenseFile: "/opt/sonatype/license.lic"
   - name: multicast_enabled
     run_list:

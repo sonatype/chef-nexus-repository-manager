@@ -71,26 +71,26 @@ describe file('/nexus-data/etc/nexus.properties') do
   it { should exist }
 
   context 'when application_port is default' do
-    its('content') { should include '# application-port=8081' }
+    its('content') { should include 'application-port=8081' }
   end
 
   context 'when application_host is default' do
-    its('content') { should include '# application-host=0.0.0.0' }
+    its('content') { should include 'application-host=0.0.0.0' }
   end
 
   context 'when nexus_context_path is default' do
-    its('content') { should include '# nexus-context-path=/' }
+    its('content') { should include 'nexus-context-path=/' }
   end
 
-  context 'when nexus_loadAsOSS is false' do
-    its('content') { should_not include 'nexus.loadAsOSS' }
+  context 'when nexus_loadAsOSS is default' do
+    its('content') { should include 'nexus.loadAsOSS=false' }
   end
 
-  context 'when nexus_clustered is false' do
-    its('content') { should_not include 'nexus.clustered' }
+  context 'when nexus_clustered is default' do
+    its('content') { should include 'nexus.clustered=false' }
   end
 
-  context 'when nexus_licenseFile is blank' do
-    its('content') { should_not include 'nexus.licenseFile' }
+  context 'when nexus_licenseFile is default' do
+    its('content') { should include '# nexus.licenseFile=' }
   end
 end

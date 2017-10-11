@@ -22,11 +22,11 @@ describe file('/nexus-data/etc/nexus.properties') do
   end
 
   context 'when nexus_loadAsOSS is true' do
-    its('content') { should include 'nexus.loadAsOSS=true' }
+    its('content') { should include 'nexus.loadAsOSS=false' }
   end
 
   context 'when nexus_clustered is true' do
-    its('content') { should include 'nexus.clustered=true' }
+    its('content') { should include 'nexus.clustered=false' }
   end
 
   context 'when nexus_licenseFile is not blank' do
