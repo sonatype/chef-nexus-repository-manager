@@ -8,8 +8,6 @@ default['java']['install_flavor'] = 'oracle'
 default['java']['jdk']['8']['x86_64']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/server-jre-8u144-linux-x64.tar.gz'
 default['java']['jdk']['8']['x86_64']['checksum'] = 'e8a341ce566f32c3d06f6d0f0eeea9a0f434f538d22af949ae58bc86f2eeaae4'
 default['java']['oracle']['accept_oracle_download_terms'] = true
-# This prevents the java recipe from configuring java alternatives
-default['java']['jdk']['8']['bin_cmds'] = [];
 
 default['nexus_repository_manager']['version'] = '3.6.0-02'
 default['nexus_repository_manager']['nexus_download_url'] = "https://download.sonatype.com/nexus/3/nexus-#{node['nexus_repository_manager']['version']}-unix.tar.gz"
