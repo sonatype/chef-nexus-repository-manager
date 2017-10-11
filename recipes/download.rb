@@ -27,8 +27,8 @@ directory node['nexus_repository_manager']['sonatype']['path'] do
 end
 
 directory node['nexus_repository_manager']['nexus']['home']['path'] do
-  owner 'root'
-  group 'root'
+  owner 'nexus'
+  group 'nexus'
   mode '755'
   recursive true
   action :create

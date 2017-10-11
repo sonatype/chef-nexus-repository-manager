@@ -4,35 +4,27 @@
 #
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
-include_recipe 'nexus_repository_manager::default'
 include_recipe 'poise-python'
 
-template node['nexus_repository_manager']['nexus']['home']['bin']['path'] + '/cloudformation-signal.sh' do
-  source 'cloudformation-signal.sh.erb'
-  owner 'root'
-  group 'root'
-  mode '0755'
-end
-
-template node['nexus_repository_manager']['nexus']['home']['bin']['path'] + '/verify-cloud-init.py' do
-  source 'verify-cloud-init.py.erb'
-  owner 'root'
-  group 'root'
-  mode '0755'
-end
-
-directory node['nexus_repository_manager']['nexus']['home']['path'] + '/.aws/' do
+directory '/opt/cloudformation/' do
   owner 'root'
   group 'root'
   mode '755'
   action :create
 end
 
-template node['nexus_repository_manager']['nexus']['home']['path'] + '/.aws/config' do
-  source 'aws/config.erb'
+template '/opt/cloudformation/signal-completion.sh' do
+  source 'aws/signal-completion.sh.erb'
   owner 'root'
   group 'root'
-  mode '0644'
+  mode '0755'
+end
+
+template '/opt/cloudformation/verify-cloud-init.py' do
+  source 'aws/verify-cloud-init.py.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
 end
 
 directory '/home/awslogs/.aws/' do
@@ -88,4 +80,10 @@ systemd_unit 'awslogs-agent.service' do
   WantedBy=multi-user.target
   EOU
   action [:create, :enable, :start]
+end
+
+include_recipe 'nexus_repository_manager::default'
+
+execute 'signal_completion' do
+  command '/opt/cloudformation/signal-completion.sh &'
 end

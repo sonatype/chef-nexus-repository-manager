@@ -5,6 +5,7 @@
 [general]
 state_file= <%= node['awslogs']['data'] %>/agent-state
 use_gzip_http_content_encoding = true
+queue_size = 10
 
 [cloud-init.log]
 file = /var/log/cloud-init.log
@@ -21,14 +22,14 @@ datetime_format = %Y-%m-%d %H:%M:%S,%f
 multi_line_start_pattern = {datetime_format}
 
 [nexus.log]
-file = /opt/sonatype-work/nexus3/log/nexus.log
+file = <%= node['nexus_repository_manager']['nexus']['data']['log']['path'] %>/nexus.log
 log_group_name = <%= node['nexus_repository_manager']['aws']['log_group'] %>
 log_stream_name = {instance_id}/nexus.log
 datetime_format = %Y-%m-%d %H:%M:%S,%f%z
 multi_line_start_pattern = {datetime_format}
 
 [karaf.log]
-file = /opt/sonatype-work/nexus3/log/karaf.log
+file = <%= node['nexus_repository_manager']['nexus']['data']['log']['path'] %>/karaf.log
 log_group_name = <%= node['nexus_repository_manager']['aws']['log_group'] %>
 log_stream_name = {instance_id}/karaf.log
 datetime_format = %b %d, %Y %I:%M:%S %p
