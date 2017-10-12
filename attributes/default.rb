@@ -14,7 +14,7 @@ default['nexus_repository_manager']['version'] = '3.6.0-02'
 default['nexus_repository_manager']['nexus_download_url'] = "https://download.sonatype.com/nexus/3/nexus-#{node['nexus_repository_manager']['version']}-unix.tar.gz"
 default['nexus_repository_manager']['checksum'] = '40b95b097b43cc8941a9700d24baf25ef94867286e43eaffa37cf188726bb2a7'
 default['nexus_repository_manager']['sonatype']['path'] = '/opt/sonatype'
-default['nexus_repository_manager']['nexus']['data']['path'] = '/nexus-data'
+default['nexus_repository_manager']['nexus_data']['path'] = '/nexus-data'
 
 # nexus.properties configuration
 default['nexus_repository_manager']['properties']['application_port'] = '8081'

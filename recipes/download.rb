@@ -9,7 +9,7 @@ user 'nexus' do
   comment 'Nexus Repository Manager user'
   system true
   shell '/bin/false'
-  home node['nexus_repository_manager']['nexus']['home']['path']
+  home node['nexus_repository_manager']['nexus_home']['path']
   action :create
 end
 
@@ -26,7 +26,7 @@ directory node['nexus_repository_manager']['sonatype']['path'] do
   action :create
 end
 
-directory node['nexus_repository_manager']['nexus']['home']['path'] do
+directory node['nexus_repository_manager']['nexus_home']['path'] do
   owner 'root'
   group 'root'
   mode '755'
@@ -35,19 +35,19 @@ directory node['nexus_repository_manager']['nexus']['home']['path'] do
 end
 
 tar_extract node['nexus_repository_manager']['nexus_download_url'] do
-  target_dir node['nexus_repository_manager']['nexus']['home']['path']
+  target_dir node['nexus_repository_manager']['nexus_home']['path']
   checksum node['nexus_repository_manager']['checksum']
-  creates node['nexus_repository_manager']['nexus']['home']['bin']['path']
+  creates node['nexus_repository_manager']['nexus_home']['bin']['path']
   tar_flags [ '-P', '--strip-components 1' ]
 end
 
 # Delete the nexus3 folder that is not used.
-directory node['nexus_repository_manager']['nexus']['home']['path'] + '/nexus3' do
+directory node['nexus_repository_manager']['nexus_home']['path'] + '/nexus3' do
   recursive true
   action :delete
 end
 
-directory node['nexus_repository_manager']['nexus']['data']['path'] do
+directory node['nexus_repository_manager']['nexus_data']['path'] do
   owner 'nexus'
   group 'nexus'
   mode '755'
@@ -55,7 +55,7 @@ directory node['nexus_repository_manager']['nexus']['data']['path'] do
   action :create
 end
 
-directory node['nexus_repository_manager']['nexus']['data']['etc']['path'] do
+directory node['nexus_repository_manager']['nexus_data']['etc']['path'] do
   owner 'nexus'
   group 'nexus'
   mode '755'
@@ -63,7 +63,7 @@ directory node['nexus_repository_manager']['nexus']['data']['etc']['path'] do
   action :create
 end
 
-directory node['nexus_repository_manager']['nexus']['data']['log']['path'] do
+directory node['nexus_repository_manager']['nexus_data']['log']['path'] do
   owner 'nexus'
   group 'nexus'
   mode '755'
@@ -71,7 +71,7 @@ directory node['nexus_repository_manager']['nexus']['data']['log']['path'] do
   action :create
 end
 
-directory node['nexus_repository_manager']['nexus']['data']['tmp']['path'] do
+directory node['nexus_repository_manager']['nexus_data']['tmp']['path'] do
   owner 'nexus'
   group 'nexus'
   mode '755'
@@ -79,7 +79,7 @@ directory node['nexus_repository_manager']['nexus']['data']['tmp']['path'] do
   action :create
 end
 
-directory node['nexus_repository_manager']['sonatype']['sonatype_work']['path'] do
+directory node['nexus_repository_manager']['sonatype_work']['path'] do
   owner 'root'
   group 'root'
   mode '755'
@@ -87,8 +87,8 @@ directory node['nexus_repository_manager']['sonatype']['sonatype_work']['path'] 
   action :create
 end
 
-link node['nexus_repository_manager']['sonatype']['sonatype_work']['nexus3']['path'] do
-  to node['nexus_repository_manager']['nexus']['data']['path']
+link node['nexus_repository_manager']['sonatype_work']['nexus3']['path'] do
+  to node['nexus_repository_manager']['nexus_data']['path']
   owner 'root'
   group 'root'
 end

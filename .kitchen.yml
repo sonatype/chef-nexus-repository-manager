@@ -17,7 +17,6 @@ verifier:
 
 platforms:
   - name: ubuntu-16.04
-  - name: centos-7.3
 
 suites:
   - name: default
@@ -51,16 +50,14 @@ suites:
     attributes:
       nexus_repository_manager:
         hazelcast:
-          network:
-            join:
-              multicast:
-                enabled: true
-                multicast_group: 123.4.5.6
-                multicast_port: 54321
-              aws:
-                enabled: false
-              tcp_ip:
-                enabled: false
+          multicast:
+            enabled: true
+            group: 123.4.5.6
+            port: 54321
+          aws:
+            enabled: false
+          tcp_ip:
+            enabled: false
   - name: tcp_ip_enabled
     run_list:
       - recipe[nexus_repository_manager::default]
@@ -70,16 +67,14 @@ suites:
     attributes:
       nexus_repository_manager:
         hazelcast:
-          network:
-            join:
-              multicast:
-                enabled: false
-              aws:
-                enabled: false
-              tcp_ip:
-                enabled: true
-                interface: '10.0.1.1'
-                members: ['10.0.1.2', '10.0.1.3', '10.0.1.4']
+          multicast:
+            enabled: false
+          aws:
+            enabled: false
+          tcp_ip:
+            enabled: true
+            interface: '10.0.1.1'
+            members: ['10.0.1.2', '10.0.1.3', '10.0.1.4']
   - name: aws_enabled
     run_list:
       - recipe[nexus_repository_manager::default]
@@ -89,18 +84,16 @@ suites:
     attributes:
       nexus_repository_manager:
         hazelcast:
-          network:
-            join:
-              multicast:
-                enabled: false
-              tcp_ip:
-                enabled: false
-              aws:
-                enabled: true
-                iam_role: "test-iam-role"
-                region: "test-region"
-                tag_key: "test-tag-key"
-                tag_value: "test-tag-value"
+          multicast:
+            enabled: false
+          tcp_ip:
+            enabled: false
+          aws:
+            enabled: true
+            iam_role: "test-iam-role"
+            region: "test-region"
+            tag_key: "test-tag-key"
+            tag_value: "test-tag-value"
         properties:
           clustered: true
           license_file: "/opt/sonatype/license.lic"
@@ -113,21 +106,17 @@ suites:
     attributes:
       nexus_repository_manager:
         hazelcast:
-          properties:
-            discovery:
-              enabled: true
-          network:
-            join:
-              multicast:
-                enabled: false
-              tcp_ip:
-                enabled: false
-              aws:
-                enabled: false
-              hazelcast_discovery:
-                iam_role: "test-hz-iam-role"
-                region: "test-hz-region"
-                tag_key: "test-hz-tag-key"
-                tag_value: "test-hz-tag-value"
-                security_group_name: "test-hz-security-group-name"
-                hz_port: 5708
+          multicast:
+            enabled: false
+          tcp_ip:
+            enabled: false
+          aws:
+            enabled: false
+          discovery:
+            enabled: true
+            iam_role: "test-hz-iam-role"
+            region: "test-hz-region"
+            tag_key: "test-hz-tag-key"
+            tag_value: "test-hz-tag-value"
+            security_group_name: "test-hz-security-group-name"
+            hz_port: 5708

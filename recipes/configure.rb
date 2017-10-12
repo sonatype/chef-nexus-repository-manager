@@ -13,7 +13,7 @@ template start_script do
   mode '0755'
 end
 
-hazelcast_xml = node['nexus_repository_manager']['nexus']['home']['path'] + '/etc/fabric/hazelcast.xml'
+hazelcast_xml = node['nexus_repository_manager']['nexus_home']['path'] + '/etc/fabric/hazelcast.xml'
 
 template hazelcast_xml do
   source 'hazelcast.xml.erb'
@@ -22,7 +22,7 @@ template hazelcast_xml do
   mode '0755'
 end
 
-nexus_properties = node['nexus_repository_manager']['nexus']['data']['etc']['path'] + '/nexus.properties'
+nexus_properties = node['nexus_repository_manager']['nexus_data']['etc']['path'] + '/nexus.properties'
 
 template nexus_properties do
   source 'nexus.properties.erb'
