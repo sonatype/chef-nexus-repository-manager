@@ -30,3 +30,13 @@ template nexus_properties do
   group 'nexus'
   mode '0755'
 end
+
+ruby_block "remove java memory settings from nexus.vmoptions" do
+  block do
+    file = Chef::Util::FileEdit.new(node['nexus_repository_manager']['nexus_home']['path'] + '/bin/nexus.vmoptions')
+    file.search_file_delete_line(/^-Xms/)
+    file.search_file_delete_line(/^-Xmx/)
+    file.search_file_delete_line(/^-XX:MaxDirectMemorySize/)
+    file.write_file
+  end
+end
