@@ -37,7 +37,7 @@ end
 tar_extract node['nexus_repository_manager']['nexus_download_url'] do
   target_dir node['nexus_repository_manager']['nexus_home']['path']
   checksum node['nexus_repository_manager']['checksum']
-  creates node['nexus_repository_manager']['nexus_home']['bin']['path']
+  creates node['nexus_repository_manager']['nexus_home']['path'] + '/bin'
   tar_flags [ '-P', '--strip-components 1' ]
 end
 
@@ -71,7 +71,7 @@ directory node['nexus_repository_manager']['nexus_data']['log']['path'] do
   action :create
 end
 
-directory node['nexus_repository_manager']['nexus_data']['tmp']['path'] do
+directory node['nexus_repository_manager']['nexus_data']['path'] + '/tmp' do
   owner 'nexus'
   group 'nexus'
   mode '755'
@@ -87,7 +87,7 @@ directory node['nexus_repository_manager']['sonatype_work']['path'] do
   action :create
 end
 
-link node['nexus_repository_manager']['sonatype_work']['nexus3']['path'] do
+link node['nexus_repository_manager']['sonatype_work']['path'] + '/nexus3' do
   to node['nexus_repository_manager']['nexus_data']['path']
   owner 'root'
   group 'root'
