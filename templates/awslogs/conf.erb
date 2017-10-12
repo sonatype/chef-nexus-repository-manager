@@ -21,6 +21,27 @@ log_stream_name = {instance_id}/cloud-init-output.log
 datetime_format = %Y-%m-%d %H:%M:%S,%f
 multi_line_start_pattern = {datetime_format}
 
+[cfn-init-cmd.log]
+file = /var/log/cfn-init-cmd.log
+log_group_name = <%= node['nexus_repository_manager']['aws']['log_group'] %>
+log_stream_name = {instance_id}/cfn-init-cmd.log
+datetime_format = %Y-%m-%d %H:%M:%S,%f
+multi_line_start_pattern = {datetime_format}
+
+[cfn-init-wire.log]
+file = /var/log/cfn-init-wire.log
+log_group_name = <%= node['nexus_repository_manager']['aws']['log_group'] %>
+log_stream_name = {instance_id}/cfn-init-wire.log
+datetime_format = %Y-%m-%d %H:%M:%S,%f
+multi_line_start_pattern = {datetime_format}
+
+[cfn-init.log]
+file = /var/log/cfn-init.log
+log_group_name = <%= node['nexus_repository_manager']['aws']['log_group'] %>
+log_stream_name = {instance_id}/cfn-init.log
+datetime_format = %Y-%m-%d %H:%M:%S,%f
+multi_line_start_pattern = {datetime_format}
+
 [nexus.log]
 file = <%= node['nexus_repository_manager']['nexus']['data']['log']['path'] %>/nexus.log
 log_group_name = <%= node['nexus_repository_manager']['aws']['log_group'] %>
