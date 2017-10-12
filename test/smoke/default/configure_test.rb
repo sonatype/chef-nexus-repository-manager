@@ -67,7 +67,7 @@ describe file('/opt/sonatype/nexus/etc/fabric/hazelcast.xml') do
   end  
 end
 
-describe file('/nexus-data/etc/nexus.properties') do
+describe file('/opt/sonatype/nexus/etc/nexus-default.properties') do
   it { should exist }
 
   context 'when application_port is default' do
@@ -83,7 +83,7 @@ describe file('/nexus-data/etc/nexus.properties') do
   end
 
   context 'when nexus_loadAsOSS is default' do
-    its('content') { should include 'nexus.loadAsOSS=false' }
+    its('content') { should include 'nexus.loadAsOSS=true' }
   end
 
   context 'when nexus_clustered is default' do
@@ -91,6 +91,6 @@ describe file('/nexus-data/etc/nexus.properties') do
   end
 
   context 'when nexus_licenseFile is default' do
-    its('content') { should include '# nexus.licenseFile=' }
+    its('content') { should_not include 'nexus.licenseFile=' }
   end
 end

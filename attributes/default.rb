@@ -20,4 +20,4 @@ default['nexus_repository_manager']['nexus_data']['path'] = '/nexus-data'
 default['nexus_repository_manager']['properties']['application_port'] = '8081'
 default['nexus_repository_manager']['properties']['application_host'] = '0.0.0.0'
 default['nexus_repository_manager']['properties']['context_path'] = '/'
-default['nexus_repository_manager']['properties']['license_file'] = ''
+default['nexus_repository_manager']['properties']['license_file'] = nil

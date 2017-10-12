@@ -1,17 +1,15 @@
 # Jetty section
 application-port=<%= node['nexus_repository_manager']['properties']['application_port'] %>
 application-host=<%= node['nexus_repository_manager']['properties']['application_host'] %>
-# nexus-args=${jetty.etc}/jetty.xml,${jetty.etc}/jetty-http.xml,${jetty.etc}/jetty-requestlog.xml
+nexus-args=${jetty.etc}/jetty.xml,${jetty.etc}/jetty-http.xml,${jetty.etc}/jetty-requestlog.xml
 nexus-context-path=<%= node['nexus_repository_manager']['properties']['context_path'] %>
 
 # Nexus section
-# nexus-edition=nexus-pro-edition
-# nexus-features=\
-#  nexus-pro-feature
+nexus-edition=nexus-pro-edition
+nexus-features=\
+ nexus-pro-feature
 nexus.loadAsOSS=<%= node['nexus_repository_manager']['properties']['load_as_oss'] %>
 nexus.clustered=<%= node['nexus_repository_manager']['properties']['clustered'] %>
-<% if node['nexus_repository_manager']['properties']['license_file'] != ''%>
+<% if node['nexus_repository_manager']['properties']['license_file'] %>
 nexus.licenseFile=<%= node['nexus_repository_manager']['properties']['license_file'] %>
-<% else %>
-# nexus.licenseFile=
 <% end %>

@@ -17,6 +17,7 @@ verifier:
 
 platforms:
   - name: ubuntu-16.04
+  - name: centos-7.3
 
 suites:
   - name: default
@@ -39,7 +40,7 @@ suites:
           application_host: 127.0.0.1
           context_path: "/test-context"
           load_as_oss: false
-          clustered: false
+          clustered: true
           license_file: "/opt/sonatype/license.lic"
   - name: multicast_enabled
     run_list:

@@ -22,7 +22,7 @@ template hazelcast_xml do
   mode '0755'
 end
 
-nexus_properties = node['nexus_repository_manager']['nexus_data']['etc']['path'] + '/nexus.properties'
+nexus_properties = node['nexus_repository_manager']['nexus_home']['path'] + '/etc/nexus-default.properties'
 
 template nexus_properties do
   source 'nexus.properties.erb'
