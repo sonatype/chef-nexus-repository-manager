@@ -35,13 +35,13 @@ suites:
         - test/smoke/nexus_properties_configured
     attributes:
       nexus_repository_manager:
-        nexus_properties:
+        properties:
           application_port: 8082
           application_host: 127.0.0.1
-          nexus_context_path: "/test-context"
-          nexus_loadAsOSS: false
-          nexus_clustered: false
-          nexus_licenseFile: "/opt/sonatype/license.lic"
+          context_path: "/test-context"
+          load_as_oss: false
+          clustered: false
+          license_file: "/opt/sonatype/license.lic"
   - name: multicast_enabled
     run_list:
       - recipe[nexus_repository_manager::default]
@@ -101,9 +101,9 @@ suites:
                 region: "test-region"
                 tag_key: "test-tag-key"
                 tag_value: "test-tag-value"
-        nexus_properties:
-          nexus_clustered: true
-          nexus_licenseFile: "/opt/sonatype/license.lic"
+        properties:
+          clustered: true
+          license_file: "/opt/sonatype/license.lic"
   - name: hazelcast_discovery_enabled
     run_list:
       - recipe[nexus_repository_manager::default]
