@@ -34,13 +34,6 @@ template '/opt/cloudformation/signal-completion.sh' do
   mode '0755'
 end
 
-template '/opt/cloudformation/verify-cloud-init.py' do
-  source 'aws/verify-cloud-init.py.erb'
-  owner 'root'
-  group 'root'
-  mode '0755'
-end
-
 directory '/home/awslogs/.aws/' do
   owner 'awslogs'
   group 'awslogs'
@@ -109,13 +102,15 @@ bash 'wait for nexus startup' do
   EOH
 end
 
-bash 'check instance health' do
+python 'check instance health' do
   code <<-EOH
-    instance_id=`cat /var/lib/cloud/data/instance-id`
-    load_balancer=`aws elb describe-load-balancers --region #{region} | python -c "import json,sys;describeLoadBalancersResult=json.load(sys.stdin);print [loadBalancerDescription['LoadBalancerName'] for loadBalancerDescription in describeLoadBalancersResult['LoadBalancerDescriptions'] if(any(instance['InstanceId'] == '$instance_id' for instance in loadBalancerDescription['Instances']))][0]"`
-    instance_state=`aws elb describe-instance-health --region #{region} --load-balancer-name ${load_balancer} --instances ${instance_id} --query InstanceStates[0].State --output text`
-    echo load balancer state is ${instance_state} lb: {load_balancer} instance: ${instance_id}
-    test ${instance_state} == "InService" || exit 1
+    import boto3, sys
+    instance_id = open('/tmp/instance_id', 'r').readline().strip()
+    elb_client = boto3.client('elb')
+    elbs = elb_client.describe_load_balancers()['LoadBalancerDescriptions']
+    elb_name = [e['LoadBalancerName'] for e in elbs if instance_id in [ i['InstanceId'] for i in e['Instances'] ]]
+    inst_health = elb_client.describe_instance_health(LoadBalancerName=elb_name[0], Instances=[{'InstanceId':instance_id}])
+    if inst_health['InstanceStates'][0]['State'] != 'InService': sys.exit(1)
   EOH
   retries 300
   retry_delay 2
