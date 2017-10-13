@@ -91,7 +91,7 @@ end
 
 include_recipe 'nexus_repository_manager::default'
 
-nexus_log = node['nexus_repository_manager']['nexus']['data']['log']['path'] + '/nexus.log'
+nexus_log = node['nexus_repository_manager']['nexus_data']['log']['path'] + '/nexus.log'
 
 bash 'wait for nexus startup' do
   code <<-EOH
@@ -104,13 +104,13 @@ end
 
 python 'check instance health' do
   code <<-EOH
-    import boto3, sys
-    instance_id = open('/var/lib/cloud/data/instance-id', 'r').readline().strip()
-    elb_client = boto3.client('elb')
-    elbs = elb_client.describe_load_balancers()['LoadBalancerDescriptions']
-    elb_name = [e['LoadBalancerName'] for e in elbs if instance_id in [ i['InstanceId'] for i in e['Instances'] ]]
-    inst_health = elb_client.describe_instance_health(LoadBalancerName=elb_name[0], Instances=[{'InstanceId':instance_id}])
-    if inst_health['InstanceStates'][0]['State'] != 'InService': sys.exit(1)
+import boto3, sys
+instance_id = open('/var/lib/cloud/data/instance-id', 'r').readline().strip()
+elb_client = boto3.client('elb', region_name='#{region}')
+elbs = elb_client.describe_load_balancers()['LoadBalancerDescriptions']
+elb_name = [e['LoadBalancerName'] for e in elbs if instance_id in [ i['InstanceId'] for i in e['Instances'] ]]
+inst_health = elb_client.describe_instance_health(LoadBalancerName=elb_name[0], Instances=[{'InstanceId':instance_id}])
+if inst_health['InstanceStates'][0]['State'] != 'InService': sys.exit(1)
   EOH
   retries 300
   retry_delay 2

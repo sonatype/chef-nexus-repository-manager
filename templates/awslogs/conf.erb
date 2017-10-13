@@ -43,14 +43,14 @@ datetime_format = %Y-%m-%d %H:%M:%S,%f
 multi_line_start_pattern = {datetime_format}
 
 [nexus.log]
-file = <%= node['nexus_repository_manager']['nexus']['data']['log']['path'] %>/nexus.log
+file = <%= node['nexus_repository_manager']['nexus_data']['log']['path'] %>/nexus.log
 log_group_name = <%= node['nexus_repository_manager']['aws']['log_group'] %>
 log_stream_name = {instance_id}/nexus.log
 datetime_format = %Y-%m-%d %H:%M:%S,%f%z
 multi_line_start_pattern = {datetime_format}
 
 [karaf.log]
-file = <%= node['nexus_repository_manager']['nexus']['data']['log']['path'] %>/karaf.log
+file = <%= node['nexus_repository_manager']['nexus_data']['log']['path'] %>/karaf.log
 log_group_name = <%= node['nexus_repository_manager']['aws']['log_group'] %>
 log_stream_name = {instance_id}/karaf.log
 datetime_format = %b %d, %Y %I:%M:%S %p
