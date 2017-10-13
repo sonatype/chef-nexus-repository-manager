@@ -105,7 +105,7 @@ end
 python 'check instance health' do
   code <<-EOH
     import boto3, sys
-    instance_id = open('/tmp/instance_id', 'r').readline().strip()
+    instance_id = open('/var/lib/cloud/data/instance-id', 'r').readline().strip()
     elb_client = boto3.client('elb')
     elbs = elb_client.describe_load_balancers()['LoadBalancerDescriptions']
     elb_name = [e['LoadBalancerName'] for e in elbs if instance_id in [ i['InstanceId'] for i in e['Instances'] ]]
