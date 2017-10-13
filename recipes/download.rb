@@ -27,8 +27,8 @@ directory node['nexus_repository_manager']['sonatype']['path'] do
 end
 
 directory node['nexus_repository_manager']['nexus_home']['path'] do
-  owner 'root'
-  group 'root'
+  owner 'nexus'
+  group 'nexus'
   mode '755'
   recursive true
   action :create
@@ -36,7 +36,7 @@ end
 
 tar_extract node['nexus_repository_manager']['nexus_download_url'] do
   target_dir node['nexus_repository_manager']['nexus_home']['path']
-  checksum node['nexus_repository_manager']['checksum']
+  checksum node['nexus_repository_manager']['nexus_download_sha256']
   creates node['nexus_repository_manager']['nexus_home']['path'] + '/bin'
   tar_flags [ '-P', '--strip-components 1' ]
 end

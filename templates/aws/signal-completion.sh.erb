@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
+#
+
+region=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/\(.*\)[a-z]/\1/'`
+instance_id=`cat /var/lib/cloud/data/instance-id`
+stack_name=`aws ec2 describe-instances --instance-id ${instance_id} --query 'Reservations[*].Instances[*].Tags[?Key==\`aws:cloudformation:stack-name\`].Value' --output text --region ${region}`
+auto_scaling_group=`aws autoscaling describe-auto-scaling-instances --region ${region} --instance-ids=${instance_id} --query 'AutoScalingInstances[0].AutoScalingGroupName' --output text`
+auto_scaling_group_logical_id=`aws autoscaling describe-tags --region ${region} --filters "Name=Key,Values=aws:cloudformation:logical-id" "Name=auto-scaling-group,Values=${auto_scaling_group}" --query 'Tags[0].Value' --output text`
+cfn-signal -s $1 --stack=${stack_name} --region ${region} --resource=${auto_scaling_group_logical_id}
