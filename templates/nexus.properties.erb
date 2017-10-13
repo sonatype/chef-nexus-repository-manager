@@ -1,31 +1,15 @@
 # Jetty section
-<% if node['nexus_repository_manager']['nexus_properties']['application_port'] != '8081' %>
-application-port=<%= node['nexus_repository_manager']['nexus_properties']['application_port'] %>
-<% else %>
-# application-port=8081
-<% end %>
-<% if node['nexus_repository_manager']['nexus_properties']['application_host'] != '0.0.0.0' %>
-application-host=<%= node['nexus_repository_manager']['nexus_properties']['application_host'] %>
-<% else %>
-# application-host=0.0.0.0
-<% end %>
-# nexus-args=${jetty.etc}/jetty.xml,${jetty.etc}/jetty-http.xml,${jetty.etc}/jetty-requestlog.xml
-<% if node['nexus_repository_manager']['nexus_properties']['nexus_context_path'] != '/' %>
-nexus-context-path=<%= node['nexus_repository_manager']['nexus_properties']['nexus_context_path'] %>
-<% else %>
-# nexus-context-path=/
-<% end %>
+application-port=<%= node['nexus_repository_manager']['properties']['application_port'] %>
+application-host=<%= node['nexus_repository_manager']['properties']['application_host'] %>
+nexus-args=${jetty.etc}/jetty.xml,${jetty.etc}/jetty-http.xml,${jetty.etc}/jetty-requestlog.xml
+nexus-context-path=<%= node['nexus_repository_manager']['properties']['context_path'] %>
 
 # Nexus section
-# nexus-edition=nexus-pro-edition
-# nexus-features=\
-#  nexus-pro-feature
-<% if node['nexus_repository_manager']['nexus_properties']['nexus_loadAsOSS'] %>
-nexus.loadAsOSS=true
-<% end %>
-<% if node['nexus_repository_manager']['nexus_properties']['nexus_clustered'] %>
-nexus.clustered=true
-<% end %>
-<% if node['nexus_repository_manager']['nexus_properties']['nexus_licenseFile'] != ''%>
-nexus.licenseFile=<%= node['nexus_repository_manager']['nexus_properties']['nexus_licenseFile'] %>
+nexus-edition=nexus-pro-edition
+nexus-features=\
+ nexus-pro-feature
+nexus.loadAsOSS=<%= node['nexus_repository_manager']['properties']['load_as_oss'] %>
+nexus.clustered=<%= node['nexus_repository_manager']['properties']['clustered'] %>
+<% if node['nexus_repository_manager']['properties']['license_file'] %>
+nexus.licenseFile=<%= node['nexus_repository_manager']['properties']['license_file'] %>
 <% end %>

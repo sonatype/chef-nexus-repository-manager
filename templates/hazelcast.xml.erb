@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2017-present Sonatype, Inc.
+    All rights reserved. Includes the third-party code listed at http://links.sonatype.com/products/nexus/pro/attributions
+    Sonatype and Sonatype Nexus are trademarks of Sonatype, Inc. Apache Maven is a trademark of the Apache Foundation.
+    M2Eclipse is a trademark of the Eclipse Foundation. All other trademarks are the property of their respective owners.
+-->
 <hazelcast xmlns="http://www.hazelcast.com/schema/config"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://www.hazelcast.com/schema/config hazelcast-config-3.6.xsd">
@@ -36,7 +42,7 @@
     <property name="hazelcast.icmp.timeout">5000</property>
     <property name="hazelcast.icmp.ttl">3</property>
 
-    <property name="hazelcast.discovery.enabled"><%= node['nexus_repository_manager']['properties']['hazelcast']['discovery']['enabled'] %></property>
+    <property name="hazelcast.discovery.enabled"><%= node['nexus_repository_manager']['hazelcast']['discovery']['enabled'] %></property>
   </properties>
 
   <network>
@@ -51,43 +57,43 @@
     </outbound-ports>
 
     <join>
-      <multicast enabled="<%= node['nexus_repository_manager']['hazelcast']['network']['join']['multicast']['enabled'] %>">
-        <multicast-group><%= node['nexus_repository_manager']['hazelcast']['network']['join']['multicast']['multicast_group'] %></multicast-group>
-        <multicast-port><%= node['nexus_repository_manager']['hazelcast']['network']['join']['multicast']['multicast_port'] %></multicast-port>
+      <multicast enabled="<%= node['nexus_repository_manager']['hazelcast']['multicast']['enabled'] %>">
+        <multicast-group><%= node['nexus_repository_manager']['hazelcast']['multicast']['group'] %></multicast-group>
+        <multicast-port><%= node['nexus_repository_manager']['hazelcast']['multicast']['port'] %></multicast-port>
       </multicast>
-      <tcp-ip enabled="<%= node['nexus_repository_manager']['hazelcast']['network']['join']['tcp_ip']['enabled'] %>">
-        <interface><%= node['nexus_repository_manager']['hazelcast']['network']['join']['tcp_ip']['interface'] %></interface>
+      <tcp-ip enabled="<%= node['nexus_repository_manager']['hazelcast']['tcp_ip']['enabled'] %>">
+        <interface><%= node['nexus_repository_manager']['hazelcast']['tcp_ip']['interface'] %></interface>
         <member-list>
-          <% node['nexus_repository_manager']['hazelcast']['network']['join']['tcp_ip']['members'].each do |ip| %>
+          <% node['nexus_repository_manager']['hazelcast']['tcp_ip']['members'].each do |ip| %>
           <member><%= "#{ip}" %></member>
           <% end %>
         </member-list>
       </tcp-ip>
-      <aws enabled="<%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['enabled'] %>">
-        <iam-role><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['iam_role'] %></iam-role>
+      <aws enabled="<%= node['nexus_repository_manager']['hazelcast']['aws']['enabled'] %>">
+        <iam-role><%= node['nexus_repository_manager']['hazelcast']['aws']['iam_role'] %></iam-role>
         <!--optional, default is us-east-1 -->
-        <region><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['region'] %></region>
+        <region><%= node['nexus_repository_manager']['hazelcast']['aws']['region'] %></region>
         <!--optional, default is ec2.amazonaws.com. If set, region shouldn't be set as it will override this property -->
         <host-header>ec2.amazonaws.com</host-header>
         <!-- optional, only instances belonging to this group will be discovered, default will try all running instances -->
         <!-- <security-group-name>hazelcast-sg</security-group-name> -->
-        <tag-key><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['tag_key'] %></tag-key>
-        <tag-value><%= node['nexus_repository_manager']['hazelcast']['network']['join']['aws']['tag_value'] %></tag-value>
+        <tag-key><%= node['nexus_repository_manager']['hazelcast']['aws']['tag_key'] %></tag-key>
+        <tag-value><%= node['nexus_repository_manager']['hazelcast']['aws']['tag_value'] %></tag-value>
       </aws>
       <discovery-strategies>
-          <% if node['nexus_repository_manager']['properties']['hazelcast']['discovery']['enabled'] %>
+          <% if node['nexus_repository_manager']['hazelcast']['discovery']['enabled'] %>
           <!-- class equals to the DiscoveryStrategy not the factory! -->
-          <discovery-strategy enabled="<%= node['nexus_repository_manager']['properties']['hazelcast']['discovery']['enabled'] %>" class="com.hazelcast.aws.AwsDiscoveryStrategy">
+          <discovery-strategy enabled="<%= node['nexus_repository_manager']['hazelcast']['discovery']['enabled'] %>" class="com.hazelcast.aws.AwsDiscoveryStrategy">
               <properties>
-                 <property name="iam-role"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['hazelcast_discovery']['iam_role'] %></property>
-                 <property name="region"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['hazelcast_discovery']['region'] %></property>
+                 <property name="iam-role"><%= node['nexus_repository_manager']['hazelcast']['discovery']['iam_role'] %></property>
+                 <property name="region"><%= node['nexus_repository_manager']['hazelcast']['discovery']['region'] %></property>
                  <property name="host-header">ec2.amazonaws.com</property>
-                 <% if node['nexus_repository_manager']['hazelcast']['network']['join']['hazelcast_discovery']['security_group_name'] != '' %>
-                 <property name="security-group-name"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['hazelcast_discovery']['security_group_name'] %></property>
+                 <% if node['nexus_repository_manager']['hazelcast']['discovery']['security_group_name'] != '' %>
+                 <property name="security-group-name"><%= node['nexus_repository_manager']['hazelcast']['discovery']['security_group_name'] %></property>
                  <% end %>
-                 <property name="tag-key"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['hazelcast_discovery']['tag_key'] %></property>
-                 <property name="tag-value"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['hazelcast_discovery']['tag_value'] %></property>
-                 <property name="hz-port"><%= node['nexus_repository_manager']['hazelcast']['network']['join']['hazelcast_discovery']['hz_port'] %></property>
+                 <property name="tag-key"><%= node['nexus_repository_manager']['hazelcast']['discovery']['tag_key'] %></property>
+                 <property name="tag-value"><%= node['nexus_repository_manager']['hazelcast']['discovery']['tag_value'] %></property>
+                 <property name="hz-port"><%= node['nexus_repository_manager']['hazelcast']['discovery']['hz_port'] %></property>
               </properties>
           </discovery-strategy>
           <% end %>

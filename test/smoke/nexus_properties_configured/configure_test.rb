@@ -6,7 +6,7 @@
 
 # Inspec test for recipe nexus_repository_manager::configure
 
-describe file('/nexus-data/etc/nexus.properties') do
+describe file('/opt/sonatype/nexus/etc/nexus-default.properties') do
   it { should exist }
 
   context 'when application_port is set' do
@@ -22,14 +22,14 @@ describe file('/nexus-data/etc/nexus.properties') do
   end
 
   context 'when nexus_loadAsOSS is true' do
-    its('content') { should include 'nexus.loadAsOSS=true' }
+    its('content') { should include 'nexus.loadAsOSS=false' }
   end
 
   context 'when nexus_clustered is true' do
     its('content') { should include 'nexus.clustered=true' }
   end
 
-  context 'when nexus_licenseFile is not blank' do
+  context 'when nexus_license_file is not blank' do
     its('content') { should include 'nexus.licenseFile=/opt/sonatype/license.lic' }
   end
 end
