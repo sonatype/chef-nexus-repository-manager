@@ -92,3 +92,13 @@ link node['nexus_repository_manager']['sonatype_work']['path'] + '/nexus3' do
   owner 'root'
   group 'root'
 end
+
+s3_file node['nexus_repository_manager']['nexus_data']['etc']['path'] + '/license.lic' do
+  remote_path node['nexus_repository_manager']['license_s3_path']
+  bucket node['nexus_repository_manager']['license_s3_bucket']
+  owner 'nexus'
+  group 'nexus'
+  mode '600'
+  action :create
+  only_if { node['nexus_repository_manager']['license_s3_bucket'] != '' }
+end

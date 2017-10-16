@@ -15,6 +15,8 @@ default['nexus_repository_manager']['nexus_download_url'] = "https://download.so
 default['nexus_repository_manager']['nexus_download_sha256'] = '40b95b097b43cc8941a9700d24baf25ef94867286e43eaffa37cf188726bb2a7'
 default['nexus_repository_manager']['sonatype']['path'] = '/opt/sonatype'
 default['nexus_repository_manager']['nexus_data']['path'] = '/nexus-data'
+default['nexus_repository_manager']['license_s3_bucket'] = ''
+default['nexus_repository_manager']['license_s3_path'] = ''
 
 # nexus.properties configuration
 default['nexus_repository_manager']['properties']['application_port'] = '8081'
