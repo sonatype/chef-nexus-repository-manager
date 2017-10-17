@@ -100,5 +100,5 @@ s3_file node['nexus_repository_manager']['nexus_data']['etc']['path'] + '/licens
   group 'nexus'
   mode '600'
   action :create
-  only_if { node['nexus_repository_manager']['license_s3_bucket'] != '' }
+  not_if { node['nexus_repository_manager']['license_s3_bucket'].to_s.empty? }
 end
