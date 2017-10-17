@@ -12,4 +12,6 @@ nexus.loadAsOSS=<%= node['nexus_repository_manager']['properties']['load_as_oss'
 nexus.clustered=<%= node['nexus_repository_manager']['properties']['clustered'] %>
 <% if node['nexus_repository_manager']['properties']['license_file'] %>
 nexus.licenseFile=<%= node['nexus_repository_manager']['properties']['license_file'] %>
+<% elsif node['nexus_repository_manager']['license_s3_bucket'] %>
+nexus.licenseFile=<%= node['nexus_repository_manager']['nexus_data']['etc']['path'] + '/license.lic' %>
 <% end %>
