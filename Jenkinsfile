@@ -11,7 +11,8 @@ node('ubuntu-zion') {
   def commitId, commitDate, version, imageId
   def organization = 'sonatype',
       repository = 'chef-nexus-repository-manager',
-      credentialsId = 'integrations-github-api'
+      credentialsId = 'integrations-github-api',
+      archiveName = 'chef-nexus-repository-manager'
   GitHub gitHub
 
   try {
