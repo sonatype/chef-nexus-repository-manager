@@ -36,7 +36,7 @@ node('ubuntu-zion') {
     stage('Build') {
       gitHub.statusUpdate commitId, 'pending', 'build', 'Build is running'
 
-      OsTools.runSafe(this, 'curl -L https://www.getchef.com/chef/install.sh | bash')
+      OsTools.runSafe(this, 'curl -L https://www.getchef.com/chef/install.sh | sudo bash')
 
       if (currentBuild.result == 'FAILURE') {
         gitHub.statusUpdate commitId, 'failure', 'build', 'Build failed'
