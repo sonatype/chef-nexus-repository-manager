@@ -40,7 +40,6 @@ node('ubuntu-zion') {
       withEnv(["PATH+GEMS=${gemInstallDirectory}/bin"]) {
         OsTools.runSafe(this, "gem install --user-install berkshelf")
         OsTools.runSafe(this, "berks package")
-        OsTools.runSafe(this, "mv cookbooks-*.tar.gz chef-nexus-repository-manager.tar.gz")
       }
 
       if (currentBuild.result == 'FAILURE') {
@@ -65,6 +64,7 @@ node('ubuntu-zion') {
     }
     stage('Archive') {
       dir('build/target') {
+        OsTools.runSafe(this, "mv ../../cookbooks-*.tar.gz ${archiveName}.tar.gz")
         archiveArtifacts artifacts: "${archiveName}.tar.gz", onlyIfSuccessful: true
       }
     }
