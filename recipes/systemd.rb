@@ -14,7 +14,9 @@ systemd_unit 'nexus-repository-manager.service' do
   LimitNOFILE=65536
   ExecStart=#{ node['nexus_repository_manager']['sonatype']['path'] }/start-nexus-repository-manager.sh
   User=nexus
-  Restart=on-abort
+  Restart=on-failure
+  StartLimitInterval=30min
+  StartLimitBurst=2
   [Install]
   WantedBy=multi-user.target
   EOU
