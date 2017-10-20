@@ -68,12 +68,7 @@ node('ubuntu-zion') {
         archiveArtifacts artifacts: "${archiveName}.tar.gz", onlyIfSuccessful: true
       }
     }
-    if (scm.branches[0].name != '*/master') {
-      return
-    }
-    input 'Push image and tags?'
-    stage('Push image') {
-    }
+    input 'Push tags?'
     stage('Push tags') {
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
@@ -83,10 +78,25 @@ node('ubuntu-zion') {
           https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git \
             ${version}
         """)
+
+        response = OsTools.runSafe(this, """
+          curl https://api.github.com/repos/${organization}/${repository}/releases/tags/${version}
+        """)
+        release = readJSON text: response
+        releaseId = release.id
+
+        response = OsTools.runSafe(this, """
+          curl -H "Authorization: token ${apiToken}" \
+               -H "Accept: application/vnd.github.manifold-preview" \
+               -H "Content-Type: application/gzip" \
+               --data-binary @build/target/${archiveName} \
+               "https://uploads.github.com/repos/${organization}/${repository}/releases/${releaseId}/assets?name=${archiveName}"
+        """)
+        echo response
       }
-      OsTools.runSafe(this, "git tag -d ${version}")
     }
   } finally {
+    OsTools.runSafe(this, "git tag -d ${version}")
     OsTools.runSafe(this, 'git clean -f && git reset --hard origin/master')
   }
 }
