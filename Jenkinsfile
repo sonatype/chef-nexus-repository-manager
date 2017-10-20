@@ -36,7 +36,10 @@ node('ubuntu-zion') {
     stage('Build') {
       gitHub.statusUpdate commitId, 'pending', 'build', 'Build is running'
 
-      tool name: 'chef', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
+      def gemInstallDirectory = getGemInstallDirectory()
+      withEnv(["PATH+GEMS=${gemInstallDirectory}/bin"]) {
+        OsTools.runSafe(this, "gem install --user-install berkshelf")
+      }
 
       if (currentBuild.result == 'FAILURE') {
         gitHub.statusUpdate commitId, 'failure', 'build', 'Build failed'
@@ -87,4 +90,13 @@ node('ubuntu-zion') {
 }
 def readVersion() {
   return '0.3.0-01'
+}
+def getGemInstallDirectory() {
+  def content = OsTools.runSafe(this, "gem env")
+  for (line in content.split('\n')) {
+    if (line.startsWith('  - USER INSTALLATION DIRECTORY: ')) {
+      return line.substring(33)
+    }
+  }
+  error 'Could not determine user gem install directory.'
 }
