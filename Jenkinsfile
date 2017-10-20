@@ -80,13 +80,13 @@ node('ubuntu-zion') {
         """)
 
         response = OsTools.runSafe(this, """
-          curl https://api.github.com/repos/${organization}/${repository}/releases/tags/${version}
+          curl https://api.github.com/repos/${organization}/${repository}/releases/tags/release-${version}
         """)
         release = readJSON text: response
         releaseId = release.id
 
         response = OsTools.runSafe(this, """
-          curl -H "Authorization: token ${apiToken}" \
+          curl -H "Authorization: token ${env.GITHUB_API_PASSWORD}" \
                -H "Accept: application/vnd.github.manifold-preview" \
                -H "Content-Type: application/gzip" \
                --data-binary @build/target/${archiveName} \
