@@ -38,9 +38,6 @@ node('ubuntu-zion') {
       def gemInstallDirectory = getGemInstallDirectory()
       withEnv(["PATH+GEMS=${gemInstallDirectory}/bin"]) {
         OsTools.runSafe(this, "gem install --user-install berkshelf")
-        OsTools.runSafe(this, "gem install --user-install test-kitchen")
-        OsTools.runSafe(this, "gem install --user-install kitchen-docker")
-        OsTools.runSafe(this, "kitchen test")
         OsTools.runSafe(this, "berks package")
       }
 
