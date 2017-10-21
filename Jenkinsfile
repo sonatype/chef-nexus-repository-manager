@@ -8,11 +8,11 @@ import com.sonatype.jenkins.pipeline.GitHub
 import com.sonatype.jenkins.pipeline.OsTools
 
 node('ubuntu-zion') {
-  def commitId, commitDate, version, imageId
+  def commitId, commitDate, version, imageId, apiToken
   def organization = 'sonatype',
       repository = 'chef-nexus-repository-manager',
       credentialsId = 'integrations-github-api',
-      archiveName = 'chef-nexus-repository-manager'
+      archiveName = 'chef-nexus-repository-manager.tar.gz'
   GitHub gitHub
 
   try {
@@ -26,7 +26,6 @@ node('ubuntu-zion') {
 
       version = readVersion()
 
-      def apiToken
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
         apiToken = env.GITHUB_API_PASSWORD
@@ -64,44 +63,48 @@ node('ubuntu-zion') {
     }
     stage('Archive') {
       dir('build/target') {
-        OsTools.runSafe(this, "mv ../../cookbooks-*.tar.gz ${archiveName}.tar.gz")
-        archiveArtifacts artifacts: "${archiveName}.tar.gz", onlyIfSuccessful: true
+        OsTools.runSafe(this, "mv ../../cookbooks-*.tar.gz ${archiveName}")
+        archiveArtifacts artifacts: "${archiveName}", onlyIfSuccessful: true
       }
+    }
+    if (scm.branches[0].name != '*/master') {
+      return
     }
     input 'Push tags?'
     stage('Push tags') {
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
-        OsTools.runSafe(this, "git tag ${version}")
+        OsTools.runSafe(this, "git tag release-${version}")
         OsTools.runSafe(this, """
           git push \
           https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git \
-            ${version}
+            release-${version}
         """)
-
-        response = OsTools.runSafe(this, """
-          curl https://api.github.com/repos/${organization}/${repository}/releases/tags/release-${version}
-        """)
-        release = readJSON text: response
-        releaseId = release.id
-
-        response = OsTools.runSafe(this, """
-          curl -H "Authorization: token ${env.GITHUB_API_PASSWORD}" \
-               -H "Accept: application/vnd.github.manifold-preview" \
-               -H "Content-Type: application/gzip" \
-               --data-binary @build/target/${archiveName} \
-               "https://uploads.github.com/repos/${organization}/${repository}/releases/${releaseId}/assets?name=${archiveName}"
-        """)
-        echo response
       }
     }
+    stage('Create release') {
+      response = httpRequest customHeaders: [[name: 'Authorization', value: "token ${apiToken}"]],
+          acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST',
+          requestBody: "{\"tag_name\": \"release-${version}\"}",
+          url: "https://api.github.com/repos/${organization}/${repository}/releases"
+
+      def release = readJSON text: response.content
+      def releaseId = release.id
+
+      response = OsTools.runSafe(this, """
+        curl -H "Authorization: token ${apiToken}" \
+             -H "Accept: application/vnd.github.manifold-preview" \
+             -H "Content-Type: application/gzip" \
+             --data-binary @build/target/${archiveName} \
+             "https://uploads.github.com/repos/${organization}/${repository}/releases/${releaseId}/assets?name=${archiveName}"
+      """)
+    }
   } finally {
-    OsTools.runSafe(this, "git tag -d ${version}")
     OsTools.runSafe(this, 'git clean -f && git reset --hard origin/master')
   }
 }
 def readVersion() {
-  return '0.3.0-01'
+  readFile('version').split('\n')[0]
 }
 def getGemInstallDirectory() {
   def content = OsTools.runSafe(this, "gem env")
