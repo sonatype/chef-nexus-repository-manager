@@ -1,7 +1,7 @@
 ---
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 driver:
-  name: vagrant
+  name: docker
   network:
     - ["private_network", {ip: "192.168.35.36"}]
 
