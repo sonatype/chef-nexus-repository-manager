@@ -40,8 +40,8 @@ node('ubuntu-zion') {
         OsTools.runSafe(this, "gem install --user-install berkshelf")
         OsTools.runSafe(this, "gem install --user-install test-kitchen")
         OsTools.runSafe(this, "gem install --user-install kitchen-docker")
+        OsTools.runSafe(this, "kitchen test")
         OsTools.runSafe(this, "berks package")
-        OsTools.runSafe(this, "kitchen --version")
       }
 
       if (currentBuild.result == 'FAILURE') {
