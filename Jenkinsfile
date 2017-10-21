@@ -24,7 +24,7 @@ node('ubuntu-zion') {
       commitId = OsTools.runSafe(this, 'git rev-parse HEAD')
       commitDate = OsTools.runSafe(this, "git show -s --format=%cd --date=format:%Y%m%d-%H%M%S ${commitId}")
 
-      version = readVersion()
+      version = readVersion().split('-')[0] + ".${commitDate}.${commitId.substring(0, 7)}"
 
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
@@ -74,7 +74,7 @@ node('ubuntu-zion') {
     stage('Push tags') {
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
-        OsTools.runSafe(this, "git tag release-${version}")
+        OsTools.runSafe(this, "git tag \"release-${version}\"")
         OsTools.runSafe(this, """
           git push \
           https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git \
