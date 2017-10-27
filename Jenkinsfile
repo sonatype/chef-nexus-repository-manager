@@ -7,12 +7,13 @@
 import com.sonatype.jenkins.pipeline.GitHub
 import com.sonatype.jenkins.pipeline.OsTools
 
-node('ubuntu-zion') {
+node('ubuntu-chef-zion') {
   def commitId, commitDate, version, imageId, apiToken
   def organization = 'sonatype',
       repository = 'chef-nexus-repository-manager',
       credentialsId = 'integrations-github-api',
-      archiveName = 'chef-nexus-repository-manager.tar.gz'
+      archiveName = 'chef-nexus-repository-manager.tar.gz',
+      cookbookName = 'nexus_repository_manager'
   GitHub gitHub
 
   try {
@@ -37,8 +38,11 @@ node('ubuntu-zion') {
 
       def gemInstallDirectory = getGemInstallDirectory()
       withEnv(["PATH+GEMS=${gemInstallDirectory}/bin"]) {
-        OsTools.runSafe(this, "gem install --user-install berkshelf")
-        OsTools.runSafe(this, "berks package")
+        OsTools.runSafe(this, 'gem install --user-install berkshelf')
+        OsTools.runSafe(this, 'berks package')
+        dir('build/target') {
+          OsTools.runSafe(this, "mv ../../cookbooks-*.tar.gz ${archiveName}")
+        }
       }
 
       if (currentBuild.result == 'FAILURE') {
@@ -50,6 +54,30 @@ node('ubuntu-zion') {
     }
     stage('Test') {
       gitHub.statusUpdate commitId, 'pending', 'test', 'Tests are running'
+
+      def keyPairName = "chef-${UUID.randomUUID().toString()}"
+
+      try {
+        OsTools.runSafe(this, """
+          aws --region us-east-1 ec2 create-key-pair --key-name ${keyPairName} \
+          | ruby -e "require 'json'; puts JSON.parse(STDIN.read)['KeyMaterial']" > ~/.ssh/${keyPairName}
+        """)
+
+        dir('build/target') {
+          OsTools.runSafe(this, "tar -zxvf ${archiveName}")
+        }
+
+        dir("build/target/cookbooks/${cookbookName}") {
+          OsTools.runSafe(this, "KEY_PAIR_NAME=${keyPairName} erb ../../../../.kitchen.yml.erb > .kitchen.yml")
+          OsTools.runSafe(this, 'cp ../../../../Berksfile .')
+          OsTools.runSafe(this, 'cp ../../../../Berksfile.lock .')
+          OsTools.runSafe(this, 'cp ../../../../metadata.rb .')
+          OsTools.runSafe(this, 'kitchen test')
+        }
+      } finally {
+        OsTools.runSafe(this, "aws --region us-east-1 ec2 delete-key-pair --key-name ${keyPairName}")
+        OsTools.runSafe(this, "rm -f ~/.ssh/${keyPairName}")
+      }
 
       if (currentBuild.result == 'FAILURE') {
         gitHub.statusUpdate commitId, 'failure', 'test', 'Tests failed'
@@ -63,7 +91,6 @@ node('ubuntu-zion') {
     }
     stage('Archive') {
       dir('build/target') {
-        OsTools.runSafe(this, "mv ../../cookbooks-*.tar.gz ${archiveName}")
         archiveArtifacts artifacts: "${archiveName}", onlyIfSuccessful: true
       }
     }
