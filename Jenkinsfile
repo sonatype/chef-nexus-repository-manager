@@ -1,7 +1,5 @@
 /*
- * Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
- * Includes the third-party code listed at http://links.sonatype.com/products/nexus/attributions.
- * "Sonatype" is a trademark of Sonatype, Inc.
+ * Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
  */
 @Library('zion-pipeline-library')
 import com.sonatype.jenkins.pipeline.GitHub
