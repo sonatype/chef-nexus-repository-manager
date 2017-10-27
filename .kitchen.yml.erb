@@ -19,7 +19,15 @@ verifier:
 
 platforms:
   - name: ubuntu-16.04
+    driver:
+      image_id: ami-1d4e7a66
+    transport:
+      username: ubuntu
   - name: centos-7.3
+    driver:
+      image_id: ami-ae7bfdb8
+    transport:
+      username: centos
 
 suites:
   - name: default
