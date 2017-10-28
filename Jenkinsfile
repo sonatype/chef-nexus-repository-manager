@@ -39,7 +39,7 @@ node('ubuntu-chef-zion') {
         OsTools.runSafe(this, 'gem install --user-install berkshelf')
         OsTools.runSafe(this, 'berks package')
         dir('build/target') {
-          OsTools.runSafe(this, "mv ../../cookbooks-*.tar.gz ${archiveName}")
+          OsTools.runSafe(this, "mv ${WORKSPACE}/cookbooks-*.tar.gz ${archiveName}")
         }
       }
 
@@ -66,10 +66,10 @@ node('ubuntu-chef-zion') {
         }
 
         dir("build/target/cookbooks/${cookbookName}") {
-          OsTools.runSafe(this, "KEY_PAIR_NAME=${keyPairName} erb ../../../../.kitchen.yml.erb > .kitchen.yml")
-          OsTools.runSafe(this, 'cp ../../../../Berksfile .')
-          OsTools.runSafe(this, 'cp ../../../../Berksfile.lock .')
-          OsTools.runSafe(this, 'cp ../../../../metadata.rb .')
+          OsTools.runSafe(this, "KEY_PAIR_NAME=${keyPairName} erb ${WORKSPACE}/.kitchen.yml.erb > .kitchen.yml")
+          OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile .')
+          OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile.lock .')
+          OsTools.runSafe(this, 'cp ${WORKSPACE}/metadata.rb .')
           OsTools.runSafe(this, 'kitchen test')
         }
       } finally {
