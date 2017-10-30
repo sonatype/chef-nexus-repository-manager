@@ -5,6 +5,14 @@
 import com.sonatype.jenkins.pipeline.GitHub
 import com.sonatype.jenkins.pipeline.OsTools
 
+properties([
+  parameters([
+    string(name: 'securityGroupId', defaultValue: 'sg-a4fc5ec1',
+        description: 'The security group id to use for the chef tests.'),
+    string(name: 'subnetId', defaultValue: 'subnet-c96f61bd',
+        description: 'The subnet id to use for the chef tests.')
+  ])
+])
 node('ubuntu-chef-zion') {
   def commitId, commitDate, version, imageId, apiToken
   def organization = 'sonatype',
@@ -66,7 +74,10 @@ node('ubuntu-chef-zion') {
         }
 
         dir("build/target/cookbooks/${cookbookName}") {
-          OsTools.runSafe(this, "KEY_PAIR_NAME=${keyPairName} erb ${WORKSPACE}/.kitchen.yml.erb > .kitchen.yml")
+          OsTools.runSafe(this, """
+            KEY_PAIR_NAME=${keyPairName} SECURITY_GROUP_ID=${params.securityGroupId} SUBNET_ID=${params.subnetId} \
+            erb ${WORKSPACE}/.kitchen.yml.erb > .kitchen.yml
+          """)
           OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile .')
           OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile.lock .')
           OsTools.runSafe(this, 'cp ${WORKSPACE}/metadata.rb .')

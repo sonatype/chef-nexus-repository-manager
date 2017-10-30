@@ -4,9 +4,9 @@ driver:
   name: ec2
   aws_ssh_key_id: <%= ENV['KEY_PAIR_NAME'] %>
   region: us-east-1
-  security_group_ids: ["sg-a4fc5ec1"]
+  security_group_ids: ["<%= ENV['SECURITY_GROUP_ID'] %>"]
   require_chef_omnibus: true
-  subnet_id: subnet-c96f61bd
+  subnet_id: <%= ENV['SUBNET_ID'] %>
   instance_type: t2.large
   tags:
     Name: chef-test
