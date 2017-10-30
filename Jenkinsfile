@@ -7,9 +7,9 @@ import com.sonatype.jenkins.pipeline.OsTools
 
 properties([
   parameters([
-    string(name: 'securityGroupId', defaultValue: 'sg-a4fc5ec1',
+    string(name: 'security_group_id', defaultValue: 'sg-a4fc5ec1',
         description: 'The security group id to use for the chef tests.'),
-    string(name: 'subnetId', defaultValue: 'subnet-c96f61bd',
+    string(name: 'subnet_id', defaultValue: 'subnet-c96f61bd',
         description: 'The subnet id to use for the chef tests.')
   ])
 ])
@@ -75,7 +75,7 @@ node('ubuntu-chef-zion') {
 
         dir("build/target/cookbooks/${cookbookName}") {
           OsTools.runSafe(this, """
-            KEY_PAIR_NAME=${keyPairName} SECURITY_GROUP_ID=${params.securityGroupId} SUBNET_ID=${params.subnetId} \
+            KEY_PAIR_NAME=${keyPairName} SECURITY_GROUP_ID=${params.security_group_id} SUBNET_ID=${params.subnet_id} \
             erb ${WORKSPACE}/.kitchen.yml.erb > .kitchen.yml
           """)
           OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile .')
