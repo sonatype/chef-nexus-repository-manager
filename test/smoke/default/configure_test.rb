@@ -82,10 +82,6 @@ describe file('/opt/sonatype/nexus/etc/nexus-default.properties') do
     its('content') { should include 'nexus-context-path=/' }
   end
 
-  context 'when nexus_loadAsOSS is default' do
-    its('content') { should include 'nexus.loadAsOSS=true' }
-  end
-
   context 'when nexus_clustered is default' do
     its('content') { should include 'nexus.clustered=false' }
   end
