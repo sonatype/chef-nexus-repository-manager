@@ -35,6 +35,9 @@ node('ubuntu-chef-zion') {
       commitId = OsTools.runSafe(this, 'git rev-parse HEAD')
       commitDate = OsTools.runSafe(this, "git show -s --format=%cd --date=format:%Y%m%d-%H%M%S ${commitId}")
 
+      OsTools.runSafe(this, 'git config --global user.email sonatype-ci@sonatype.com')
+      OsTools.runSafe(this, 'git config --global user.name Sonatype CI')
+
       version = readVersion().split('-')[0] + ".${commitDate}.${commitId.substring(0, 7)}"
 
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
