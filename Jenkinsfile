@@ -53,7 +53,7 @@ node('ubuntu-chef-zion') {
         def shaRegex = /default['nexus_repository_manager']['nexus_download_sha256'] = '([A-Fa-f0-9]{64})'/
 
         defaultsFile.replaceAll(versionRegex, params.nexus_rm_version)
-        defaultsFile.replaceAll(shaRegex, params.nexus_download_sha256)
+        defaultsFile.replaceAll(shaRegex, params.nexus_rm_version_sha)
 
         writeFile(file: defaultsFileLocation, text: defaultsFile)
       }
