@@ -52,11 +52,11 @@ node('ubuntu-chef-zion') {
         def defaultsFileLocation = "${pwd()}/attributes/default.rb"
         def defaultsFile = readFile(file: defaultsFileLocation)
 
-        def versionRegex = /default['nexus_repository_manager']['version'] = '(\d\.\d\.\d\-\d{2})'/
-        def shaRegex = /default['nexus_repository_manager']['nexus_download_sha256'] = '([A-Fa-f0-9]{64})'/
+        def versionRegex = /(default\['nexus_repository_manager'\]\['version'\] = ')(\d\.\d\.\d\-\d{2})(')/
+        def shaRegex = /(default\['nexus_repository_manager'\]\['nexus_download_sha256'\] = ')([A-Fa-f0-9]{64})(')/
 
-        defaultsFile.replaceAll(versionRegex, params.nexus_rm_version)
-        defaultsFile.replaceAll(shaRegex, params.nexus_rm_version_sha)
+        defaultsFile = defaultsFile.replaceAll(versionRegex, "\$1${params.nexus_rm_version}\$3")
+        defaultsFile = defaultsFile.replaceAll(shaRegex, "\$1${params.nexus_rm_version_sha}\$3")
 
         writeFile(file: defaultsFileLocation, text: defaultsFile)
       }
