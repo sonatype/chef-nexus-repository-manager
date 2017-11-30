@@ -10,9 +10,9 @@ default['java']['jdk']['8']['x86_64']['checksum'] = '7307a55dc385921c7d9fb90bd84
 default['java']['oracle']['accept_oracle_download_terms'] = true
 
 # nexus configuration
-default['nexus_repository_manager']['version'] = '3.6.1-02'
+default['nexus_repository_manager']['version'] = '3.6.2-01'
 default['nexus_repository_manager']['nexus_download_url'] = "https://download.sonatype.com/nexus/3/nexus-#{node['nexus_repository_manager']['version']}-unix.tar.gz"
-default['nexus_repository_manager']['nexus_download_sha256'] = '4a658996cf29ca2d4f9c8b3d3cff11bfc358d88f03495812d7814268f0b1259b'
+default['nexus_repository_manager']['nexus_download_sha256'] = 'd055006ce90778ca7441efcccb2c979429fe296d1871642b99da2e97c04724a5'
 default['nexus_repository_manager']['sonatype']['path'] = '/opt/sonatype'
 default['nexus_repository_manager']['nexus_data']['path'] = '/nexus-data'
 default['nexus_repository_manager']['license_s3_bucket'] = nil
