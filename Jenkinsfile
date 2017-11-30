@@ -7,6 +7,9 @@ import com.sonatype.jenkins.pipeline.OsTools
 
 properties([
   parameters([
+    string(defaultValue: '', description: 'New Nexus RM Version', name: 'nexus_rm_version'),
+    string(defaultValue: '', description: 'New Nexus RM Version Sha256', name: 'nexus_rm_version_sha'),
+
     string(name: 'security_group_id', defaultValue: 'sg-a4fc5ec1',
         description: 'The security group id to use for the chef tests.'),
     string(name: 'subnet_id', defaultValue: 'subnet-c96f61bd',
@@ -14,7 +17,7 @@ properties([
   ])
 ])
 node('ubuntu-chef-zion') {
-  def commitId, commitDate, version, imageId, apiToken
+  def commitId, commitDate, version, imageId, apiToken, branch
   def organization = 'sonatype',
       repository = 'chef-nexus-repository-manager',
       credentialsId = 'integrations-github-api',
@@ -27,6 +30,7 @@ node('ubuntu-chef-zion') {
       deleteDir()
 
       checkout scm
+      branch = scm.branches[0].name
 
       commitId = OsTools.runSafe(this, 'git rev-parse HEAD')
       commitDate = OsTools.runSafe(this, "git show -s --format=%cd --date=format:%Y%m%d-%H%M%S ${commitId}")
@@ -38,6 +42,21 @@ node('ubuntu-chef-zion') {
         apiToken = env.GITHUB_API_PASSWORD
       }
       gitHub = new GitHub(this, "${organization}/${repository}", apiToken)
+    }
+    if (params.nexus_rm_version && params.nexus_rm_version_sha) {
+      stage('Update RM Version') {
+        OsTools.runSafe(this, "git checkout ${branch}")
+        def defaultsFileLocation = "${pwd()}/attributes/default.rb"
+        def defaultsFile = readFile(file: defaultsFileLocation)
+
+        def versionRegex = /default['nexus_repository_manager']['version'] = '(\d\.\d\.\d\-\d{2})'/
+        def shaRegex = /default['nexus_repository_manager']['nexus_download_sha256'] = '([A-Fa-f0-9]{64})'/
+
+        defaultsFile.replaceAll(versionRegex, params.nexus_rm_version)
+        defaultsFile.replaceAll(shaRegex, params.nexus_download_sha256)
+
+        writeFile(file: defaultsFileLocation, text: defaultsFile)
+      }
     }
     stage('Build') {
       gitHub.statusUpdate commitId, 'pending', 'build', 'Build is running'
@@ -98,12 +117,24 @@ node('ubuntu-chef-zion') {
     if (currentBuild.result == 'FAILURE') {
       return
     }
+    if (params.nexus_rm_version && params.nexus_rm_version_sha) {
+      stage('Commit RM Version Update') {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'integrations-github-api',
+                        usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
+          OsTools.runSafe(this, """
+            git add .
+            git commit -m 'Update RM Server to ${params.nexus_rm_version}'
+            git push https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git ${branch}
+          """)
+        }
+      }
+    }
     stage('Archive') {
       dir('build/target') {
         archiveArtifacts artifacts: "${archiveName}", onlyIfSuccessful: true
       }
     }
-    if (scm.branches[0].name != '*/master') {
+    if (branch != '*/master') {
       return
     }
     input 'Push tags?'
