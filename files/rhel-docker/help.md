@@ -1,6 +1,6 @@
 % NEXUS(1) Container Image Pages
 % Sonatype
-% November 21, 2016
+% December 15, 2017
 
 # NAME
 nexus \- Nexus Repository Manager container image
@@ -59,7 +59,7 @@ The registry location and name of the image. For example, Name="Nexus Repository
 
 `Version=`
 
-The Nexus Repository Manager version from which the container was built. For example, Version="3.0.2-02".
+The Nexus Repository Manager version from which the container was built. For example, Version="3.6.2-01".
 
 When the atomic command runs the nexus container, it reads the command line associated with the selected option
 from a LABEL set within the Docker container itself. It then runs that command. The following sections detail
