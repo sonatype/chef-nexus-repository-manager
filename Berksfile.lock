@@ -29,5 +29,5 @@ GRAPH
     poise-languages (~> 2.0)
   s3_file (2.8.5)
   tar (2.1.1)
-  windows (3.4.0)
+  windows (3.4.1)
     ohai (>= 4.0.0)
