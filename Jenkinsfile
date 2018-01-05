@@ -17,7 +17,7 @@ properties([
   ])
 ])
 node('ubuntu-chef-zion') {
-  def commitId, commitDate, version, imageId, apiToken, branch
+  def commitId, commitDate, version, imageId, apiToken, branch, defaultsFileLocation
   def organization = 'sonatype',
       repository = 'chef-nexus-repository-manager',
       credentialsId = 'integrations-github-api',
@@ -49,7 +49,7 @@ node('ubuntu-chef-zion') {
     if (params.nexus_rm_version && params.nexus_rm_version_sha) {
       stage('Update RM Version') {
         OsTools.runSafe(this, "git checkout ${branch}")
-        def defaultsFileLocation = "${pwd()}/attributes/default.rb"
+        defaultsFileLocation = "${pwd()}/attributes/default.rb"
         def defaultsFile = readFile(file: defaultsFileLocation)
 
         def versionRegex = /(default\['nexus_repository_manager'\]\['version'\] = ')(\d\.\d\.\d\-\d{2})(')/
@@ -125,7 +125,7 @@ node('ubuntu-chef-zion') {
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'integrations-github-api',
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
           OsTools.runSafe(this, """
-            git add .
+            git add ${defaultsFileLocation}
             git commit -m 'Update RM Server to ${params.nexus_rm_version}'
             git push https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git ${branch}
           """)
