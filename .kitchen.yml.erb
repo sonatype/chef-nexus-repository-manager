@@ -42,12 +42,12 @@ suites:
     verifier:
       inspec_tests:
         - test/smoke/docker
-  - name: rhel-docker
+  - name: rh-docker
     run_list:
-      - recipe[nexus_repository_manager::rhel-docker]
+      - recipe[nexus_repository_manager::rh-docker]
     verifier:
       inspec_tests:
-        - test/smoke/rhel-docker
+        - test/smoke/rh-docker
   - name: nexus_properties_configured
     run_list:
       - recipe[nexus_repository_manager::default]
