@@ -4,9 +4,9 @@
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 #
 
-# Red Hat requirements test for recipe nexus_repository_manager::rhel-docker
+# Red Hat requirements test for recipe nexus_repository_manager::rh-docker
 
-control 'rhel-docker-requirements-test-001' do
+control 'rh-docker-requirements-test-001' do
   title 'Includes the required files for Red Hat certification'
   describe file('/help.1') do
     it { should exist }
