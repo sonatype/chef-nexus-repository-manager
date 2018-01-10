@@ -17,7 +17,7 @@ properties([
   ])
 ])
 node('ubuntu-chef-zion') {
-  def commitId, commitDate, version, imageId, apiToken, branch, defaultsFileLocation
+  def commitId, commitDate, imageId, apiToken, branch, defaultsFileLocation
   def organization = 'sonatype',
       repository = 'chef-nexus-repository-manager',
       credentialsId = 'integrations-github-api',
@@ -38,7 +38,7 @@ node('ubuntu-chef-zion') {
       OsTools.runSafe(this, 'git config --global user.email sonatype-ci@sonatype.com')
       OsTools.runSafe(this, 'git config --global user.name Sonatype CI')
 
-      version = readVersion().split('-')[0] + ".${commitDate}.${commitId.substring(0, 7)}"
+      env.VERSION = readVersion().split('-')[0] + ".${commitDate}.${commitId.substring(0, 7)}"
 
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
@@ -144,7 +144,7 @@ node('ubuntu-chef-zion') {
     stage('Push tags') {
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
-        OsTools.runSafe(this, "git tag \"release-${version}\"")
+        OsTools.runSafe(this, "git tag \"release-${env.VERSION}\"")
         OsTools.runSafe(this, """
           git push \
           https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git \
@@ -155,7 +155,7 @@ node('ubuntu-chef-zion') {
     stage('Create release') {
       response = httpRequest customHeaders: [[name: 'Authorization', value: "token ${apiToken}"]],
           acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST',
-          requestBody: "{\"tag_name\": \"release-${version}\"}",
+          requestBody: "{\"tag_name\": \"release-${env.VERSION}\"}",
           url: "https://api.github.com/repos/${organization}/${repository}/releases"
 
       def release = readJSON text: response.content
