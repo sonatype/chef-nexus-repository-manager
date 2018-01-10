@@ -81,7 +81,6 @@ node('ubuntu-chef-zion') {
       }
     }
     stage('Test') {
-      return
       gitHub.statusUpdate commitId, 'pending', 'test', 'Tests are running'
 
       def keyPairName = "chef-${UUID.randomUUID().toString()}"
@@ -118,7 +117,6 @@ node('ubuntu-chef-zion') {
         gitHub.statusUpdate commitId, 'success', 'test', 'Tests succeeded'
       }
     }
-    return
     if (currentBuild.result == 'FAILURE') {
       return
     }
