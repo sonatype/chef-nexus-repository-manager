@@ -64,19 +64,19 @@ node('ubuntu-chef-zion') {
 
         writeFile(file: defaultsFileLocation, text: defaultsFile)
       }
-      if (params.oracle_jre_url && params.oracle_jre_sha) {
-        stage('Update JRE Url') {
-          OsTools.runSafe(this, "git checkout ${branch}")
-          def defaultsFile = readFile(file: defaultsFileLocation)
+    }
+    if (params.oracle_jre_url && params.oracle_jre_sha) {
+      stage('Update JRE Url') {
+        OsTools.runSafe(this, "git checkout ${branch}")
+        def defaultsFile = readFile(file: defaultsFileLocation)
 
-          def urlRegex = /(default\['java'\]\['jdk'\]\['8'\]\['x86_64'\]\['url'\] = ')(http.*-linux-x64\.tar\.gz)(')/
-          def shaRegex = /(default\['java'\]\['jdk'\]\['8'\]\['x86_64'\]\['checksum'\] = ')([A-Fa-f0-9]{64})(')/
+        def urlRegex = /(default\['java'\]\['jdk'\]\['8'\]\['x86_64'\]\['url'\] = ')(http.*-linux-x64\.tar\.gz)(')/
+        def shaRegex = /(default\['java'\]\['jdk'\]\['8'\]\['x86_64'\]\['checksum'\] = ')([A-Fa-f0-9]{64})(')/
 
-          defaultsFile = defaultsFile.replaceAll(versionRegex, "\$1${params.oracle_jre_url}\$3")
-          defaultsFile = defaultsFile.replaceAll(shaRegex, "\$1${params.oracle_jre_sha}\$3")
+        defaultsFile = defaultsFile.replaceAll(urlRegex, "\$1${params.oracle_jre_url}\$3")
+        defaultsFile = defaultsFile.replaceAll(shaRegex, "\$1${params.oracle_jre_sha}\$3")
 
-          writeFile(file: defaultsFileLocation, text: defaultsFile)
-        }
+        writeFile(file: defaultsFileLocation, text: defaultsFile)
       }
     }
     stage('Build') {
