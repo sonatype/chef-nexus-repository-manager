@@ -9,6 +9,8 @@ properties([
   parameters([
     string(defaultValue: '', description: 'New Nexus RM Version', name: 'nexus_rm_version'),
     string(defaultValue: '', description: 'New Nexus RM Version Sha256', name: 'nexus_rm_version_sha'),
+    string(defaultValue: '', description: 'New JRE Url', name: 'oracle_jre_url'),
+    string(defaultValue: '', description: 'New JRE Sha256', name: 'oracle_jre_sha'),
 
     string(name: 'security_group_id', defaultValue: 'sg-a4fc5ec1',
         description: 'The security group id to use for the chef tests.'),
@@ -30,6 +32,9 @@ node('ubuntu-chef-zion') {
       deleteDir()
 
       checkout scm
+
+      defaultsFileLocation = "${pwd()}/attributes/default.rb"
+
       branch = scm.branches[0].name
 
       commitId = OsTools.runSafe(this, 'git rev-parse HEAD')
@@ -49,7 +54,6 @@ node('ubuntu-chef-zion') {
     if (params.nexus_rm_version && params.nexus_rm_version_sha) {
       stage('Update RM Version') {
         OsTools.runSafe(this, "git checkout ${branch}")
-        defaultsFileLocation = "${pwd()}/attributes/default.rb"
         def defaultsFile = readFile(file: defaultsFileLocation)
 
         def versionRegex = /(default\['nexus_repository_manager'\]\['version'\] = ')(\d\.\d\.\d\-\d{2})(')/
@@ -57,6 +61,20 @@ node('ubuntu-chef-zion') {
 
         defaultsFile = defaultsFile.replaceAll(versionRegex, "\$1${params.nexus_rm_version}\$3")
         defaultsFile = defaultsFile.replaceAll(shaRegex, "\$1${params.nexus_rm_version_sha}\$3")
+
+        writeFile(file: defaultsFileLocation, text: defaultsFile)
+      }
+    }
+    if (params.oracle_jre_url && params.oracle_jre_sha) {
+      stage('Update JRE Url') {
+        OsTools.runSafe(this, "git checkout ${branch}")
+        def defaultsFile = readFile(file: defaultsFileLocation)
+
+        def urlRegex = /(default\['java'\]\['jdk'\]\['8'\]\['x86_64'\]\['url'\] = ')(http.*-linux-x64\.tar\.gz)(')/
+        def shaRegex = /(default\['java'\]\['jdk'\]\['8'\]\['x86_64'\]\['checksum'\] = ')([A-Fa-f0-9]{64})(')/
+
+        defaultsFile = defaultsFile.replaceAll(urlRegex, "\$1${params.oracle_jre_url}\$3")
+        defaultsFile = defaultsFile.replaceAll(shaRegex, "\$1${params.oracle_jre_sha}\$3")
 
         writeFile(file: defaultsFileLocation, text: defaultsFile)
       }
@@ -120,13 +138,19 @@ node('ubuntu-chef-zion') {
     if (currentBuild.result == 'FAILURE') {
       return
     }
-    if (params.nexus_rm_version && params.nexus_rm_version_sha) {
+    if (params.nexus_rm_version && params.nexus_rm_version_sha || params.oracle_jre_url && params.oracle_jre_sha) {
       stage('Commit RM Version Update') {
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'integrations-github-api',
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
+          def commitMessage = [
+            params.nexus_rm_version && params.nexus_rm_version_sha ?
+              "Update Repository Manager to ${params.nexus_rm_version_sha}." : "",
+            params.oracle_jre_url && params.oracle_jre_sha ?
+              "Update Oracle JRE to ${(params.oracle_jre_url =~ /(\du\d{3}\-b\d{2})/)[0][0]}." : ""
+          ].findAll({ it }).join(' ')
           OsTools.runSafe(this, """
             git add ${defaultsFileLocation}
-            git commit -m 'Update RM Server to ${params.nexus_rm_version}'
+            git commit -m '${commitMessage}'
             git push https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git ${branch}
           """)
         }
