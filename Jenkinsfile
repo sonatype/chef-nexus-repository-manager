@@ -144,7 +144,7 @@ node('ubuntu-chef-zion') {
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
           def commitMessage = [
             params.nexus_rm_version && params.nexus_rm_version_sha ?
-              "Update Repository Manager to ${params.nexus_rm_version_sha}." : "",
+              "Update Repository Manager to ${params.nexus_rm_version}." : "",
             params.oracle_jre_url && params.oracle_jre_sha ?
               "Update Oracle JRE to ${(params.oracle_jre_url =~ /(\du\d{3}\-b\d{2})/)[0][0]}." : ""
           ].findAll({ it }).join(' ')
