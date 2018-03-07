@@ -2,20 +2,20 @@
 
 #### Usage
 
-Simply include the `nexus-repository-manager` recipe wherever you would like Nexus Repository Manager installed. Simply add
-`recipe['nexus-repository-manager']` to your runlist or `include_recipe 'nexus-repository-manager'` to your cookbook. This will
+Simply include the `nexus_repository_manager` recipe wherever you would like Nexus Repository Manager installed. Simply add
+`recipe['nexus_repository_manager']` to your runlist or `include_recipe 'nexus_repository_manager'` to your cookbook. This will
 install Nexus Repository Manager managed as a systemd service.
 
-We also provide a `nexus-repository-manager::docker` recipe which is exactly the same but without installing a systemd service.
+We also provide a `nexus_repository_manager::docker` recipe which is exactly the same but without installing a systemd service.
 
 #### Recipes
 
- - nexus-repository-manager::default
+ - nexus_repository_manager::default
    Installs Nexus Repository Manager and starts it as systemd service.
- - nexus-repository-manager::docker
+ - nexus_repository_manager::docker
    Installs Nexus Repository Manager. Instead of a systemd service a startup script `start-nexus-repository-manager.sh` is provided in install_dir.
- - nexus-repository-manager::rh-docker
-   Uses the nexus-repository-manager::docker recipe but includes additional meta data to comform with Kubernetes and
+ - nexus_repository_manager::rh-docker
+   Uses the nexus_repository_manager::docker recipe but includes additional meta data to comform with Kubernetes and
    OpenShift standards, a directory with the licenses applicable to the software and a man file for help on how to use
    the software. It also uses an ENTRYPOINT script the ensure the running user has access to the appropriate 
    permissions for OpenShift 'restricted' SCC.
@@ -37,4 +37,4 @@ We provide a simple smoke test for this cookbook. Use this command to run it:
 We run our tests against `centos-7.3` as well as `ubuntu-16.04`. However all major systemd based distributions should
 work fine.
 
-The alternative `nexus-repository-manager::docker` recipe does not require systemd.
+The alternative `nexus_repository_manager::docker` recipe does not require systemd.
