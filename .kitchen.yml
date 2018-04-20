@@ -27,20 +27,30 @@ suites:
       inspec_tests:
         - test/smoke/default
   - name: docker
+    driver:
+      name: docker
+      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::docker]
     verifier:
       inspec_tests:
         - test/smoke/docker
   - name: rh-docker
+    driver:
+      name: docker
+      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::rh-docker]
     verifier:
       inspec_tests:
         - test/smoke/rh-docker
   - name: nexus_properties_configured
+    driver:
+      name: docker
+      use_sudo: false
     run_list:
-      - recipe[nexus_repository_manager::default]
+      - recipe[nexus_repository_manager::users]
+      - recipe[nexus_repository_manager::configure]
     verifier:
       inspec_tests:
         - test/smoke/nexus_properties_configured
@@ -53,6 +63,9 @@ suites:
           clustered: true
           license_file: "/opt/sonatype/license.lic"
   - name: multicast_enabled
+    driver:
+      name: docker
+      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
       - recipe[nexus_repository_manager::ha-hazelcast]
@@ -71,6 +84,9 @@ suites:
           tcp_ip:
             enabled: false
   - name: tcp_ip_enabled
+    driver:
+      name: docker
+      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
       - recipe[nexus_repository_manager::ha-hazelcast]
@@ -89,6 +105,9 @@ suites:
             interface: '10.0.1.1'
             members: ['10.0.1.2', '10.0.1.3', '10.0.1.4']
   - name: aws_enabled
+    driver:
+      name: docker
+      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
       - recipe[nexus_repository_manager::ha-hazelcast]
@@ -112,6 +131,9 @@ suites:
           clustered: true
           license_file: "/opt/sonatype/license.lic"
   - name: hazelcast_discovery_enabled
+    driver:
+      name: docker
+      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
       - recipe[nexus_repository_manager::ha-hazelcast]

@@ -11,6 +11,8 @@ properties([
     string(defaultValue: '', description: 'New Nexus RM Version Sha256', name: 'nexus_rm_version_sha'),
     string(defaultValue: '', description: 'New JRE Url', name: 'oracle_jre_url'),
     string(defaultValue: '', description: 'New JRE Sha256', name: 'oracle_jre_sha'),
+    string(defaultValue: '20', description: 'Kitchen concurrency', name: 'KITCHEN_TEST_CONCURRENCY'),
+    string(defaultValue: '', description: 'Kitchen additional parameters', name: 'KITCHEN_TEST_PARAMS'),
 
     string(name: 'security_group_id', defaultValue: 'sg-a4fc5ec1',
         description: 'The security group id to use for the chef tests.'),
