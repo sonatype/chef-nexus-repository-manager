@@ -4,6 +4,14 @@
 #
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
+directory node['nexus_repository_manager']['sonatype']['path'] do
+  owner 'root'
+  group 'root'
+  mode '755'
+  recursive true
+  action :create
+end
+
 start_script = node['nexus_repository_manager']['sonatype']['path'] + '/start-nexus-repository-manager.sh'
 
 template start_script do
@@ -13,13 +21,12 @@ template start_script do
   mode '0755'
 end
 
-hazelcast_xml = node['nexus_repository_manager']['nexus_home']['path'] + '/etc/fabric/hazelcast.xml'
-
-template hazelcast_xml do
-  source 'hazelcast.xml.erb'
-  owner 'root'
-  group 'root'
-  mode '0755'
+directory node['nexus_repository_manager']['nexus_home']['path'] + '/etc/' do
+  owner 'nexus'
+  group 'nexus'
+  mode '755'
+  recursive true
+  action :create
 end
 
 nexus_properties = node['nexus_repository_manager']['nexus_home']['path'] + '/etc/nexus-default.properties'

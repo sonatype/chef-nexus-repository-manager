@@ -90,6 +90,7 @@ systemd_unit 'awslogs-agent.service' do
 end
 
 include_recipe 'nexus_repository_manager::default'
+include_recipe 'nexus_repository_manager::hazelcast'
 
 nexus_log = node['nexus_repository_manager']['nexus_data']['log']['path'] + '/nexus.log'
 
