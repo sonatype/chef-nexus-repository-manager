@@ -1,23 +1,33 @@
 ---
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 driver:
-  name: vagrant
-  network:
-    - ["private_network", {ip: "192.168.35.36"}]
+  name: ec2
+  aws_ssh_key_id: <%= ENV['KEY_PAIR_NAME'] %>
+  region: us-east-1
+  security_group_ids: ["<%= ENV['SECURITY_GROUP_ID'] %>"]
+  require_chef_omnibus: true
+  subnet_id: <%= ENV['SUBNET_ID'] %>
+  instance_type: t2.large
+  tags:
+    Name: chef-test
 
-provisioner:
-  name: chef_zero
-  # You may wish to disable always updating cookbooks in CI or other testing environments.
-  # For example:
-  #   always_update_cookbooks: <%= !ENV['CI'] %>
-  always_update_cookbooks: true
+transport:
+  ssh_key: ~/.ssh/<%= ENV['KEY_PAIR_NAME'] %>
 
 verifier:
   name: inspec
 
 platforms:
   - name: ubuntu-16.04
+    driver:
+      image_id: ami-1d4e7a66
+    transport:
+      username: ubuntu
   - name: centos-7.3
+    driver:
+      image_id: ami-ae7bfdb8
+    transport:
+      username: centos
 
 suites:
   - name: default
@@ -54,8 +64,7 @@ suites:
           license_file: "/opt/sonatype/license.lic"
   - name: multicast_enabled
     run_list:
-      - recipe[nexus_repository_manager::users]
-      - recipe[nexus_repository_manager::ha-hazelcast]
+      - recipe[nexus_repository_manager::default]
     verifier:
       inspec_tests:
         - test/smoke/multicast_enabled
@@ -72,8 +81,7 @@ suites:
             enabled: false
   - name: tcp_ip_enabled
     run_list:
-      - recipe[nexus_repository_manager::users]
-      - recipe[nexus_repository_manager::ha-hazelcast]
+      - recipe[nexus_repository_manager::default]
     verifier:
       inspec_tests:
         - test/smoke/tcp_ip_enabled
@@ -90,8 +98,7 @@ suites:
             members: ['10.0.1.2', '10.0.1.3', '10.0.1.4']
   - name: aws_enabled
     run_list:
-      - recipe[nexus_repository_manager::users]
-      - recipe[nexus_repository_manager::ha-hazelcast]
+      - recipe[nexus_repository_manager::default]
     verifier:
       inspec_tests:
         - test/smoke/aws_enabled
@@ -113,8 +120,7 @@ suites:
           license_file: "/opt/sonatype/license.lic"
   - name: hazelcast_discovery_enabled
     run_list:
-      - recipe[nexus_repository_manager::users]
-      - recipe[nexus_repository_manager::ha-hazelcast]
+      - recipe[nexus_repository_manager::default]
     verifier:
       inspec_tests:
         - test/smoke/hazelcast_discovery_enabled
