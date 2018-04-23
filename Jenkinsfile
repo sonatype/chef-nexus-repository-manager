@@ -120,7 +120,7 @@ node('ubuntu-chef-zion') {
           OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile .')
           OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile.lock .')
           OsTools.runSafe(this, 'cp ${WORKSPACE}/metadata.rb .')
-          OsTools.runSafe(this, 'kitchen test')
+          sh 'kitchen test'
         }
       } finally {
         OsTools.runSafe(this, "aws --region us-east-1 ec2 delete-key-pair --key-name ${keyPairName}")
