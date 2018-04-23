@@ -74,6 +74,8 @@ suites:
         - test/smoke/multicast_enabled
     attributes:
       nexus_repository_manager:
+        properties:
+          clustered: true
         hazelcast:
           multicast:
             enabled: true
@@ -95,6 +97,8 @@ suites:
         - test/smoke/tcp_ip_enabled
     attributes:
       nexus_repository_manager:
+        properties:
+          clustered: true
         hazelcast:
           multicast:
             enabled: false
@@ -116,6 +120,8 @@ suites:
         - test/smoke/aws_enabled
     attributes:
       nexus_repository_manager:
+        properties:
+          clustered: true
         hazelcast:
           multicast:
             enabled: false
@@ -142,6 +148,8 @@ suites:
         - test/smoke/hazelcast_discovery_enabled
     attributes:
       nexus_repository_manager:
+        properties:
+          clustered: true
         hazelcast:
           multicast:
             enabled: false
