@@ -1,7 +1,8 @@
 ---
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 driver:
-  name: vagrant
+  name: docker
+  use_sudo: false
   network:
     - ["private_network", {ip: "192.168.35.36"}]
 
@@ -21,33 +22,32 @@ platforms:
 
 suites:
   - name: default
+    driver:
+      name: docker
+      use_sudo: false
+      image: centos/systemd
+      run_command: /bin/bash -c "/usr/sbin/sshd -D -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes -o UsePrivilegeSeparation=no -o PidFile=/tmp/sshd.pid & exec /sbin/init"
+      privileged: true
+      run_options: -v /sys/fs/cgroup:/sys/fs/cgroup:ro
+    excludes: ["ubuntu-16.04"]
     run_list:
       - recipe[nexus_repository_manager::default]
     verifier:
       inspec_tests:
         - test/smoke/default
   - name: docker
-    driver:
-      name: docker
-      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::docker]
     verifier:
       inspec_tests:
         - test/smoke/docker
   - name: rh-docker
-    driver:
-      name: docker
-      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::rh-docker]
     verifier:
       inspec_tests:
         - test/smoke/rh-docker
   - name: nexus_properties_configured
-    driver:
-      name: docker
-      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
       - recipe[nexus_repository_manager::configure]
@@ -63,9 +63,6 @@ suites:
           clustered: true
           license_file: "/opt/sonatype/license.lic"
   - name: multicast_enabled
-    driver:
-      name: docker
-      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
       - recipe[nexus_repository_manager::ha-hazelcast]
@@ -74,8 +71,6 @@ suites:
         - test/smoke/multicast_enabled
     attributes:
       nexus_repository_manager:
-        properties:
-          clustered: true
         hazelcast:
           multicast:
             enabled: true
@@ -86,9 +81,6 @@ suites:
           tcp_ip:
             enabled: false
   - name: tcp_ip_enabled
-    driver:
-      name: docker
-      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
       - recipe[nexus_repository_manager::ha-hazelcast]
@@ -97,8 +89,6 @@ suites:
         - test/smoke/tcp_ip_enabled
     attributes:
       nexus_repository_manager:
-        properties:
-          clustered: true
         hazelcast:
           multicast:
             enabled: false
@@ -109,9 +99,6 @@ suites:
             interface: '10.0.1.1'
             members: ['10.0.1.2', '10.0.1.3', '10.0.1.4']
   - name: aws_enabled
-    driver:
-      name: docker
-      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
       - recipe[nexus_repository_manager::ha-hazelcast]
@@ -120,8 +107,6 @@ suites:
         - test/smoke/aws_enabled
     attributes:
       nexus_repository_manager:
-        properties:
-          clustered: true
         hazelcast:
           multicast:
             enabled: false
@@ -137,9 +122,6 @@ suites:
           clustered: true
           license_file: "/opt/sonatype/license.lic"
   - name: hazelcast_discovery_enabled
-    driver:
-      name: docker
-      use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
       - recipe[nexus_repository_manager::ha-hazelcast]
@@ -148,8 +130,6 @@ suites:
         - test/smoke/hazelcast_discovery_enabled
     attributes:
       nexus_repository_manager:
-        properties:
-          clustered: true
         hazelcast:
           multicast:
             enabled: false
