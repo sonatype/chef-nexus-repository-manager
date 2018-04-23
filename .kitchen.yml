@@ -68,12 +68,14 @@ suites:
       use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
-      - recipe[nexus_repository_manager::hazelcast]
+      - recipe[nexus_repository_manager::ha-hazelcast]
     verifier:
       inspec_tests:
         - test/smoke/multicast_enabled
     attributes:
       nexus_repository_manager:
+        properties:
+          clustered: true
         hazelcast:
           multicast:
             enabled: true
@@ -89,12 +91,14 @@ suites:
       use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
-      - recipe[nexus_repository_manager::hazelcast]
+      - recipe[nexus_repository_manager::ha-hazelcast]
     verifier:
       inspec_tests:
         - test/smoke/tcp_ip_enabled
     attributes:
       nexus_repository_manager:
+        properties:
+          clustered: true
         hazelcast:
           multicast:
             enabled: false
@@ -110,12 +114,14 @@ suites:
       use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
-      - recipe[nexus_repository_manager::hazelcast]
+      - recipe[nexus_repository_manager::ha-hazelcast]
     verifier:
       inspec_tests:
         - test/smoke/aws_enabled
     attributes:
       nexus_repository_manager:
+        properties:
+          clustered: true
         hazelcast:
           multicast:
             enabled: false
@@ -136,12 +142,14 @@ suites:
       use_sudo: false
     run_list:
       - recipe[nexus_repository_manager::users]
-      - recipe[nexus_repository_manager::hazelcast]
+      - recipe[nexus_repository_manager::ha-hazelcast]
     verifier:
       inspec_tests:
         - test/smoke/hazelcast_discovery_enabled
     attributes:
       nexus_repository_manager:
+        properties:
+          clustered: true
         hazelcast:
           multicast:
             enabled: false

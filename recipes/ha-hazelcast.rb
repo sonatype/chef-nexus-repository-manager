@@ -15,7 +15,7 @@ directory node['nexus_repository_manager']['nexus_home']['path'] + '/etc/fabric/
 end
 
 template hazelcast_xml do
-  source 'hazelcast.xml.erb'
+  source 'ha/hazelcast.xml.erb'
   owner 'root'
   group 'root'
   mode '0755'
