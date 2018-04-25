@@ -24,7 +24,6 @@ suites:
   - name: default
     driver:
       name: docker
-      use_sudo: false
       image: centos/systemd
       run_command: /bin/bash -c "/usr/sbin/sshd -D -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes -o UsePrivilegeSeparation=no -o PidFile=/tmp/sshd.pid & exec /sbin/init"
       privileged: true
