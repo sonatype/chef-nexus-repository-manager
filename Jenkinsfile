@@ -11,11 +11,8 @@ properties([
     string(defaultValue: '', description: 'New Nexus RM Version Sha256', name: 'nexus_rm_version_sha'),
     string(defaultValue: '', description: 'New JRE Url', name: 'oracle_jre_url'),
     string(defaultValue: '', description: 'New JRE Sha256', name: 'oracle_jre_sha'),
-
-    string(name: 'security_group_id', defaultValue: 'sg-a4fc5ec1',
-        description: 'The security group id to use for the chef tests.'),
-    string(name: 'subnet_id', defaultValue: 'subnet-c96f61bd',
-        description: 'The subnet id to use for the chef tests.')
+    string(defaultValue: '20', description: 'Kitchen concurrency', name: 'KITCHEN_TEST_CONCURRENCY'),
+    string(defaultValue: '', description: 'Kitchen additional parameters', name: 'KITCHEN_TEST_PARAMS')
   ])
 ])
 node('ubuntu-chef-zion') {
@@ -83,7 +80,7 @@ node('ubuntu-chef-zion') {
 
       def gemInstallDirectory = getGemInstallDirectory()
       withEnv(["PATH+GEMS=${gemInstallDirectory}/bin"]) {
-        OsTools.runSafe(this, 'gem install --user-install berkshelf')
+        OsTools.runSafe(this, 'gem install --user-install -v 6.3.2 berkshelf')
         OsTools.runSafe(this, 'berks package')
         dir('build/target') {
           OsTools.runSafe(this, "mv ${WORKSPACE}/cookbooks-*.tar.gz ${archiveName}")
@@ -100,33 +97,12 @@ node('ubuntu-chef-zion') {
     stage('Test') {
       gitHub.statusUpdate commitId, 'pending', 'test', 'Tests are running'
 
-      def keyPairName = "chef-${UUID.randomUUID().toString()}"
-
-      try {
-        OsTools.runSafe(this, """
-          aws --region us-east-1 ec2 create-key-pair --key-name ${keyPairName} \
-          | ruby -e "require 'json'; puts JSON.parse(STDIN.read)['KeyMaterial']" > ~/.ssh/${keyPairName}
-        """)
-
-        dir('build/target') {
-          OsTools.runSafe(this, "tar -zxvf ${archiveName}")
-        }
-
-        dir("build/target/cookbooks/${cookbookName}") {
-          OsTools.runSafe(this, """
-            KEY_PAIR_NAME=${keyPairName} SECURITY_GROUP_ID=${params.security_group_id} SUBNET_ID=${params.subnet_id} \
-            erb ${WORKSPACE}/.kitchen.yml.erb > .kitchen.yml
-          """)
-          OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile .')
-          OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile.lock .')
-          OsTools.runSafe(this, 'cp ${WORKSPACE}/metadata.rb .')
-          sh 'kitchen test'
-        }
-      } finally {
-        OsTools.runSafe(this, "aws --region us-east-1 ec2 delete-key-pair --key-name ${keyPairName}")
-        OsTools.runSafe(this, "rm -f ~/.ssh/${keyPairName}")
+      dir('build/target') {
+        OsTools.runSafe(this, "tar -zxvf ${archiveName}")
       }
 
+      OsTools.runSafe(this, 'chef gem install kitchen-docker')
+      sh 'kitchen test -c ${KITCHEN_TEST_CONCURRENCY} -d always --no-color ${KITCHEN_TEST_PARAMS}'
       if (currentBuild.result == 'FAILURE') {
         gitHub.statusUpdate commitId, 'failure', 'test', 'Tests failed'
         return

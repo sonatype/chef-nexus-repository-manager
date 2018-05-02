@@ -1,7 +1,8 @@
 ---
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 driver:
-  name: vagrant
+  name: docker
+  use_sudo: false
   network:
     - ["private_network", {ip: "192.168.35.36"}]
 
@@ -21,6 +22,13 @@ platforms:
 
 suites:
   - name: default
+    driver:
+      name: docker
+      image: centos/systemd
+      run_command: /bin/bash -c "/usr/sbin/sshd -D -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes -o UsePrivilegeSeparation=no -o PidFile=/tmp/sshd.pid & exec /sbin/init"
+      privileged: true
+      run_options: -v /sys/fs/cgroup:/sys/fs/cgroup:ro
+    excludes: ["ubuntu-16.04"]
     run_list:
       - recipe[nexus_repository_manager::default]
     verifier:
@@ -40,7 +48,8 @@ suites:
         - test/smoke/rh-docker
   - name: nexus_properties_configured
     run_list:
-      - recipe[nexus_repository_manager::default]
+      - recipe[nexus_repository_manager::users]
+      - recipe[nexus_repository_manager::configure]
     verifier:
       inspec_tests:
         - test/smoke/nexus_properties_configured
