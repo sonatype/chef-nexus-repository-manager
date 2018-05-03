@@ -101,30 +101,8 @@ node('ubuntu-chef-zion') {
         OsTools.runSafe(this, "tar -zxvf ${archiveName}")
       }
 
-      try {
-        OsTools.runSafe(this, """
-          aws --region us-east-1 ec2 create-key-pair --key-name ${keyPairName} \
-          | ruby -e "require 'json'; puts JSON.parse(STDIN.read)['KeyMaterial']" > ~/.ssh/${keyPairName}
-        """)
-
-        dir('build/target') {
-          OsTools.runSafe(this, "tar -zxvf ${archiveName}")
-        }
-
-        dir("build/target/cookbooks/${cookbookName}") {
-          OsTools.runSafe(this, """
-            KEY_PAIR_NAME=${keyPairName} SECURITY_GROUP_ID=${params.security_group_id} SUBNET_ID=${params.subnet_id} \
-            erb ${WORKSPACE}/.kitchen.yml.erb > .kitchen.yml
-          """)
-          OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile .')
-          OsTools.runSafe(this, 'cp ${WORKSPACE}/Berksfile.lock .')
-          OsTools.runSafe(this, 'cp ${WORKSPACE}/metadata.rb .')
-          OsTools.runSafe(this, 'kitchen test')
-        }
-      } finally {
-        OsTools.runSafe(this, "aws --region us-east-1 ec2 delete-key-pair --key-name ${keyPairName}")
-        OsTools.runSafe(this, "rm -f ~/.ssh/${keyPairName}")
-      }
+      OsTools.runSafe(this, 'chef gem install kitchen-docker')
+      sh 'kitchen test -c ${KITCHEN_TEST_CONCURRENCY} -d always --no-color ${KITCHEN_TEST_PARAMS}'
 
       if (currentBuild.result == 'FAILURE') {
         gitHub.statusUpdate commitId, 'failure', 'test', 'Tests failed'
