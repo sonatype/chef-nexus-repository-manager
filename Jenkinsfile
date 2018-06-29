@@ -1,7 +1,7 @@
 /*
  * Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
  */
-@Library('zion-pipeline-library')
+@Library('private-pipeline-library')
 import com.sonatype.jenkins.pipeline.GitHub
 import com.sonatype.jenkins.pipeline.OsTools
 
