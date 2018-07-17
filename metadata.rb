@@ -23,5 +23,5 @@ recipe 'nexus_repository_manager::rh-docker', 'Installs Nexus Repository Manager
 depends 'java', '~> 1.50'
 depends 'tar', '~> 2.1'
 depends 'limits', '~> 1.0.0'
-depends 'poise-python', '~> 1.6.0'
+depends 'poise-python', '~> 1.7.0'
 depends 's3_file', '~> 2.8.5'
