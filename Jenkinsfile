@@ -52,7 +52,7 @@ node('ubuntu-chef-zion') {
         OsTools.runSafe(this, "git checkout ${branch}")
         def defaultsFile = readFile(file: defaultsFileLocation)
 
-        def versionRegex = /(default\['nexus_repository_manager'\]\['version'\] = ')(\d\.\d\.\d\-\d{2})(')/
+        def versionRegex = /(default\['nexus_repository_manager'\]\['version'\] = ')(\d\.\d{1,3}\.\d\-\d{2})(')/
         def shaRegex = /(default\['nexus_repository_manager'\]\['nexus_download_sha256'\] = ')([A-Fa-f0-9]{64})(')/
 
         defaultsFile = defaultsFile.replaceAll(versionRegex, "\$1${params.nexus_rm_version}\$3")
