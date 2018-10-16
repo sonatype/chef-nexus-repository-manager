@@ -5,8 +5,8 @@
 
 default['java']['jdk_version'] = '8'
 default['java']['install_flavor'] = 'oracle'
-default['java']['jdk']['8']['x86_64']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/server-jre-8u181-linux-x64.tar.gz'
-default['java']['jdk']['8']['x86_64']['checksum'] = '0b26c7fcfad20029e6e0989e678efcd4a81f0fe502a478b4972215533867de1b'
+default['java']['jdk']['8']['x86_64']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/8u192-b12/750e1c8617c5452694857ad95c3ee230/server-jre-8u192-linux-x64.tar.gz'
+default['java']['jdk']['8']['x86_64']['checksum'] = '3d811a5ec65dc6fc261f488757bae86ecfe285a79992363b016f60cdb4dbe7e6'
 default['java']['oracle']['accept_oracle_download_terms'] = true
 
 # nexus configuration
