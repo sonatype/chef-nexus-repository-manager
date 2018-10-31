@@ -40,6 +40,8 @@
     <!-- OrientDB: reduce split-brain merge interval -->
     <property name="hazelcast.merge.next.run.delay.seconds">15</property>
     <property name="hazelcast.wait.seconds.before.join">5</property>
+
+    <property name="hazelcast.discovery.enabled"><%= node['nexus_repository_manager']['hazelcast']['discovery']['enabled'] %></property>
   </properties>
 
   <network>
