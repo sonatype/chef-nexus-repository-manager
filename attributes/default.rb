@@ -4,10 +4,8 @@
 # Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
 
 default['java']['jdk_version'] = '8'
-default['java']['install_flavor'] = 'oracle'
-default['java']['jdk']['8']['x86_64']['url'] = 'https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/server-jre-8u202-linux-x64.tar.gz'
-default['java']['jdk']['8']['x86_64']['checksum'] = '61292e9d9ef84d9702f0e30f57b208e8fbd9a272d87cd530aece4f5213c98e4e'
-default['java']['oracle']['accept_oracle_download_terms'] = true
+default['java']['install_flavor'] = 'openjdk'
+default['java']['accept_license_agreement'] = true
 
 # nexus configuration
 default['nexus_repository_manager']['version'] = '3.14.0-04'
