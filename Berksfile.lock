@@ -4,15 +4,13 @@ DEPENDENCIES
     metadata: true
 
 GRAPH
-  apt (7.0.0)
-  homebrew (5.0.4)
-  java (1.50.0)
-    apt (>= 0.0.0)
+  homebrew (5.0.8)
+  java (3.1.2)
     homebrew (>= 0.0.0)
     windows (>= 0.0.0)
   limits (1.0.0)
   nexus_repository_manager (0.1.0)
-    java (~> 1.50)
+    java (~> 3.1.2)
     limits (~> 1.0.0)
     poise-python (~> 1.7.0)
     s3_file (~> 2.8.5)
@@ -27,5 +25,5 @@ GRAPH
     poise (~> 2.7)
     poise-languages (~> 2.0)
   s3_file (2.8.5)
-  tar (2.1.1)
-  windows (4.3.3)
+  tar (2.2.0)
+  windows (5.2.2)
