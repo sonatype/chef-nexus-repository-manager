@@ -1,7 +1,7 @@
 /*
  * Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
  */
-@Library('private-pipeline-library')
+@Library('ci-pipeline-library@INT-add-version-tools')
 import com.sonatype.jenkins.pipeline.GitHub
 import com.sonatype.jenkins.pipeline.OsTools
 
@@ -23,10 +23,13 @@ node('ubuntu-chef-zion') {
       archiveName = 'chef-nexus-repository-manager.tar.gz',
       cookbookName = 'nexus_repository_manager'
   GitHub gitHub
+  VersionTools versionTools
 
   try {
     stage('Preparation') {
       deleteDir()
+
+      versionTools = new VersionTools(this, currentBuild)
 
       def checkoutDetails = checkout scm
 
@@ -34,8 +37,9 @@ node('ubuntu-chef-zion') {
 
       branch = checkoutDetails.GIT_BRANCH == 'origin/master' ? 'master' : checkoutDetails.GIT_BRANCH
       commitId = checkoutDetails.GIT_COMMIT
-      version = getCommitVersion(commitId)
-      setDisplayName(version)
+      majorMinorVersion = readVersion().split('-')[0]
+      version = versionTools.getCommitVersion(majorMinorVersion, commitId)
+      versionTools.setDisplayName(version)
 
       OsTools.runSafe(this, 'git config --global user.email sonatype-ci@sonatype.com')
       OsTools.runSafe(this, 'git config --global user.name Sonatype CI')
@@ -128,8 +132,8 @@ node('ubuntu-chef-zion') {
             git push https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git ${branch}
           """)
 
-          version = getCommitVersion(OsTools.runSafe(this, "git rev-parse HEAD"))
-          setDisplayName(version)
+          version = versionTools.getCommitVersion(majorMinorVersion, OsTools.runSafe(this, "git rev-parse HEAD"))
+          versionTools.setDisplayName(version)
         }
       }
     }
