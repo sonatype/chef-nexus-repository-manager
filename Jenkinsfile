@@ -4,6 +4,7 @@
 @Library('ci-pipeline-library@INT-add-version-tools')
 import com.sonatype.jenkins.pipeline.GitHub
 import com.sonatype.jenkins.pipeline.OsTools
+import com.sonatype.jenkins.pipeline.VersionTools
 
 properties([
   parameters([
