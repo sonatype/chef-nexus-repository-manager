@@ -16,7 +16,7 @@ properties([
   ])
 ])
 node('ubuntu-chef-zion') {
-  def commitId, commitDate, imageId, apiToken, branch, defaultsFileLocation
+  def commitId, version, imageId, apiToken, branch, defaultsFileLocation
   def organization = 'sonatype',
       repository = 'chef-nexus-repository-manager',
       credentialsId = 'integrations-github-api',
@@ -34,12 +34,11 @@ node('ubuntu-chef-zion') {
 
       branch = checkoutDetails.GIT_BRANCH == 'origin/master' ? 'master' : checkoutDetails.GIT_BRANCH
       commitId = checkoutDetails.GIT_COMMIT
-      commitDate = OsTools.runSafe(this, "git show -s --format=%cd --date=format:%Y%m%d-%H%M%S ${commitId}")
+      version = getCommitVersion(commitId)
+      setDisplayName(version)
 
       OsTools.runSafe(this, 'git config --global user.email sonatype-ci@sonatype.com')
       OsTools.runSafe(this, 'git config --global user.name Sonatype CI')
-
-      env.VERSION = readVersion().split('-')[0] + ".${commitDate}.${commitId.substring(0, 7)}"
 
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
@@ -128,6 +127,9 @@ node('ubuntu-chef-zion') {
             git commit -m '${commitMessage}'
             git push https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git ${branch}
           """)
+
+          version = getCommitVersion(OsTools.runSafe(this, "git rev-parse HEAD"))
+          setDisplayName(version)
         }
       }
     }
@@ -143,7 +145,7 @@ node('ubuntu-chef-zion') {
     stage('Push tags') {
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
-        OsTools.runSafe(this, "git tag \"release-${env.VERSION}\"")
+        OsTools.runSafe(this, "git tag \"release-${version}\"")
         OsTools.runSafe(this, """
           git push \
           https://${env.GITHUB_API_USERNAME}:${env.GITHUB_API_PASSWORD}@github.com/${organization}/${repository}.git \
@@ -154,7 +156,7 @@ node('ubuntu-chef-zion') {
     stage('Create release') {
       response = httpRequest customHeaders: [[name: 'Authorization', value: "token ${apiToken}"]],
           acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST',
-          requestBody: "{\"tag_name\": \"release-${env.VERSION}\"}",
+          requestBody: "{\"tag_name\": \"release-${version}\"}",
           url: "https://api.github.com/repos/${organization}/${repository}/releases"
 
       def release = readJSON text: response.content
@@ -171,6 +173,13 @@ node('ubuntu-chef-zion') {
   } finally {
     OsTools.runSafe(this, 'git clean -f && git reset --hard origin/master')
   }
+}
+def getCommitVersion(commitId) {
+  def commitDate = OsTools.runSafe(this, "git show -s --format=%cd --date=format:%Y%m%d-%H%M%S ${commitId}")
+  return readVersion().split('-')[0] + ".${commitDate}.${commitId.substring(0, 7)}"
+}
+def setDisplayName(version) {
+  currentBuild.displayName = "#${currentBuild.number} - ${version}"
 }
 def readVersion() {
   readFile('version').split('\n')[0]
