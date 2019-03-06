@@ -1,7 +1,7 @@
 /*
  * Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
  */
-@Library('ci-pipeline-library@INT-add-version-tools')
+@Library(['ci-pipeline-library', 'jenkins-shared', 'int-jenkins-shared']) _
 import com.sonatype.jenkins.pipeline.GitHub
 import com.sonatype.jenkins.pipeline.OsTools
 import com.sonatype.jenkins.pipeline.VersionTools
@@ -40,7 +40,7 @@ node('ubuntu-chef-zion') {
       commitId = checkoutDetails.GIT_COMMIT
       majorMinorVersion = readVersion().split('-')[0]
       version = versionTools.getCommitVersion(majorMinorVersion, commitId)
-      versionTools.setDisplayName(version)
+      setBuildDisplayName(Version: version)
 
       OsTools.runSafe(this, 'git config --global user.email sonatype-ci@sonatype.com')
       OsTools.runSafe(this, 'git config --global user.name Sonatype CI')
@@ -134,7 +134,7 @@ node('ubuntu-chef-zion') {
           """)
 
           version = versionTools.getCommitVersion(majorMinorVersion, OsTools.runSafe(this, "git rev-parse HEAD"))
-          versionTools.setDisplayName(version)
+          setBuildDisplayName(Version: version)
         }
       }
     }
