@@ -17,7 +17,7 @@ properties([
   ])
 ])
 node('ubuntu-chef-zion') {
-  def commitId, version, imageId, apiToken, branch, defaultsFileLocation
+  def commitId, version, imageId, apiToken, branch, defaultsFileLocation, majorMinorVersion
   def organization = 'sonatype',
       repository = 'chef-nexus-repository-manager',
       credentialsId = 'integrations-github-api',
