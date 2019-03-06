@@ -179,13 +179,6 @@ node('ubuntu-chef-zion') {
     OsTools.runSafe(this, 'git clean -f && git reset --hard origin/master')
   }
 }
-def getCommitVersion(commitId) {
-  def commitDate = OsTools.runSafe(this, "git show -s --format=%cd --date=format:%Y%m%d-%H%M%S ${commitId}")
-  return readVersion().split('-')[0] + ".${commitDate}.${commitId.substring(0, 7)}"
-}
-def setDisplayName(version) {
-  currentBuild.displayName = "#${currentBuild.number} - ${version}"
-}
 def readVersion() {
   readFile('version').split('\n')[0]
 }
