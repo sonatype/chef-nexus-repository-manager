@@ -28,8 +28,6 @@ node('ubuntu-chef-zion') {
     stage('Preparation') {
       deleteDir()
 
-      versionTools = new VersionTools(this, currentBuild)
-
       def checkoutDetails = checkout scm
 
       defaultsFileLocation = "${pwd()}/attributes/default.rb"
