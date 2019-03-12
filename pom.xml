@@ -1,0 +1,17 @@
+<!--
+
+    Copyright (c) 2017-present Sonatype, Inc. All rights reserved.
+    Includes the third-party code listed at http://links.sonatype.com/products/nexus/attributions.
+    "Sonatype" is a trademark of Sonatype, Inc.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sonatype.chef</groupId>
+  <artifactId>chef-nexus-repository-manager</artifactId>
+  <version>0.4-SNAPSHOT</version>
+</project>
