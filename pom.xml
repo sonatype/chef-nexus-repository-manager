@@ -13,5 +13,5 @@
 
   <groupId>com.sonatype.chef</groupId>
   <artifactId>chef-nexus-repository-manager</artifactId>
-  <version>0.4-SNAPSHOT</version>
+  <version>0.5-SNAPSHOT</version>
 </project>
