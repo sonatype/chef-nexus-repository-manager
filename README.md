@@ -17,7 +17,7 @@ We also provide a `nexus_repository_manager::docker` recipe which is exactly the
  - nexus_repository_manager::rh-docker
    Uses the nexus_repository_manager::docker recipe but includes additional meta data to comform with Kubernetes and
    OpenShift standards, a directory with the licenses applicable to the software and a man file for help on how to use
-   the software. It also uses an ENTRYPOINT script the ensure the running user has access to the appropriate 
+   the software. It also uses an ENTRYPOINT script to ensure the running user has access to the appropriate 
    permissions for OpenShift 'restricted' SCC.
 
 #### Red Hat help.1
