@@ -20,7 +20,7 @@ We also provide a `nexus_repository_manager::docker` recipe which is exactly the
    the software. It also uses an ENTRYPOINT script to ensure the running user has access to the appropriate 
    permissions for OpenShift 'restricted' SCC.
  - nexus_repository_manager::3x-docker
-   Nearly identical to the rh-docker recipe, but excluding the java recipe.
+   Nearly identical to the rh-docker recipe, but excluding the java recipe
 
 #### Red Hat help.1
 
