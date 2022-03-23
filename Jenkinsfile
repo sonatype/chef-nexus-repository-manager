@@ -32,7 +32,7 @@ node('ubuntu-chef-zion') {
 
       defaultsFileLocation = "${pwd()}/attributes/default.rb"
 
-      branch = checkoutDetails.GIT_BRANCH == 'origin/master' ? 'master' : checkoutDetails.GIT_BRANCH
+      branch = checkoutDetails.GIT_BRANCH == 'origin/main' ? 'main' : checkoutDetails.GIT_BRANCH
       commitId = checkoutDetails.GIT_COMMIT
 
       version = getVersion()
@@ -139,7 +139,7 @@ node('ubuntu-chef-zion') {
         archiveArtifacts artifacts: "${archiveName}", onlyIfSuccessful: true
       }
     }
-    if (branch != 'master') {
+    if (branch != 'main') {
       return
     }
     input 'Push tags?'
@@ -172,7 +172,7 @@ node('ubuntu-chef-zion') {
       """)
     }
   } finally {
-    OsTools.runSafe(this, 'git clean -f && git reset --hard origin/master')
+    OsTools.runSafe(this, 'git clean -f && git reset --hard origin/main')
   }
 }
 def getGemInstallDirectory() {
