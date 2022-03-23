@@ -1,7 +1,7 @@
 /*
  * Copyright:: Copyright (c) 2017-present Sonatype, Inc. Apache License, Version 2.0.
  */
-@Library(['ci-pipeline-library', 'jenkins-shared', 'int-jenkins-shared']) _
+@Library(['private-pipeline-library', 'jenkins-shared', 'int-jenkins-shared']) _
 import com.sonatype.jenkins.pipeline.GitHub
 import com.sonatype.jenkins.pipeline.OsTools
 
