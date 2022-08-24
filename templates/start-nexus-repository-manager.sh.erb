@@ -4,4 +4,5 @@
 #
 
 cd <%= node['nexus_repository_manager']['nexus_home']['path'] %>
+test "$FORCE_DROP_NEXUS_LOCK" && rm -f <%= node['nexus_repository_manager']['nexus_data']['path'] %>/lock
 exec ./bin/nexus run
