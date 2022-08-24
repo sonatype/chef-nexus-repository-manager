@@ -69,10 +69,6 @@ template '/etc/awslogs/nexus.conf' do
   mode '0644'
 end
 
-python_package 'awscli'
-
-python_package 'awscli-cwlogs'
-
 systemd_unit 'awslogs-agent.service' do
   content <<-EOU.gsub(/^\s+/, '')
   [Unit]
