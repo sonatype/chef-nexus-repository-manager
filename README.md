@@ -24,9 +24,10 @@ We also provide a `nexus_repository_manager::docker` recipe which is exactly the
 
 #### Red Hat help.1
 
-The man file included in the Red Hat image is generated from this [help markdown](files/rh-docker/help.md). Markdown
-can be converted to the appropriate format using [md2roff](https://github.com/nereusx/md2roff). This process is
-currently not part of the automated build and needs to be done manually after any update to the help markdown.
+The man file included in the Red Hat image is generated from this [help markdown](files/rh-docker/help.md). To be
+included, the markdown must be converted into the appropriate manual page format. This conversion is not part of
+the automated build and needs to be done manually after any update to the help markdown. Contributors may use any
+standard Markdown-to-manpage conversion tool of their choice.
 
 #### Testing
 
